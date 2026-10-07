@@ -1,0 +1,8 @@
+{
+  "name": "SebbyLogistics Kenya | Fresh Flower & Horticulture Exports",
+  "description": "Premium Kenya-based floral and horticulture exporter with direct airside cold-chain access at JKIA Nairobi, delivering fresh-cut roses and produce to worldwide markets.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

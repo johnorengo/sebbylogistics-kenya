@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    color: #4F5752;
+    background-color: #F7F6F1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: #174D3B;
+  }
+}
+
+.font-serif-luxury {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-sans-clean {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+.font-data {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Warm editorial panels */
+.editorial-card {
+  background: #FFFFFF;
+  border: 1px solid #D8DED8;
+  box-shadow: 0 4px 20px -4px rgba(23, 77, 59, 0.04);
+}
+
+.editorial-card-subtle {
+  background: #EEF1EB;
+  border: 1px solid #D8DED8;
+}
+
+.glass-header {
+  background: rgba(247, 246, 241, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid #D8DED8;
+}
+
+/* Refined light scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F7F6F1;
+}
+::-webkit-scrollbar-thumb {
+  background: #D8DED8;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C6A15B;
+}
