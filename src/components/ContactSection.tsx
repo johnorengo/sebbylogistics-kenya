@@ -47,7 +47,7 @@ export const ContactSection: React.FC = () => {
               Connect with Sebby Logistics Ltd
             </h2>
             <p className="mt-3 text-[#3A453F] text-sm sm:text-base leading-relaxed">
-              &quot;For Purchase of Flowers from Kenya including Freight&quot; — Reach our commercial team and dispatch coordinators for price quotes, flower assortments, and flight scheduling.
+              &quot;For Purchase of Flowers from Kenya including Freight&quot; — Operating from our airside dispatch facilities at <strong>Jomo Kenyatta International Airport JKIA, 1st Freight Lane Avenue (Cargo)</strong>.
             </p>
           </div>
 
@@ -57,7 +57,7 @@ export const ContactSection: React.FC = () => {
             </div>
             <div className="text-left font-serif-luxury">
               <div className="font-bold text-base text-[#0B110E]">SEBBY LOGISTICS LTD</div>
-              <div className="text-xs text-[#007A3D] font-medium">Nairobi & JKIA Cargo, Kenya</div>
+              <div className="text-xs text-[#007A3D] font-medium">JKIA · 1st Freight Lane Avenue (Cargo)</div>
             </div>
           </div>
         </div>
@@ -193,19 +193,25 @@ export const ContactSection: React.FC = () => {
               </div>
             </div>
 
-            {/* JKIA Operations Card */}
-            <div className="p-6 rounded-2xl bg-white border border-[#D9E1DC] shadow-sm">
+            {/* Location Card */}
+            <div className="p-6 rounded-2xl bg-white border-2 border-[#D9E1DC] hover:border-[#007A3D] transition-all shadow-sm">
               <div className="flex items-center gap-3 text-[#0B110E] mb-3">
                 <MapPin className="h-5 w-5 text-[#C8102E]" />
                 <h3 className="text-base font-serif-luxury font-bold text-[#0B110E]">
-                  JKIA Airside Logistics Hub
+                  Location
                 </h3>
               </div>
-              <p className="text-xs text-[#3A453F] leading-relaxed">
-                Perishable Cargo Export Terminal<br />
-                Jomo Kenyatta International Airport (JKIA)<br />
-                Nairobi, Kenya
-              </p>
+              <div className="text-sm text-[#0B110E] leading-relaxed">
+                <p className="font-bold text-base text-[#0B110E]">
+                  Jomo Kenyatta International Airport JKIA.
+                </p>
+                <p className="text-[#3A453F] font-semibold mt-1">
+                  1st Freight Lane Avenue (Cargo).
+                </p>
+                <p className="text-xs text-[#007A3D] font-data mt-2 font-medium">
+                  Nairobi, Kenya
+                </p>
+              </div>
               <div className="mt-3 pt-3 border-t border-[#D9E1DC] text-xs font-data text-[#007A3D] font-medium flex items-center gap-1.5">
                 <Clock className="h-3.5 w-3.5" />
                 <span>Synchronized with all scheduled international cargo flights</span>

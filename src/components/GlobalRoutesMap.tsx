@@ -19,7 +19,7 @@ export const GlobalRoutesMap: React.FC = () => {
             Connecting JKIA Nairobi to the World’s Floral Centers
           </h2>
           <p className="mt-4 text-[#3A453F] text-sm sm:text-base leading-relaxed">
-            Operating from the air cargo staging area at Jomo Kenyatta International Airport (JKIA), Sebby Logistics consignments connect directly onto scheduled widebody flights serving European auctions, British retail distributors, and Middle Eastern hubs.
+            Operating from Jomo Kenyatta International Airport (JKIA), 1st Freight Lane Avenue (Cargo), Sebby Logistics consignments connect directly onto scheduled widebody flights serving European auctions, British retail distributors, and Middle Eastern hubs.
           </p>
         </div>
 

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Play, Pause, FastForward, Volume2, VolumeX, ArrowDown, Plane, MessageCircle, Phone, CheckCircle2 } from 'lucide-react';
 import { soundscape } from '../utils/audio';
-import { SebbyLogo } from './SebbyLogo';
 
 import naivashaFarmImg from '../assets/images/kenya_rose_farm_naivasha_1791289265374.jpg';
 import packhouseImg from '../assets/images/kenya_cold_chain_packhouse_1791289277218.jpg';
@@ -112,8 +111,8 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
   };
 
   return (
-    <section id="hero" className="relative min-h-[92vh] w-full overflow-hidden bg-[#0B0F0D]">
-      {/* Full-bleed Cinematic Visual Story Canvas */}
+    <section id="hero" className="relative min-h-screen w-full overflow-hidden bg-[#0B0F0D] flex flex-col justify-between pt-28 sm:pt-32 lg:pt-36 pb-8 sm:pb-12">
+      {/* Full-bleed Cinematic Visual Story Canvas - Brightened with Natural Sunlight */}
       <div className="absolute inset-0 z-0">
         {CHAPTERS.map((chapter, idx) => (
           <div
@@ -127,12 +126,12 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               alt={chapter.title}
               referrerPolicy="no-referrer"
               className={`h-full w-full object-cover transition-transform duration-[14000ms] ease-out ${
-                activeChapterIndex === idx ? 'scale-105 filter brightness-[0.78] contrast-[1.05]' : 'scale-100'
+                activeChapterIndex === idx ? 'scale-105 filter brightness-[1.02] contrast-[1.02] saturate-[1.06]' : 'scale-100'
               }`}
             />
-            {/* Cinematic Kenyan Scrim: Rich Black & Subtle Vignette */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F0D] via-[#0B0F0D]/60 to-[#0B0F0D]/40" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0B0F0D]/90 via-[#0B0F0D]/50 to-transparent" />
+            {/* Luminous, Airy Overlays: Enhancing Light while Preserving Text Legibility */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F0D]/85 via-black/15 to-black/20" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0B0F0D]/65 via-[#0B0F0D]/20 to-transparent" />
           </div>
         ))}
       </div>
@@ -143,14 +142,14 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
       )}
 
       {/* Main Content Layout */}
-      <div className="relative z-20 mx-auto flex min-h-[92vh] max-w-7xl flex-col justify-between px-6 py-8 sm:py-12 lg:px-12">
+      <div className="relative z-20 mx-auto flex min-h-[calc(100vh-10rem)] max-w-7xl flex-col justify-between px-6 py-4 sm:py-6 lg:px-12 w-full">
         {/* Top Status & Audio Control */}
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5 text-xs tracking-wider text-white/90 font-medium bg-black/50 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15">
+          <div className="flex items-center gap-2.5 text-xs tracking-wider text-white/95 font-medium bg-black/40 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20">
             <span className="h-2 w-2 rounded-full bg-[#009E49] animate-pulse"></span>
             <span className="uppercase tracking-[0.2em] text-[#009E49] font-bold">Kenya Direct Export</span>
-            <span aria-hidden="true" className="text-white/30">·</span>
-            <span className="text-white/90">Airside Staging at JKIA Nairobi</span>
+            <span aria-hidden="true" className="text-white/40">·</span>
+            <span className="text-white">Airside Staging at JKIA Nairobi</span>
           </div>
 
           <div className="flex items-center gap-3">
@@ -159,7 +158,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs transition-colors border ${
                 audioEnabled
                   ? 'bg-[#007A3D] text-white border-[#009E49] font-medium'
-                  : 'bg-black/40 text-white/80 border-white/20 hover:text-white hover:bg-black/60'
+                  : 'bg-black/40 text-white/90 border-white/20 hover:text-white hover:bg-black/60'
               }`}
               title="Toggle natural ambient soundscape"
             >
@@ -169,29 +168,26 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
           </div>
         </div>
 
-        {/* Center Editorial Hero & Customer Text */}
-        <div className="my-auto max-w-4xl py-8">
-          {/* Brand Logo & Name Banner Flow */}
-          <div className="inline-flex items-center gap-3.5 mb-5 p-2 pr-5 rounded-full bg-black/60 backdrop-blur-md border border-white/20">
-            <div className="h-12 w-12 rounded-full bg-white/10 p-0.5 flex items-center justify-center">
-              <SebbyLogo className="h-11 w-11" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-sm font-bold tracking-wider uppercase text-white font-serif-luxury">
-                SEBBY LOGISTICS LTD
-              </span>
-              <span className="text-xs text-[#009E49] font-medium italic">
-                &quot;For Purchase of Flowers from Kenya including Freight&quot;
-              </span>
-            </div>
+        {/* Center Editorial Hero & Customer Text - Single Primary Heading without Duplicate Logo */}
+        <div className="my-auto max-w-4xl py-6 sm:py-8">
+          {/* Eyebrow Tagline Badge (Logo removed to prevent repetition with Header) */}
+          <div className="inline-flex items-center gap-2.5 mb-4 px-4 py-1.5 rounded-full bg-black/45 backdrop-blur-md border border-white/20 text-white">
+            <span className="h-2 w-2 rounded-full bg-[#009E49] animate-pulse"></span>
+            <span className="text-xs font-serif-luxury font-bold tracking-wider uppercase text-white">
+              SEBBY LOGISTICS LTD
+            </span>
+            <span className="text-white/40">·</span>
+            <span className="text-xs font-serif-luxury italic text-[#009E49]">
+              &quot;For Purchase of Flowers from Kenya including Freight&quot;
+            </span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif-luxury font-bold tracking-tight text-white leading-[1.08] text-balance">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif-luxury font-bold tracking-tight text-white leading-[1.08] text-balance drop-shadow-md">
             Buy Premium Kenyan Flowers Direct from Farms, Including Worldwide Airfreight.
           </h1>
 
           {/* Customer Copy from Brief */}
-          <p className="mt-5 text-base sm:text-lg text-white/95 leading-relaxed font-sans-clean max-w-3xl font-normal">
+          <p className="mt-5 text-base sm:text-lg text-white/95 leading-relaxed font-sans-clean max-w-3xl font-normal drop-shadow-sm">
             We offer you to buy flowers from good farms at the best prices. We take care of the whole purchase process and the logistics, including airfreight to any destination worldwide. Because of combined local efforts we are better and cheaper than your current suppliers.
           </p>
 

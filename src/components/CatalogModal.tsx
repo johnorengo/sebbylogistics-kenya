@@ -15,7 +15,7 @@ export const CatalogModal: React.FC<CatalogModalProps> = ({ isOpen, onClose, onO
   const handleDownloadPDF = () => {
     const content = `SEBBY LOGISTICS LTD - EXPORT FLORICULTURE & FREIGHT CATALOG
 "For Purchase of Flowers from Kenya including Freight"
-Nairobi Logistics Operations & JKIA Airside Staging Desk, Kenya
+Location: Jomo Kenyatta International Airport JKIA, 1st Freight Lane Avenue (Cargo), Nairobi, Kenya
 Standard Agricultural & Export Compliance Framework
 
 ========================================================================

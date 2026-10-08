@@ -133,9 +133,13 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCatalog, onOpenRFQ }) => {
                   <span>Download Spec Sheets</span>
                 </button>
               </li>
-              <li className="pt-2 text-xs text-white/60 flex items-center gap-2">
-                <MapPin className="h-3.5 w-3.5 text-[#009E49] shrink-0" />
-                <span>JKIA Airside Perishable Cargo Zone, Nairobi</span>
+              <li className="pt-2 text-xs text-white/80 flex items-start gap-2">
+                <MapPin className="h-4 w-4 text-[#009E49] shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-bold text-white block">Location:</span>
+                  <span className="text-white/90">Jomo Kenyatta International Airport JKIA.</span><br />
+                  <span className="text-white/90">1st Freight Lane Avenue (Cargo).</span>
+                </div>
               </li>
             </ul>
           </div>
@@ -148,7 +152,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCatalog, onOpenRFQ }) => {
           </div>
 
           <div className="flex items-center gap-6">
-            <span className="font-data text-white/50">Nairobi · JKIA Cargo Zone · Kenya</span>
+            <span className="font-data text-white/70">Location: JKIA · 1st Freight Lane Avenue (Cargo), Nairobi</span>
             <button
               onClick={scrollToTop}
               className="inline-flex items-center gap-1.5 text-[#009E49] hover:text-white transition-colors"
