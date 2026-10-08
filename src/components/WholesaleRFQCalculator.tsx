@@ -102,41 +102,41 @@ export const WholesaleRFQCalculator: React.FC<WholesaleRFQCalculatorProps> = ({
   };
 
   return (
-    <section id="wholesale" className="relative py-24 bg-[#F7F6F1] border-b border-[#D8DED8] scroll-mt-20">
+    <section id="wholesale" className="relative py-20 sm:py-24 bg-[#F8FAF8] border-b border-[#D9E1DC] scroll-mt-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="text-xs font-semibold uppercase tracking-[0.25em] text-[#C6A15B] mb-2 flex items-center gap-2">
-            <Calculator className="h-3.5 w-3.5 text-[#174D3B]" />
-            <span>Commercial Inquiries</span>
+          <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#C8102E] mb-2 flex items-center gap-2">
+            <Calculator className="h-3.5 w-3.5 text-[#007A3D]" />
+            <span>Commercial Inquiries & Pricing</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-serif-luxury font-medium text-[#174D3B] tracking-tight">
-            Wholesale Inquiries & Freight Planning
+          <h2 className="text-3xl sm:text-4xl font-serif-luxury font-bold text-[#0B110E] tracking-tight">
+            Wholesale Pricing & Airfreight Calculator
           </h2>
-          <p className="mt-4 text-[#4F5752] text-sm sm:text-base leading-relaxed">
-            Configure sample consignment parameters to review indicative volumetric weights, FOB/CIF structures, and submit a formal Request for Quotation (RFQ). Final quotations reflect current spot freight rates and confirmed harvest allocations.
+          <p className="mt-4 text-[#3A453F] text-sm sm:text-base leading-relaxed">
+            Configure sample flower consignment parameters to review indicative volumetric weights, FOB/CIF structures, and submit a formal Request for Quotation (RFQ) directly to our commercial sales desk.
           </p>
         </div>
 
         {/* Two-Column Grid: Configurator on Left, RFQ Form on Right */}
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Left: Interactive Calculation Engine */}
-          <div className="lg:col-span-6 rounded-2xl bg-white border border-[#D8DED8] p-6 sm:p-8 flex flex-col justify-between shadow-sm">
+          <div className="lg:col-span-6 rounded-2xl bg-white border border-[#D9E1DC] p-6 sm:p-8 flex flex-col justify-between shadow-sm">
             <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-[#174D3B] mb-4 pb-2 border-b border-[#D8DED8]">
+              <div className="text-xs font-bold uppercase tracking-wider text-[#0B110E] mb-4 pb-2 border-b border-[#D9E1DC]">
                 1. Consignment Parameters
               </div>
 
               {/* Product Selector */}
               <div className="space-y-4">
                 <div>
-                  <label className="block text-xs font-medium text-[#4F5752] mb-1.5">
+                  <label className="block text-xs font-semibold text-[#111814] mb-1.5">
                     Select Product / Variety
                   </label>
                   <select
                     value={selectedProduct}
                     onChange={(e) => setSelectedProduct(e.target.value)}
-                    className="w-full bg-[#F7F6F1] border border-[#D8DED8] rounded-lg px-3.5 py-2.5 text-sm text-[#174D3B] focus:outline-none focus:border-[#174D3B]"
+                    className="w-full bg-[#F8FAF8] border border-[#D9E1DC] rounded-lg px-3.5 py-2.5 text-sm text-[#0B110E] focus:outline-none focus:border-[#007A3D]"
                   >
                     <optgroup label="T-Hybrid & Premium Roses">
                       <option value="Rhodos Premium Red Rose">Rhodos Premium Red Rose</option>
@@ -477,16 +477,16 @@ export const WholesaleRFQCalculator: React.FC<WholesaleRFQCalculatorProps> = ({
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-[#D8DED8]">
+                <div className="pt-4 border-t border-[#D9E1DC]">
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-md bg-[#174D3B] hover:bg-[#285F4A] text-white font-semibold text-xs tracking-wider transition-colors shadow-sm"
+                    className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-md bg-[#C8102E] hover:bg-[#A30922] text-white font-bold text-xs uppercase tracking-wider transition-colors shadow-md active:scale-95"
                   >
-                    <Send className="h-4 w-4 text-[#C6A15B]" />
-                    Submit Wholesale RFQ
+                    <Send className="h-4 w-4 text-white" />
+                    Submit Wholesale RFQ to Sales Desk
                   </button>
                   <div className="mt-2 text-center text-[11px] text-[#4F5752]">
-                    Standard phytosanitary clearance and export documentation coordinated prior to flight handover.
+                    Dispatched directly to <span className="font-semibold text-[#0B110E]">Sales@sebbylogistics.com</span> · WhatsApp support: <span className="font-semibold text-[#007A3D]">+254 719707003</span>
                   </div>
                 </div>
               </form>

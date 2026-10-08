@@ -27,27 +27,27 @@ export const WhyKenyanFlowers: React.FC = () => {
   ];
 
   return (
-    <section id="why-kenya" className="py-24 bg-[#EEF1EB] border-b border-[#D8DED8] scroll-mt-20">
+    <section id="why-kenya" className="py-20 sm:py-24 bg-[#F8FAF8] border-b border-[#D9E1DC] scroll-mt-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Column: Image-led visual showcase */}
           <div className="lg:col-span-5">
-            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-[#D8DED8] shadow-md bg-white">
+            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-[#D9E1DC] shadow-md bg-white">
               <img
                 src={rosesImg}
                 alt="Kenyan export roses"
                 referrerPolicy="no-referrer"
                 className="h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 text-white">
-                <div className="text-xs uppercase tracking-[0.2em] text-[#C6A15B] font-semibold mb-1">
+                <div className="text-xs uppercase tracking-[0.2em] text-[#C8102E] font-bold mb-1">
                   High-Altitude Terroir
                 </div>
-                <div className="text-xl font-serif-luxury font-medium">
+                <div className="text-xl font-serif-luxury font-bold">
                   Naturally Grown at 2,200m Above Sea Level
                 </div>
-                <div className="text-xs text-white/80 mt-1">
+                <div className="text-xs text-white/90 mt-1">
                   Great Rift Valley & Mount Kenya Highlands
                 </div>
               </div>
@@ -56,13 +56,14 @@ export const WhyKenyanFlowers: React.FC = () => {
 
           {/* Right Column: Editorial Copy & 4 Key Advantages */}
           <div className="lg:col-span-7">
-            <div className="text-xs font-semibold uppercase tracking-[0.25em] text-[#C6A15B] mb-2">
-              Natural Geographic Advantage
+            <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#007A3D] mb-2 flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-[#C8102E]"></span>
+              <span>Natural Geographic Advantage</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif-luxury font-medium text-[#174D3B] tracking-tight leading-[1.15]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif-luxury font-bold text-[#0B110E] tracking-tight leading-[1.15]">
               Why the World Chooses Kenyan Blooms
             </h2>
-            <p className="mt-6 text-base text-[#4F5752] leading-relaxed">
+            <p className="mt-5 text-base text-[#3A453F] leading-relaxed">
               Kenya is one of the world's most celebrated origins for premium cut flowers. The combination of high-altitude growing zones and year-round equatorial sunshine creates optimal agronomic conditions that cannot be replicated elsewhere.
             </p>
 

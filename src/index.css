@@ -3,12 +3,12 @@
 @layer base {
   body {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    color: #4F5752;
-    background-color: #F7F6F1;
+    color: #1F2823;
+    background-color: #F8FAF8;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    color: #174D3B;
+    color: #0B110E;
   }
 }
 
@@ -25,37 +25,65 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Warm editorial panels */
+/* Kenyan Flag Inspired Accent Ribbons & Borders */
+.kenya-ribbon-bar {
+  background: linear-gradient(
+    90deg,
+    #0B0F0D 0%,
+    #0B0F0D 32%,
+    #FFFFFF 32%,
+    #FFFFFF 34%,
+    #C8102E 34%,
+    #C8102E 66%,
+    #FFFFFF 66%,
+    #FFFFFF 68%,
+    #007A3D 68%,
+    #007A3D 100%
+  );
+}
+
+.kenya-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background-color: #0B0F0D;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Editorial Cards & Glass Panels */
 .editorial-card {
   background: #FFFFFF;
-  border: 1px solid #D8DED8;
-  box-shadow: 0 4px 20px -4px rgba(23, 77, 59, 0.04);
+  border: 1px solid #D9E1DC;
+  box-shadow: 0 4px 20px -4px rgba(11, 15, 13, 0.06);
 }
 
 .editorial-card-subtle {
-  background: #EEF1EB;
-  border: 1px solid #D8DED8;
+  background: #F2F6F3;
+  border: 1px solid #D9E1DC;
 }
 
 .glass-header {
-  background: rgba(247, 246, 241, 0.92);
+  background: rgba(11, 15, 13, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid #D8DED8;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Refined light scrollbar */
+/* Refined Kenyan-Themed Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #F7F6F1;
+  background: #F8FAF8;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D8DED8;
+  background: #C8102E;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #C6A15B;
+  background: #007A3D;
 }

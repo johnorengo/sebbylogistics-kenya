@@ -42,16 +42,17 @@ export const Certifications: React.FC = () => {
   ];
 
   return (
-    <section id="quality" className="relative py-24 bg-[#F7F6F1] border-b border-[#D8DED8] scroll-mt-20">
+    <section id="quality" className="relative py-20 sm:py-24 bg-white border-b border-[#D9E1DC] scroll-mt-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="max-w-3xl">
-          <div className="text-xs font-semibold uppercase tracking-[0.25em] text-[#C6A15B] mb-2">
-            Quality Assurance & Verification
+          <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#007A3D] mb-2 flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-[#C8102E]"></span>
+            <span>Quality Assurance & Verification</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-serif-luxury font-medium text-[#174D3B] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif-luxury font-bold text-[#0B110E] tracking-tight">
             International Trade Standards & Export Governance
           </h2>
-          <p className="mt-4 text-[#4F5752] text-sm sm:text-base leading-relaxed">
+          <p className="mt-4 text-[#3A453F] text-sm sm:text-base leading-relaxed">
             Our partner estates and export packing operations align with recognized international floriculture, environmental, and ethical trade benchmarks to ensure seamless clearance at destination auction houses and supermarkets.
           </p>
         </div>

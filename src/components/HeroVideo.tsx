@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, Pause, FastForward, Volume2, VolumeX, ArrowDown, Plane } from 'lucide-react';
+import { Play, Pause, FastForward, Volume2, VolumeX, ArrowDown, Plane, MessageCircle, Phone, CheckCircle2 } from 'lucide-react';
 import { soundscape } from '../utils/audio';
+import { SebbyLogo } from './SebbyLogo';
 
 import naivashaFarmImg from '../assets/images/kenya_rose_farm_naivasha_1791289265374.jpg';
 import packhouseImg from '../assets/images/kenya_cold_chain_packhouse_1791289277218.jpg';
@@ -111,7 +112,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
   };
 
   return (
-    <section id="hero" className="relative min-h-[92vh] w-full overflow-hidden bg-[#151C18]">
+    <section id="hero" className="relative min-h-[92vh] w-full overflow-hidden bg-[#0B0F0D]">
       {/* Full-bleed Cinematic Visual Story Canvas */}
       <div className="absolute inset-0 z-0">
         {CHAPTERS.map((chapter, idx) => (
@@ -126,30 +127,30 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               alt={chapter.title}
               referrerPolicy="no-referrer"
               className={`h-full w-full object-cover transition-transform duration-[14000ms] ease-out ${
-                activeChapterIndex === idx ? 'scale-105 filter brightness-[0.82] contrast-[1.02]' : 'scale-100'
+                activeChapterIndex === idx ? 'scale-105 filter brightness-[0.78] contrast-[1.05]' : 'scale-100'
               }`}
             />
-            {/* Cinematic Scrim for Warm Editorial Text Contrast */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/25" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/30 to-transparent" />
+            {/* Cinematic Kenyan Scrim: Rich Black & Subtle Vignette */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F0D] via-[#0B0F0D]/60 to-[#0B0F0D]/40" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0B0F0D]/90 via-[#0B0F0D]/50 to-transparent" />
           </div>
         ))}
       </div>
 
       {/* Atmospheric Accent in Time-Lapse Mode */}
       {isTimelapseMode && (
-        <div className="pointer-events-none absolute inset-0 z-10 bg-[#C6A15B]/10 mix-blend-screen animate-pulse" />
+        <div className="pointer-events-none absolute inset-0 z-10 bg-[#C8102E]/10 mix-blend-screen animate-pulse" />
       )}
 
       {/* Main Content Layout */}
-      <div className="relative z-20 mx-auto flex min-h-[92vh] max-w-7xl flex-col justify-between px-6 py-12 lg:px-12">
-        {/* Top Minimal Status Header */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-4">
-          <div className="flex items-center gap-2.5 text-xs tracking-wider text-white/80 font-medium">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#C6A15B]"></span>
-            <span className="uppercase tracking-[0.2em] text-[#C6A15B] font-semibold">Equatorial Highlands</span>
+      <div className="relative z-20 mx-auto flex min-h-[92vh] max-w-7xl flex-col justify-between px-6 py-8 sm:py-12 lg:px-12">
+        {/* Top Status & Audio Control */}
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-2.5 text-xs tracking-wider text-white/90 font-medium bg-black/50 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15">
+            <span className="h-2 w-2 rounded-full bg-[#009E49] animate-pulse"></span>
+            <span className="uppercase tracking-[0.2em] text-[#009E49] font-bold">Kenya Direct Export</span>
             <span aria-hidden="true" className="text-white/30">·</span>
-            <span className="text-white/80">Direct Airside Link at JKIA Nairobi</span>
+            <span className="text-white/90">Airside Staging at JKIA Nairobi</span>
           </div>
 
           <div className="flex items-center gap-3">
@@ -157,45 +158,80 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               onClick={handleToggleAudio}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs transition-colors border ${
                 audioEnabled
-                  ? 'bg-[#C6A15B] text-black border-[#C6A15B] font-medium'
+                  ? 'bg-[#007A3D] text-white border-[#009E49] font-medium'
                   : 'bg-black/40 text-white/80 border-white/20 hover:text-white hover:bg-black/60'
               }`}
               title="Toggle natural ambient soundscape"
             >
               {audioEnabled ? <Volume2 className="h-3.5 w-3.5" /> : <VolumeX className="h-3.5 w-3.5" />}
-              <span>{audioEnabled ? 'Sound Active' : 'Sound'}</span>
+              <span>{audioEnabled ? 'Sound Active' : 'Soundscape'}</span>
             </button>
           </div>
         </div>
 
-        {/* Center Editorial Title & Value Proposition */}
-        <div className="my-auto max-w-3xl py-12">
-          <div className="text-xs uppercase tracking-[0.25em] text-[#C6A15B] font-semibold mb-3">
-            Equatorial Floriculture & Produce
+        {/* Center Editorial Hero & Customer Text */}
+        <div className="my-auto max-w-4xl py-8">
+          {/* Brand Logo & Name Banner Flow */}
+          <div className="inline-flex items-center gap-3.5 mb-5 p-2 pr-5 rounded-full bg-black/60 backdrop-blur-md border border-white/20">
+            <div className="h-12 w-12 rounded-full bg-white/10 p-0.5 flex items-center justify-center">
+              <SebbyLogo className="h-11 w-11" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-sm font-bold tracking-wider uppercase text-white font-serif-luxury">
+                SEBBY LOGISTICS LTD
+              </span>
+              <span className="text-xs text-[#009E49] font-medium italic">
+                &quot;For Purchase of Flowers from Kenya including Freight&quot;
+              </span>
+            </div>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif-luxury font-medium tracking-tight text-white leading-[1.08] text-balance">
-            Cultivated in Kenya’s Volcanic Soil. Exported to Global Markets.
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif-luxury font-bold tracking-tight text-white leading-[1.08] text-balance">
+            Buy Premium Kenyan Flowers Direct from Farms, Including Worldwide Airfreight.
           </h1>
 
-          <p className="mt-6 text-base sm:text-lg text-white/90 leading-relaxed font-sans-clean max-w-2xl font-normal">
-            Sourced from high-altitude estates across the Great Rift Valley and Mount Kenya. Harvested at dawn, temperature-conditioned within hours, and routed directly through our airside logistics staging at JKIA Nairobi to international auctions and commercial buyers.
+          {/* Customer Copy from Brief */}
+          <p className="mt-5 text-base sm:text-lg text-white/95 leading-relaxed font-sans-clean max-w-3xl font-normal">
+            We offer you to buy flowers from good farms at the best prices. We take care of the whole purchase process and the logistics, including airfreight to any destination worldwide. Because of combined local efforts we are better and cheaper than your current suppliers.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          {/* Key Value Points in Kenyan Colors */}
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl text-xs sm:text-sm text-white/90">
+            <div className="flex items-center gap-2 p-2.5 rounded-lg bg-black/40 border border-white/10 backdrop-blur-sm">
+              <CheckCircle2 className="h-4 w-4 text-[#009E49] shrink-0" />
+              <span>Assortment from selected farms at stunning prices</span>
+            </div>
+            <div className="flex items-center gap-2 p-2.5 rounded-lg bg-black/40 border border-white/10 backdrop-blur-sm">
+              <CheckCircle2 className="h-4 w-4 text-[#C8102E] shrink-0" />
+              <span>Competitive airfreight rates to your airport of choice</span>
+            </div>
+          </div>
+
+          {/* Action CTAs in Kenyan Colors */}
+          <div className="mt-8 flex flex-wrap items-center gap-3.5">
             <button
               onClick={onOpenRFQ}
-              className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-[#174D3B] hover:bg-[#285F4A] transition-all rounded-md shadow-lg shadow-black/30 whitespace-nowrap"
+              className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-white bg-[#C8102E] hover:bg-[#A30922] transition-all rounded-md shadow-xl shadow-[#C8102E]/30 whitespace-nowrap active:scale-95"
             >
-              Request Rate Card
-              <Plane className="h-4 w-4 text-[#C6A15B]" />
+              Wholesale Pricing Inquiry
+              <Plane className="h-4 w-4 text-white" />
             </button>
 
             <a
-              href="#flowers"
-              className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium text-white hover:text-[#C6A15B] border border-white/25 hover:border-[#C6A15B] rounded-md bg-black/30 backdrop-blur-sm transition-all whitespace-nowrap"
+              href="https://wa.me/254719707003"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3.5 text-sm font-semibold text-white bg-[#007A3D] hover:bg-[#009E49] transition-all rounded-md shadow-lg shadow-black/40 whitespace-nowrap"
             >
-              Browse Flower Portfolio
+              <MessageCircle className="h-4 w-4" />
+              <span>WhatsApp: +254 719707003</span>
+            </a>
+
+            <a
+              href="#flowers"
+              className="inline-flex items-center gap-2 px-5 py-3.5 text-sm font-medium text-white hover:text-white border border-white/30 hover:border-white rounded-md bg-black/35 backdrop-blur-sm transition-all whitespace-nowrap"
+            >
+              Browse Flowers
               <ArrowDown className="h-4 w-4" />
             </a>
 
@@ -203,30 +239,30 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               onClick={() => setIsTimelapseMode(!isTimelapseMode)}
               className={`inline-flex items-center gap-2 px-4 py-3.5 text-xs font-medium rounded-md border transition-colors ${
                 isTimelapseMode
-                  ? 'bg-[#C6A15B] text-black border-[#C6A15B] font-semibold'
+                  ? 'bg-[#C8102E] text-white border-[#C8102E] font-semibold'
                   : 'bg-black/30 text-white/80 border-white/20 hover:text-white'
               }`}
             >
               <FastForward className="h-4 w-4" />
-              <span>{isTimelapseMode ? 'Time-Lapse Active' : 'Experience Airport Time-Lapse'}</span>
+              <span>{isTimelapseMode ? 'Time-Lapse Active' : 'Airport Time-Lapse'}</span>
             </button>
           </div>
         </div>
 
-        {/* Bottom Editorial Storytelling Timeline */}
-        <div className="rounded-xl bg-black/55 backdrop-blur-md p-5 border border-white/15">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-white/10">
+        {/* Bottom Storytelling Timeline Bar */}
+        <div className="rounded-xl bg-black/75 backdrop-blur-md p-4 sm:p-5 border border-white/15">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-3 border-b border-white/10">
             <div className="flex items-center gap-4">
               <button
                 onClick={() => setIsPlaying(!isPlaying)}
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-[#174D3B] hover:bg-[#C6A15B] hover:text-black transition-colors"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#007A3D] text-white hover:bg-[#009E49] transition-colors shadow-md"
                 aria-label={isPlaying ? 'Pause story presentation' : 'Play story presentation'}
               >
                 {isPlaying ? <Pause className="h-4 w-4 fill-current" /> : <Play className="h-4 w-4 ml-0.5 fill-current" />}
               </button>
 
               <div>
-                <div className="flex items-center gap-2 text-xs font-medium text-[#C6A15B]">
+                <div className="flex items-center gap-2 text-xs font-semibold text-[#009E49]">
                   <span>{currentChapter.chapter}</span>
                   <span aria-hidden="true" className="text-white/30">·</span>
                   <span className="text-white font-serif-luxury text-sm">{currentChapter.title}</span>
@@ -237,41 +273,40 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               </div>
             </div>
 
-            <div className="text-xs font-data text-white/70">
-              <span className="text-[#C6A15B] mr-2">Location:</span>
+            <div className="text-xs font-data text-white/80">
+              <span className="text-[#C8102E] mr-2">Location:</span>
               <span>{currentChapter.location}</span>
             </div>
           </div>
 
           {/* Chapter Scrubber Nav */}
-          <div className="mt-3.5 grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-2.5">
             {CHAPTERS.map((ch, idx) => {
               const isActive = activeChapterIndex === idx;
               return (
                 <button
                   key={ch.id}
                   onClick={() => handleSelectChapter(idx)}
-                  className={`group relative text-left p-3 rounded-lg border transition-all ${
+                  className={`group relative text-left p-2.5 sm:p-3 rounded-lg border transition-all ${
                     isActive
-                      ? 'bg-white/15 border-[#C6A15B] ring-1 ring-[#C6A15B]/30'
-                      : 'bg-black/20 border-white/10 hover:border-white/20'
+                      ? 'bg-white/15 border-[#009E49] ring-1 ring-[#009E49]/40'
+                      : 'bg-black/30 border-white/10 hover:border-white/25'
                   }`}
                 >
-                  {/* Subtle active progress bar */}
                   {isActive && (
                     <div
-                      className="absolute bottom-0 left-0 h-0.5 bg-[#C6A15B] rounded-b transition-all"
+                      className="absolute bottom-0 left-0 h-1 bg-[#009E49] rounded-b transition-all"
                       style={{ width: `${playbackProgress}%` }}
                     />
                   )}
 
                   <div className="flex items-center justify-between text-[11px] mb-1">
-                    <span className={`font-data ${isActive ? 'text-[#C6A15B] font-semibold' : 'text-white/50'}`}>
+                    <span className={`font-data ${isActive ? 'text-[#009E49] font-bold' : 'text-white/50'}`}>
                       0{ch.id}
                     </span>
                     <span className="text-[10px] text-white/60">{ch.chapter.split('·')[1]}</span>
                   </div>
-                  <div className={`text-xs font-medium line-clamp-1 ${isActive ? 'text-white' : 'text-white/70 group-hover:text-white'}`}>
+                  <div className={`text-xs font-medium line-clamp-1 ${isActive ? 'text-white' : 'text-white/75 group-hover:text-white'}`}>
                     {ch.title.split(' in ')[0]}
                   </div>
                 </button>

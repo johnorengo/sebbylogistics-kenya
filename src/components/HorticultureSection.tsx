@@ -11,19 +11,19 @@ export const HorticultureSection: React.FC<HorticultureSectionProps> = ({ onSele
   const [selectedProduct, setSelectedProduct] = useState<HorticultureProduct>(horticultureProducts[0]);
 
   return (
-    <section id="horticulture" className="relative py-24 bg-[#EEF1EB] border-b border-[#D8DED8] scroll-mt-20">
+    <section id="horticulture" className="relative py-20 sm:py-24 bg-[#F8FAF8] border-b border-[#D9E1DC] scroll-mt-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="text-xs font-semibold uppercase tracking-[0.25em] text-[#C6A15B] mb-2 flex items-center gap-2">
-            <Leaf className="h-3.5 w-3.5 text-[#174D3B]" />
+          <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#007A3D] mb-2 flex items-center gap-2">
+            <Leaf className="h-3.5 w-3.5 text-[#007A3D]" />
             <span>High-Value Fresh Produce</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-serif-luxury font-medium text-[#174D3B] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif-luxury font-bold text-[#0B110E] tracking-tight">
             Kenya Horticulture Export Line
           </h2>
-          <p className="mt-4 text-[#4F5752] text-sm sm:text-base leading-relaxed">
-            In addition to fresh flowers, our export network handles select high-grade horticultural produce sourced from regional partner farms in Kenya. Consignments are conditioned under strict temperature-controlled standards and prepared for international airfreight dispatch.
+          <p className="mt-4 text-[#3A453F] text-sm sm:text-base leading-relaxed">
+            In addition to fresh flowers, Sebby Logistics handles select high-grade horticultural produce sourced from regional partner farms in Kenya. Consignments are conditioned under strict temperature-controlled standards and prepared for international airfreight dispatch.
           </p>
         </div>
 
@@ -37,14 +37,14 @@ export const HorticultureSection: React.FC<HorticultureSectionProps> = ({ onSele
                 onClick={() => setSelectedProduct(prod)}
                 className={`text-left p-5 rounded-xl border transition-all ${
                   isSelected
-                    ? 'bg-[#174D3B] text-white border-[#174D3B] shadow-md'
-                    : 'bg-white text-[#4F5752] border-[#D8DED8] hover:border-[#174D3B]/40'
+                    ? 'bg-[#0B0F0D] text-white border-2 border-[#007A3D] shadow-md'
+                    : 'bg-white text-[#3A453F] border-[#D9E1DC] hover:border-[#007A3D]'
                 }`}
               >
-                <div className={`text-[11px] font-data uppercase tracking-wider mb-1 ${isSelected ? 'text-[#C6A15B]' : 'text-[#C6A15B]'}`}>
+                <div className={`text-[11px] font-data uppercase tracking-wider mb-1 ${isSelected ? 'text-[#009E49]' : 'text-[#C8102E]'}`}>
                   {prod.seasonality}
                 </div>
-                <div className={`text-base font-serif-luxury font-semibold ${isSelected ? 'text-white' : 'text-[#174D3B]'}`}>
+                <div className={`text-base font-serif-luxury font-bold ${isSelected ? 'text-white' : 'text-[#0B110E]'}`}>
                   {prod.name}
                 </div>
                 <div className={`mt-2 text-xs line-clamp-2 ${isSelected ? 'text-white/80' : 'text-[#4F5752]'}`}>
@@ -133,13 +133,13 @@ export const HorticultureSection: React.FC<HorticultureSectionProps> = ({ onSele
               </div>
 
               {/* Action Buttons */}
-              <div className="mt-8 pt-6 border-t border-[#D8DED8] flex flex-wrap items-center gap-4">
+              <div className="mt-8 pt-6 border-t border-[#D9E1DC] flex flex-wrap items-center gap-4">
                 <button
                   onClick={() => onSelectProductForRFQ(selectedProduct.name)}
-                  className="inline-flex items-center gap-2 px-6 py-3 text-xs font-semibold text-white bg-[#174D3B] hover:bg-[#285F4A] rounded-md transition-colors shadow-sm"
+                  className="inline-flex items-center gap-2 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white bg-[#C8102E] hover:bg-[#A30922] rounded-md transition-colors shadow-sm"
                 >
                   Request Produce Rate Card
-                  <ArrowUpRight className="h-4 w-4 text-[#C6A15B]" />
+                  <ArrowUpRight className="h-4 w-4 text-white" />
                 </button>
                 <div className="text-xs text-[#4F5752] font-sans-clean">
                   *Scheduled air cargo allocations subject to harvest availability.

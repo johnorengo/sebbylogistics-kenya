@@ -10,18 +10,19 @@ export const ColdChainProcess: React.FC = () => {
   const activeStep = coldChainSteps[activeStepIndex];
 
   return (
-    <section id="journey" className="relative py-24 bg-[#F7F6F1] border-b border-[#D8DED8] scroll-mt-20">
+    <section id="journey" className="relative py-20 sm:py-24 bg-white border-b border-[#D9E1DC] scroll-mt-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="text-xs font-semibold uppercase tracking-[0.25em] text-[#C6A15B] mb-2">
-            Disciplined Post-Harvest Logistics
+          <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#C8102E] mb-2 flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-[#007A3D]"></span>
+            <span>Disciplined Post-Harvest Logistics</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-serif-luxury font-medium text-[#174D3B] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif-luxury font-bold text-[#0B110E] tracking-tight">
             The Farm-to-Global-Market Journey
           </h2>
-          <p className="mt-4 text-[#4F5752] text-sm sm:text-base leading-relaxed">
-            Perishable cut flowers require swift and unbroken temperature management from harvest to arrival. Our integrated journey conditions stems immediately post-harvest and protects them in a chilled envelope connecting high-altitude estates to international flights at JKIA.
+          <p className="mt-4 text-[#3A453F] text-sm sm:text-base leading-relaxed">
+            Perishable cut flowers require swift and unbroken temperature management from harvest to arrival. Sebby Logistics conditions stems immediately post-harvest and protects them in a chilled envelope connecting high-altitude estates to international flights at JKIA Nairobi.
           </p>
         </div>
 

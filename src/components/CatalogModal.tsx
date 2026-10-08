@@ -1,6 +1,7 @@
 import React from 'react';
 import { flowerVarieties, horticultureProducts } from '../data/flowerData';
-import { X, Download, FileText, Plane } from 'lucide-react';
+import { X, Download, FileText, Plane, Phone, Mail } from 'lucide-react';
+import { SebbyLogo } from './SebbyLogo';
 
 interface CatalogModalProps {
   isOpen: boolean;
@@ -12,7 +13,8 @@ export const CatalogModal: React.FC<CatalogModalProps> = ({ isOpen, onClose, onO
   if (!isOpen) return null;
 
   const handleDownloadPDF = () => {
-    const content = `SEBBYLOGISTICS KENYA - EXPORT FLORICULTURE & HORTICULTURE CATALOG
+    const content = `SEBBY LOGISTICS LTD - EXPORT FLORICULTURE & FREIGHT CATALOG
+"For Purchase of Flowers from Kenya including Freight"
 Nairobi Logistics Operations & JKIA Airside Staging Desk, Kenya
 Standard Agricultural & Export Compliance Framework
 
@@ -50,9 +52,11 @@ Product: ${h.name} (${h.botanicalName})
 - Master Carton Dimensions: 100cm (L) x 30cm (W) x 20cm (H)
 - Average Carton Gross Weight: ~14.5 kg
 
-Direct Commercial Inquiries:
-JKIA Operations Desk: dispatch@sebbylogistics.co.ke
-Commercial Planning: wholesale@sebbylogistics.co.ke
+DIRECT COMMERCIAL & FREIGHT INQUIRIES:
+Tel / WhatsApp: +254 719707003
+General Inquiries: info@sebbylogistics.com
+Sales & Quotes: Sales@sebbylogistics.com
+Invoicing & Accounts: Invoices@sebbylogistics.com
 `;
 
     const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
@@ -67,84 +71,102 @@ Commercial Planning: wholesale@sebbylogistics.co.ke
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white border border-[#D8DED8] p-6 sm:p-10 shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white border border-[#D9E1DC] p-6 sm:p-10 shadow-2xl">
         {/* Header */}
-        <div className="flex items-start justify-between border-b border-[#D8DED8] pb-6">
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.25em] text-[#C6A15B]">
-              Technical Export Brochure
+        <div className="flex items-start justify-between border-b border-[#D9E1DC] pb-6">
+          <div className="flex items-start gap-4">
+            <div className="h-14 w-14 rounded-full p-1 bg-[#F8FAF8] border border-[#D9E1DC] flex items-center justify-center shrink-0">
+              <SebbyLogo className="h-full w-full" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-serif-luxury font-medium text-[#174D3B] mt-1">
-              SebbyLogistics Master Product Catalog
-            </h2>
-            <p className="mt-1 text-xs text-[#4F5752]">
-              Indicative export specifications, packaging parameters, and airfreight palletizing guidelines.
-            </p>
+            <div>
+              <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#C8102E]">
+                Technical Export Brochure
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-serif-luxury font-bold text-[#0B110E] mt-0.5">
+                SEBBY LOGISTICS LTD Catalog
+              </h2>
+              <p className="text-xs font-serif-luxury italic text-[#007A3D] font-medium mt-0.5">
+                &quot;For Purchase of Flowers from Kenya including Freight&quot;
+              </p>
+            </div>
           </div>
 
           <button
             onClick={onClose}
-            className="p-2 text-[#4F5752] hover:text-[#174D3B] rounded-lg hover:bg-[#EEF1EB]"
+            className="p-2 text-[#4F5752] hover:text-[#0B110E] rounded-lg hover:bg-[#F2F6F3]"
             aria-label="Close catalog modal"
           >
-            <X className="h-6 w-6" />
+            <X className="h-5 w-5" />
           </button>
         </div>
 
-        {/* Action bar */}
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl bg-[#EEF1EB] border border-[#D8DED8]">
-          <div className="flex items-center gap-3 text-xs text-[#4F5752]">
-            <FileText className="h-4 w-4 text-[#174D3B] shrink-0" />
-            <span className="font-medium text-[#174D3B]">Export Specification & Packaging Guide</span>
+        {/* Contact Strip */}
+        <div className="mt-4 p-3 rounded-lg bg-[#0B0F0D] text-white flex flex-wrap items-center justify-between gap-3 text-xs font-data">
+          <div className="flex items-center gap-2">
+            <Phone className="h-3.5 w-3.5 text-[#009E49]" />
+            <span>Tel / WhatsApp: +254 719707003</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="text-[#C8102E]">Sales@sebbylogistics.com</span>
+            <span className="text-white/40">|</span>
+            <span className="text-[#009E49]">info@sebbylogistics.com</span>
+          </div>
+        </div>
+
+        {/* Action Controls */}
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+          <div className="text-xs text-[#4F5752]">
+            Comprehensive variety specifications, packaging parameters, and airfreight palletizing guidelines.
           </div>
 
           <div className="flex items-center gap-3">
             <button
               onClick={handleDownloadPDF}
-              className="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium text-[#174D3B] border border-[#D8DED8] bg-white rounded-md hover:bg-[#F7F6F1] transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-[#007A3D] hover:bg-[#009E49] rounded-md transition-colors shadow-sm"
             >
-              <Download className="h-3.5 w-3.5 text-[#C6A15B]" />
-              Download Spec Sheet
+              <Download className="h-3.5 w-3.5" />
+              <span>Download Text Spec Sheet</span>
             </button>
             <button
               onClick={() => {
                 onClose();
                 onOpenRFQ();
               }}
-              className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-white bg-[#174D3B] hover:bg-[#285F4A] rounded-md transition-colors shadow-sm"
+              className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white bg-[#C8102E] hover:bg-[#A30922] rounded-md transition-colors shadow-sm"
             >
-              Inquire Pricing
+              <span>Request Wholesale RFQ</span>
             </button>
           </div>
         </div>
 
-        {/* Section 1: Flowers Table */}
+        {/* Section 1: Roses Specifications Table */}
         <div className="mt-8">
-          <h3 className="text-lg font-serif-luxury font-semibold text-[#174D3B] mb-3">
-            1. Fresh Cut Floral Specifications
+          <h3 className="text-base font-serif-luxury font-bold text-[#0B110E] mb-3 flex items-center gap-2">
+            <FileText className="h-4 w-4 text-[#C8102E]" />
+            <span>Export Rose Varieties & Technical Specifications</span>
           </h3>
-          <div className="overflow-x-auto rounded-xl border border-[#D8DED8]">
-            <table className="w-full text-left text-xs font-data">
-              <thead className="bg-[#EEF1EB] text-[#174D3B] border-b border-[#D8DED8]">
+          <div className="overflow-x-auto border border-[#D9E1DC] rounded-xl">
+            <table className="w-full text-left text-xs font-sans-clean">
+              <thead className="bg-[#F8FAF8] text-[#0B110E] font-semibold border-b border-[#D9E1DC]">
                 <tr>
                   <th className="p-3">Variety</th>
-                  <th className="p-3">Category</th>
-                  <th className="p-3">Stem Lengths</th>
+                  <th className="p-3">Botanical Class</th>
+                  <th className="p-3">Lengths</th>
                   <th className="p-3">Head Size</th>
+                  <th className="p-3">Box Pack</th>
                   <th className="p-3">Vase Life</th>
-                  <th className="p-3">Box Packing</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#D8DED8] bg-white text-[#4F5752]">
+              <tbody className="divide-y divide-[#D9E1DC]">
                 {flowerVarieties.map((f) => (
-                  <tr key={f.id} className="hover:bg-[#F7F6F1]">
-                    <td className="p-3 font-semibold text-[#174D3B]">{f.name}</td>
-                    <td className="p-3 capitalize text-[#4F5752]">{f.category.replace('-', ' ')}</td>
-                    <td className="p-3">{f.stemLengths.join(', ')}</td>
-                    <td className="p-3">{f.headSize}</td>
-                    <td className="p-3 text-[#174D3B] font-semibold">{f.vaseLife}</td>
-                    <td className="p-3">{f.bunchesPerBox} bunches / box</td>
+                  <tr key={f.id} className="hover:bg-[#F2F6F3]/60 transition-colors">
+                    <td className="p-3 font-semibold text-[#0B110E]">{f.name}</td>
+                    <td className="p-3 text-[#4F5752] italic">{f.botanicalName}</td>
+                    <td className="p-3 font-data text-[#0B110E]">{f.stemLengths.join(', ')}</td>
+                    <td className="p-3 font-data text-[#C8102E] font-bold">{f.headSize}</td>
+                    <td className="p-3 font-data text-[#4F5752]">{f.bunchesPerBox * f.stemsPerBunch} stems</td>
+                    <td className="p-3 text-[#007A3D] font-bold">{f.vaseLife}</td>
                   </tr>
                 ))}
               </tbody>
@@ -152,30 +174,31 @@ Commercial Planning: wholesale@sebbylogistics.co.ke
           </div>
         </div>
 
-        {/* Section 2: Horticulture Table */}
+        {/* Section 2: Horticulture Specifications Table */}
         <div className="mt-8">
-          <h3 className="text-lg font-serif-luxury font-semibold text-[#174D3B] mb-3">
-            2. Fresh Horticulture Export Specifications
+          <h3 className="text-base font-serif-luxury font-bold text-[#0B110E] mb-3 flex items-center gap-2">
+            <FileText className="h-4 w-4 text-[#007A3D]" />
+            <span>Kenya Horticulture Produce Export Line</span>
           </h3>
-          <div className="overflow-x-auto rounded-xl border border-[#D8DED8]">
-            <table className="w-full text-left text-xs font-data">
-              <thead className="bg-[#EEF1EB] text-[#174D3B] border-b border-[#D8DED8]">
+          <div className="overflow-x-auto border border-[#D9E1DC] rounded-xl">
+            <table className="w-full text-left text-xs font-sans-clean">
+              <thead className="bg-[#F8FAF8] text-[#0B110E] font-semibold border-b border-[#D9E1DC]">
                 <tr>
-                  <th className="p-3">Product</th>
-                  <th className="p-3">Commercial Varieties</th>
-                  <th className="p-3">Packaging Specs</th>
+                  <th className="p-3">Produce</th>
+                  <th className="p-3">Target Varieties</th>
+                  <th className="p-3">Standard Packaging</th>
+                  <th className="p-3">Grading / Net Wt</th>
                   <th className="p-3">Transit Temp</th>
-                  <th className="p-3">Guidelines</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#D8DED8] bg-white text-[#4F5752]">
+              <tbody className="divide-y divide-[#D9E1DC]">
                 {horticultureProducts.map((h) => (
-                  <tr key={h.id} className="hover:bg-[#F7F6F1]">
-                    <td className="p-3 font-semibold text-[#174D3B]">{h.name}</td>
-                    <td className="p-3">{h.varieties.join(', ')}</td>
-                    <td className="p-3">{h.packaging} ({h.netWeight})</td>
-                    <td className="p-3 text-[#174D3B] font-semibold">{h.storageTemp}</td>
-                    <td className="p-3 text-[#4F5752]">{h.certifications.join(', ')}</td>
+                  <tr key={h.id} className="hover:bg-[#F2F6F3]/60 transition-colors">
+                    <td className="p-3 font-semibold text-[#0B110E]">{h.name}</td>
+                    <td className="p-3 text-[#4F5752]">{h.varieties.join(', ')}</td>
+                    <td className="p-3 text-[#4F5752]">{h.packaging}</td>
+                    <td className="p-3 font-data text-[#C8102E] font-medium">{h.netWeight}</td>
+                    <td className="p-3 font-data text-[#007A3D] font-bold">{h.storageTemp}</td>
                   </tr>
                 ))}
               </tbody>
@@ -184,31 +207,31 @@ Commercial Planning: wholesale@sebbylogistics.co.ke
         </div>
 
         {/* Section 3: Aircraft Palletizing Guidelines */}
-        <div className="mt-8 p-5 rounded-xl bg-[#F7F6F1] border border-[#D8DED8] text-xs">
-          <div className="text-xs font-semibold uppercase tracking-wider text-[#174D3B] mb-2 flex items-center gap-2">
-            <Plane className="h-4 w-4 text-[#C6A15B]" />
+        <div className="mt-8 p-5 rounded-xl bg-[#F8FAF8] border border-[#D9E1DC] text-xs">
+          <div className="text-xs font-bold uppercase tracking-wider text-[#0B110E] mb-2 flex items-center gap-2">
+            <Plane className="h-4 w-4 text-[#C8102E]" />
             <span>Aircraft ULD Pallet Guidelines (JKIA Nairobi)</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3 text-[#4F5752] font-data">
             <div>
-              <div className="text-[#C6A15B] font-semibold">Master Box Dims:</div>
-              <div className="text-[#174D3B] font-medium mt-0.5">100cm × 30cm × 20cm (0.06m³)</div>
+              <div className="text-[#0B110E] font-semibold">Master Box Dims:</div>
+              <div className="text-[#007A3D] font-medium mt-0.5">100cm × 30cm × 20cm (0.06m³)</div>
             </div>
             <div>
-              <div className="text-[#C6A15B] font-semibold">Standard PMC Pallet:</div>
-              <div className="text-[#174D3B] font-medium mt-0.5">140 - 160 Boxes (~2,250 kg)</div>
+              <div className="text-[#0B110E] font-semibold">Standard PMC Pallet:</div>
+              <div className="text-[#C8102E] font-medium mt-0.5">140 - 160 Boxes (~2,250 kg)</div>
             </div>
             <div>
-              <div className="text-[#C6A15B] font-semibold">LD3 Lower Deck:</div>
-              <div className="text-[#174D3B] font-medium mt-0.5">38 - 42 Boxes (~600 kg)</div>
+              <div className="text-[#0B110E] font-semibold">LD3 Lower Deck:</div>
+              <div className="text-[#0B110E] font-medium mt-0.5">38 - 42 Boxes (~600 kg)</div>
             </div>
           </div>
         </div>
 
-        <div className="mt-8 pt-4 border-t border-[#D8DED8] flex justify-end">
+        <div className="mt-8 pt-4 border-t border-[#D9E1DC] flex justify-end">
           <button
             onClick={onClose}
-            className="px-5 py-2.5 text-xs font-medium text-[#4F5752] hover:text-[#174D3B] border border-[#D8DED8] rounded-md bg-white hover:bg-[#EEF1EB]"
+            className="px-5 py-2.5 text-xs font-semibold text-[#0B110E] hover:bg-[#F2F6F3] border border-[#D9E1DC] rounded-md bg-white transition-colors"
           >
             Close Catalog
           </button>

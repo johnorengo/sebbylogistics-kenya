@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Menu, X, FileText, ChevronRight, Mail, PhoneCall } from 'lucide-react';
+import { Menu, X, FileText, ChevronRight, Mail, Phone, MessageCircle } from 'lucide-react';
+import { SebbyLogo } from './SebbyLogo';
 
 interface HeaderProps {
   onOpenCatalog: () => void;
@@ -18,189 +19,259 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCatalog, onOpenRFQ }) => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[#D8DED8] bg-[#F7F6F1]/95 backdrop-blur-md transition-colors">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-12">
-        {/* Zone 1: Single Text Element Brand Wordmark */}
-        <a
-          href="#hero"
-          className="text-2xl font-serif-luxury font-semibold tracking-tight text-[#174D3B] transition-colors hover:text-[#285F4A] flex items-center gap-2"
-        >
-          <span>SebbyLogistics</span>
-        </a>
+    <header className="sticky top-0 z-50 w-full transition-all">
+      {/* 1. Kenyan National Flag Accent Ribbon */}
+      <div className="h-1 w-full kenya-ribbon-bar" />
 
-        {/* Zone 2: Clean Text Navigation Links */}
-        <nav className="hidden items-center gap-5 lg:gap-7 xl:gap-8 lg:flex">
-          <a
-            href="#flowers"
-            className="text-xs lg:text-sm font-medium text-[#4F5752] transition-colors hover:text-[#174D3B]"
-          >
-            Floral Portfolio
-          </a>
-          <a
-            href="#horticulture"
-            className="text-xs lg:text-sm font-medium text-[#4F5752] transition-colors hover:text-[#174D3B]"
-          >
-            Horticulture
-          </a>
-          <a
-            href="#journey"
-            className="text-xs lg:text-sm font-medium text-[#4F5752] transition-colors hover:text-[#174D3B]"
-          >
-            Export Journey
-          </a>
-          <a
-            href="#why-kenya"
-            className="text-xs lg:text-sm font-medium text-[#4F5752] transition-colors hover:text-[#174D3B]"
-          >
-            Why Kenya
-          </a>
-          <a
-            href="#quality"
-            className="text-xs lg:text-sm font-medium text-[#4F5752] transition-colors hover:text-[#174D3B]"
-          >
-            Quality
-          </a>
-          <a
-            href="#markets"
-            className="text-xs lg:text-sm font-medium text-[#4F5752] transition-colors hover:text-[#174D3B]"
-          >
-            Global Markets
-          </a>
-          <a
-            href="#contact"
-            className="text-xs lg:text-sm font-semibold text-[#174D3B] hover:text-[#285F4A] transition-colors flex items-center gap-1.5"
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-[#C6A15B]"></span>
-            Contact Us
-          </a>
-        </nav>
+      {/* 2. Top Micro-Bar with Official Contact Channels */}
+      <div className="bg-[#0B0F0D] border-b border-white/10 text-white/90 px-6 lg:px-12 py-1.5 hidden md:block">
+        <div className="mx-auto max-w-7xl flex items-center justify-between text-[11px] font-sans-clean">
+          <div className="flex items-center gap-4">
+            <span className="text-white/60 font-data">Direct Airside Link at JKIA Nairobi, Kenya</span>
+            <span className="text-white/20">|</span>
+            <span className="text-[#009E49] font-medium flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#009E49] animate-pulse"></span>
+              Fresh Daily Harvest & Airfreight Logistics
+            </span>
+          </div>
 
-        {/* Zone 3: Primary Actions */}
-        <div className="hidden items-center gap-2.5 lg:gap-3 md:flex">
+          <div className="flex items-center gap-5 text-white/80 font-data">
+            <a
+              href="https://wa.me/254719707003"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-white hover:text-[#009E49] transition-colors"
+            >
+              <MessageCircle className="h-3 w-3 text-[#009E49]" />
+              <span>WhatsApp: +254 719707003</span>
+            </a>
+            <span className="text-white/20">|</span>
+            <a
+              href="mailto:info@sebbylogistics.com"
+              className="flex items-center gap-1 text-white/80 hover:text-white transition-colors"
+            >
+              <Mail className="h-3 w-3 text-[#C8102E]" />
+              <span>info@sebbylogistics.com</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* 3. Main Glass Navigation Bar Flowing Seamlessly with the Video Hero */}
+      <div className="bg-[#0B0F0D]/95 backdrop-blur-md border-b border-white/10 shadow-lg text-white">
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-12">
+          {/* Zone 1: Sebby Flower Logo & Company Identity */}
           <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavClick('contact');
-            }}
-            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold tracking-wide text-[#174D3B] hover:bg-[#EEF1EB] transition-colors border border-[#D8DED8] rounded-md whitespace-nowrap"
+            href="#hero"
+            className="flex items-center gap-3.5 group transition-transform shrink-0"
           >
-            <PhoneCall className="h-3.5 w-3.5 text-[#C6A15B]" />
-            Contact Us
+            <div className="h-12 w-12 rounded-full p-0.5 bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-105 transition-transform">
+              <SebbyLogo className="h-11 w-11" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-lg sm:text-2xl font-serif-luxury font-bold tracking-tight text-white leading-tight">
+                SEBBY LOGISTICS LTD
+              </span>
+              <span className="text-[10px] sm:text-xs font-serif-luxury italic text-[#009E49] tracking-wide max-w-[260px] sm:max-w-none truncate">
+                &quot;For Purchase of Flowers from Kenya including Freight&quot;
+              </span>
+            </div>
           </a>
 
+          {/* Zone 2: Navigation Links */}
+          <nav className="hidden items-center gap-5 lg:gap-6 xl:gap-7 xl:flex">
+            <a
+              href="#flowers"
+              className="text-xs lg:text-sm font-medium text-white/80 transition-colors hover:text-[#009E49]"
+            >
+              Floral Portfolio
+            </a>
+            <a
+              href="#horticulture"
+              className="text-xs lg:text-sm font-medium text-white/80 transition-colors hover:text-[#009E49]"
+            >
+              Horticulture
+            </a>
+            <a
+              href="#journey"
+              className="text-xs lg:text-sm font-medium text-white/80 transition-colors hover:text-[#009E49]"
+            >
+              Export Journey
+            </a>
+            <a
+              href="#why-kenya"
+              className="text-xs lg:text-sm font-medium text-white/80 transition-colors hover:text-[#009E49]"
+            >
+              Why Kenya
+            </a>
+            <a
+              href="#quality"
+              className="text-xs lg:text-sm font-medium text-white/80 transition-colors hover:text-[#009E49]"
+            >
+              Quality
+            </a>
+            <a
+              href="#markets"
+              className="text-xs lg:text-sm font-medium text-white/80 transition-colors hover:text-[#009E49]"
+            >
+              Global Markets
+            </a>
+            <a
+              href="#contact"
+              className="text-xs lg:text-sm font-semibold text-white hover:text-[#C8102E] transition-colors flex items-center gap-1.5"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-[#C8102E]"></span>
+              Contact Us
+            </a>
+          </nav>
+
+          {/* Zone 3: Primary Action Buttons */}
+          <div className="hidden items-center gap-2.5 lg:gap-3 md:flex">
+            <a
+              href="https://wa.me/254719707003"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-white bg-[#007A3D] hover:bg-[#009E49] transition-all rounded-md shadow-sm whitespace-nowrap"
+            >
+              <Phone className="h-3.5 w-3.5" />
+              <span>+254 719707003</span>
+            </a>
+
+            <button
+              onClick={onOpenCatalog}
+              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-white/90 hover:text-white transition-colors bg-white/5 hover:bg-white/10 border border-white/15 rounded-md whitespace-nowrap"
+            >
+              <FileText className="h-3.5 w-3.5 text-[#009E49]" />
+              Catalog
+            </button>
+
+            <button
+              onClick={onOpenRFQ}
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white bg-[#C8102E] hover:bg-[#A30922] transition-all rounded-md shadow-md whitespace-nowrap"
+            >
+              Wholesale RFQ
+              <ChevronRight className="h-3.5 w-3.5 text-white" />
+            </button>
+          </div>
+
+          {/* Mobile Toggle Button */}
           <button
-            onClick={onOpenCatalog}
-            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium tracking-wide text-[#4F5752] hover:text-[#174D3B] transition-colors hover:bg-[#EEF1EB] border border-[#D8DED8] rounded-md whitespace-nowrap"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 text-white/80 hover:text-white xl:hidden focus:outline-none"
+            aria-label="Toggle navigation menu"
           >
-            <FileText className="h-3.5 w-3.5 text-[#C6A15B]" />
-            Catalog
-          </button>
-
-          <button
-            onClick={onOpenRFQ}
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold tracking-wide text-white bg-[#174D3B] hover:bg-[#285F4A] transition-colors rounded-md shadow-sm whitespace-nowrap"
-          >
-            Wholesale RFQ
-            <ChevronRight className="h-3.5 w-3.5 text-[#C6A15B]" />
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
-
-        {/* Mobile Toggle Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="p-2 text-[#4F5752] hover:text-[#174D3B] md:hidden focus:outline-none"
-          aria-label="Toggle navigation menu"
-        >
-          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
       </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="border-b border-[#D8DED8] bg-[#F7F6F1] px-6 py-6 md:hidden shadow-lg animate-in fade-in duration-150">
+        <div className="border-b border-white/10 bg-[#0B0F0D] px-6 py-6 xl:hidden shadow-2xl animate-in fade-in duration-150 text-white">
           <div className="flex flex-col space-y-3.5">
+            {/* Mobile Header Branding */}
+            <div className="flex items-center gap-3 pb-3 border-b border-white/10">
+              <SebbyLogo className="h-10 w-10 shrink-0" />
+              <div>
+                <div className="font-serif-luxury font-bold text-base text-white">SEBBY LOGISTICS LTD</div>
+                <div className="text-[11px] text-[#009E49] italic">&quot;For Purchase of Flowers from Kenya including Freight&quot;</div>
+              </div>
+            </div>
+
             <a
               href="#flowers"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-[#4F5752] hover:text-[#174D3B]"
+              className="text-base font-medium text-white/80 hover:text-[#009E49]"
             >
               Floral Portfolio
             </a>
             <a
               href="#horticulture"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-[#4F5752] hover:text-[#174D3B]"
+              className="text-base font-medium text-white/80 hover:text-[#009E49]"
             >
               Fresh Horticulture
             </a>
             <a
               href="#journey"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-[#4F5752] hover:text-[#174D3B]"
+              className="text-base font-medium text-white/80 hover:text-[#009E49]"
             >
               Export Journey
             </a>
             <a
               href="#why-kenya"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-[#4F5752] hover:text-[#174D3B]"
+              className="text-base font-medium text-white/80 hover:text-[#009E49]"
             >
               Why Kenyan Flowers
             </a>
             <a
               href="#quality"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-[#4F5752] hover:text-[#174D3B]"
+              className="text-base font-medium text-white/80 hover:text-[#009E49]"
             >
               Quality & Governance
             </a>
             <a
               href="#markets"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-[#4F5752] hover:text-[#174D3B]"
+              className="text-base font-medium text-white/80 hover:text-[#009E49]"
             >
               Global Destinations
             </a>
 
-            {/* Prominent Contact Us Section in Menu */}
-            <div className="pt-2 border-t border-[#D8DED8]/60">
+            {/* Direct Contact In Menu */}
+            <div className="pt-2 border-t border-white/10">
               <a
                 href="#contact"
                 onClick={(e) => {
                   e.preventDefault();
                   handleNavClick('contact');
                 }}
-                className="flex items-center justify-between py-2.5 px-3 rounded-lg bg-[#EEF1EB] text-sm font-semibold text-[#174D3B] border border-[#D8DED8]"
+                className="flex items-center justify-between py-2.5 px-3 rounded-lg bg-[#C8102E]/15 border border-[#C8102E]/40 text-sm font-semibold text-white"
               >
                 <div className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-[#C6A15B]" />
+                  <Mail className="h-4 w-4 text-[#C8102E]" />
                   <span>Contact Us & Flight Dispatch</span>
                 </div>
-                <ChevronRight className="h-4 w-4 text-[#174D3B]" />
+                <ChevronRight className="h-4 w-4 text-white" />
               </a>
             </div>
 
-            <div className="pt-3 border-t border-[#D8DED8] flex flex-col gap-2.5">
+            {/* Contact numbers */}
+            <div className="p-3 rounded-lg bg-white/5 border border-white/10 text-xs space-y-1.5 font-data">
+              <div className="text-white/60">Direct Trade Line:</div>
+              <a href="tel:+254719707003" className="flex items-center gap-1.5 text-white font-semibold hover:text-[#009E49]">
+                <Phone className="h-3.5 w-3.5 text-[#009E49]" />
+                +254 719707003
+              </a>
+              <div className="flex items-center gap-1.5 text-white/80">
+                <Mail className="h-3 w-3 text-[#C8102E]" />
+                info@sebbylogistics.com
+              </div>
+            </div>
+
+            <div className="pt-2 flex flex-col gap-2.5">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenRFQ();
                 }}
-                className="w-full flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-white bg-[#174D3B] hover:bg-[#285F4A] rounded-md shadow-sm transition-colors"
+                className="w-full flex items-center justify-center gap-2 py-3 text-xs font-bold uppercase tracking-wider text-white bg-[#C8102E] hover:bg-[#A30922] rounded-md shadow-md transition-colors"
               >
                 Wholesale Pricing Inquiry
-                <ChevronRight className="h-3.5 w-3.5 text-[#C6A15B]" />
+                <ChevronRight className="h-3.5 w-3.5" />
               </button>
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenCatalog();
                 }}
-                className="w-full flex items-center justify-center gap-2 py-2.5 text-xs font-medium text-[#174D3B] border border-[#D8DED8] rounded-md bg-white hover:bg-[#EEF1EB] transition-colors"
+                className="w-full flex items-center justify-center gap-2 py-2.5 text-xs font-medium text-white border border-white/20 rounded-md bg-white/10 hover:bg-white/15 transition-colors"
               >
-                <FileText className="h-4 w-4 text-[#C6A15B]" />
-                View Export Catalog Spec Sheet
+                <FileText className="h-4 w-4 text-[#009E49]" />
+                Download Export Catalog Spec Sheet
               </button>
             </div>
           </div>

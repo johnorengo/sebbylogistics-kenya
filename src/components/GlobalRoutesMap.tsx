@@ -7,19 +7,19 @@ export const GlobalRoutesMap: React.FC = () => {
   const [selectedRoute, setSelectedRoute] = useState<FlightRoute>(flightRoutes[0]);
 
   return (
-    <section id="markets" className="relative py-24 bg-[#EEF1EB] border-b border-[#D8DED8] scroll-mt-20">
+    <section id="markets" className="relative py-20 sm:py-24 bg-[#F8FAF8] border-b border-[#D9E1DC] scroll-mt-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="text-xs font-semibold uppercase tracking-[0.25em] text-[#C6A15B] mb-2 flex items-center gap-2">
-            <Globe2 className="h-3.5 w-3.5 text-[#174D3B]" />
+          <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#C8102E] mb-2 flex items-center gap-2">
+            <Globe2 className="h-3.5 w-3.5 text-[#007A3D]" />
             <span>Airside Logistics & Global Connectivity</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-serif-luxury font-medium text-[#174D3B] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif-luxury font-bold text-[#0B110E] tracking-tight">
             Connecting JKIA Nairobi to the World’s Floral Centers
           </h2>
-          <p className="mt-4 text-[#4F5752] text-sm sm:text-base leading-relaxed">
-            Operating from the air cargo staging area at Jomo Kenyatta International Airport (JKIA), our consignments connect directly onto scheduled widebody flights serving European auctions, British retail distributors, and Middle Eastern hubs.
+          <p className="mt-4 text-[#3A453F] text-sm sm:text-base leading-relaxed">
+            Operating from the air cargo staging area at Jomo Kenyatta International Airport (JKIA), Sebby Logistics consignments connect directly onto scheduled widebody flights serving European auctions, British retail distributors, and Middle Eastern hubs.
           </p>
         </div>
 
@@ -33,17 +33,17 @@ export const GlobalRoutesMap: React.FC = () => {
                 onClick={() => setSelectedRoute(route)}
                 className={`text-left p-4 rounded-xl border transition-all ${
                   isSelected
-                    ? 'bg-[#174D3B] text-white border-[#174D3B] shadow-sm'
-                    : 'bg-white text-[#4F5752] border-[#D8DED8] hover:border-[#174D3B]/40'
+                    ? 'bg-[#0B0F0D] text-white border-2 border-[#007A3D] shadow-md'
+                    : 'bg-white text-[#3A453F] border-[#D9E1DC] hover:border-[#007A3D]'
                 }`}
               >
-                <div className={`text-[11px] font-data uppercase tracking-wider mb-1 font-semibold ${isSelected ? 'text-[#C6A15B]' : 'text-[#C6A15B]'}`}>
+                <div className={`text-[11px] font-data uppercase tracking-wider mb-1 font-bold ${isSelected ? 'text-[#009E49]' : 'text-[#C8102E]'}`}>
                   {route.destination}
                 </div>
-                <div className={`text-base font-serif-luxury font-semibold ${isSelected ? 'text-white' : 'text-[#174D3B]'}`}>
+                <div className={`text-base font-serif-luxury font-bold ${isSelected ? 'text-white' : 'text-[#0B110E]'}`}>
                   {route.city}
                 </div>
-                <div className={`mt-2 text-xs font-data ${isSelected ? 'text-white/80' : 'text-[#4F5752]'}`}>
+                <div className={`mt-1 text-xs font-data ${isSelected ? 'text-white/80' : 'text-[#4F5752]'}`}>
                   {route.airportCode.split(' ')[0]}
                 </div>
               </button>
