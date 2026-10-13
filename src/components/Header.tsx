@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronRight, Mail, MapPin, Phone } from 'lucide-react';
 import { SebbyLogo } from './SebbyLogo';
 import { scrollToSection } from '../utils/scroll';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 interface HeaderProps {
   onOpenCatalog: () => void;
@@ -14,6 +15,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
   // While over the hero the header stays fully transparent (no bg, no lines)
   // so the background photo shows through cleanly.
   const [isSolid, setIsSolid] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const reducedMotion = useReducedMotion();
   const menuButton = useRef<HTMLButtonElement>(null);
   const drawer = useRef<HTMLDivElement>(null);
 
@@ -48,7 +51,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
       if (frame !== null) return;
       frame = requestAnimationFrame(() => {
         const y = window.scrollY;
-        setIsSolid(y > 24);
+        setScrollY(Math.min(Math.max(y, 0), 160));
+        const heroElement = document.getElementById('hero');
+        if (heroElement) {
+          const rect = heroElement.getBoundingClientRect();
+          setIsSolid(rect.bottom <= 90);
+        } else {
+          setIsSolid(y > (window.innerHeight || 800) - 140);
+        }
         frame = null;
       });
     };
@@ -63,18 +73,41 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
     };
   }, []);
 
+  // ONE shared progress (0 = landing, 1 = compact) drives the logo, the
+  // compact brand AND the menu position together, so everything glides
+  // simultaneously on the same scroll.
+  const fadeRange = 160;
+  const p = Math.min(Math.max(scrollY / fadeRange, 0), 1);
+  // Big block collapses once the fade finishes (still over the hero,
+  // header remains transparent — no lines, no solid panel).
+  const collapsed = p >= 1;
+
+  // Big centered brand: drifts left, shrinks and dissolves IN PLACE —
+  // almost no upward travel, so it can never slide under / be overlapped
+  // by the thin contact strip or the navbar. Gone by ~60% of the scroll.
+  const bigOpacity = Math.max(1 - p * 1.6, 0);
+  const bigX = reducedMotion ? 0 : -p * 140;
+  const bigY = reducedMotion ? 0 : -p * 12;
+  const bigScale = reducedMotion ? 1 : 1 - p * 0.15;
+
+  // Compact navbar brand (top-left): fades/slides in on the same `p`,
+  // so both logos are half-visible together mid-scroll — but the big one
+  // is already nearly transparent before it could touch the strip.
+  const compactOpacity = p;
+  const compactX = reducedMotion ? 0 : (1 - p) * -28;
+  const compactScale = reducedMotion ? 1 : 0.92 + p * 0.08;
+
   const handleNavClick = (e: React.MouseEvent, id: string) => {
     setMobileMenuOpen(false);
     scrollToSection(e, id);
   };
 
   return (
-    <>
     <header
       className={`fixed top-0 left-0 right-0 z-50 w-full transition-colors duration-200 ${
         // Transparent only at landing; solid color background as soon as
         // the bar compacts so nav text never overlays hero text/photo.
-        isSolid || mobileMenuOpen
+        isSolid || collapsed || mobileMenuOpen
           ? 'bg-[#0B0F0D]/95 backdrop-blur-md'
           : 'bg-transparent'
       }`}
@@ -96,7 +129,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
             className="group hidden md:flex items-center gap-2 text-white/90 hover:text-white font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] truncate min-w-0 rounded-md px-2 -ml-2 py-0.5 hover:bg-white/15 transition-all duration-200"
           >
             <MapPin className="h-4 w-4 text-[#C8102E] group-hover:text-[#ff4d6a] group-hover:scale-125 transition-all duration-200 shrink-0" />
-            <span className="truncate   ">Jomo Kenyatta International Airport JKIA · 1st Freight Lane Avenue (Cargo)</span>
+            <span className="truncate group-hover:underline underline-offset-4 decoration-white/40">Jomo Kenyatta International Airport JKIA · 1st Freight Lane Avenue (Cargo)</span>
           </a>
           {/* Right group: phone + email (spread edge-to-edge on mobile) */}
           <div className="flex items-center gap-2 sm:gap-3 max-sm:flex-1 max-sm:justify-between">
@@ -106,7 +139,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
               className="group flex items-center gap-1.5 text-white/90 hover:text-white transition-all duration-200 shrink-0 font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] rounded-md px-2 py-0.5 hover:bg-white/15"
             >
               <Phone className="h-3.5 w-3.5 text-[#00E575] group-hover:scale-125 transition-transform duration-200 shrink-0" />
-              <span className="font-data whitespace-nowrap   ">+254 719 707 003</span>
+              <span className="font-data whitespace-nowrap group-hover:underline underline-offset-4 decoration-[#00E575]/70">+254 719 707 003</span>
             </a>
             <a
               href="mailto:support@sebbylogistics.com"
@@ -114,7 +147,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
               className="group flex items-center gap-2 text-white/90 hover:text-white transition-all duration-200 shrink-0 font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] min-w-0 rounded-md px-2 py-0.5 hover:bg-white/15"
             >
               <Mail className="h-3.5 w-3.5 text-[#009E49] group-hover:text-[#00E575] group-hover:scale-125 transition-all duration-200 shrink-0" />
-              <span className="font-data truncate   ">support@sebbylogistics.com</span>
+              <span className="font-data truncate group-hover:underline underline-offset-4 decoration-[#00E575]/70">support@sebbylogistics.com</span>
             </a>
           </div>
         </div>
@@ -126,7 +159,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
       <div
         data-header-navigation
         className={`relative z-10 transition-colors duration-200 ${
-          isSolid || mobileMenuOpen
+          isSolid || collapsed || mobileMenuOpen
             ? 'bg-[#0B0F0D]/95 backdrop-blur-md'
             : 'bg-transparent'
         }`}
@@ -140,13 +173,21 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
             // translateY(-50%) below — Tailwind v4 `-translate-y-1/2` uses
             // the separate `translate` property, which would stack on top
             // of it and shove the logo up over the contact strip.
-            className="absolute left-12 sm:left-8 lg:left-12 top-1/2 -translate-y-1/2"
+            className="absolute left-12 sm:left-8 lg:left-12 top-1/2"
+            aria-hidden={p < 0.15}
+            style={{
+              opacity: compactOpacity,
+              transform: `translateY(-50%) translateX(${compactX.toFixed(1)}px) scale(${compactScale.toFixed(3)})`,
+              visibility: compactOpacity <= 0.03 ? 'hidden' : 'visible',
+              pointerEvents: compactOpacity <= 0.25 ? 'none' : 'auto',
+            }}
           >
             <a
               href="#hero"
               onClick={(e) => handleNavClick(e, 'hero')}
               className="flex items-center gap-3 group shrink-0"
               title="Return to top"
+              tabIndex={compactOpacity <= 0.25 ? -1 : 0}
             >
               <div className="h-10 w-10 sm:h-11 sm:w-11 rounded-full p-1 bg-white/10 border border-white/25 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
                 <SebbyLogo className="h-full w-full" />
@@ -156,7 +197,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
                   SEBBY LOGISTICS
                 </span>
                 {/* Same full tagline as the centered hero brand — not shortened */}
-                <span className="hidden lg:block whitespace-nowrap text-xs text-[#00E575] font-sans-clean leading-snug">
+                <span className="whitespace-nowrap text-[10px] lg:text-xs text-[#00E575] font-serif-luxury italic leading-none drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
                   &quot;For Purchase of Flowers from Kenya including Freight&quot;
                 </span>
               </div>
@@ -181,7 +222,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
               driven by the SAME scroll progress `p`, so the glide happens
               simultaneously with the logo move (smooth, no jump). */}
           <div className="flex-1 hidden sm:flex items-center min-w-0">
-            <div aria-hidden className="flex-1" />
+            <div aria-hidden className="h-1" style={{ flexGrow: 0.5 + 0.5 * p, flexShrink: 1 }} />
             <nav className="flex items-center gap-8 md:gap-10 lg:gap-12 shrink-0">
               <a
                 href="#hero"
@@ -205,11 +246,50 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
                 Contact
               </a>
             </nav>
-
+            <div aria-hidden className="h-1" style={{ flexGrow: Math.max(0.5 - 0.5 * p, 0), flexShrink: 1 }} />
           </div>
 
           {/* Request a Quote lives at the hero bottom + mobile drawer —
               intentionally nothing else on this bar. */}
+        </div>
+      </div>
+
+      {/* 4. Big CENTERED branding — BELOW the nav row. On scroll it drifts
+          left, shrinks and dissolves in place (never travels upward, so no
+          strip/nav overlap) while the compact brand fades in top-left and
+          the menu glides right — all on the same progress `p`. */}
+      <div
+        aria-hidden={mobileMenuOpen || p > 0.85}
+        className="relative z-0 overflow-hidden"
+        style={{
+          maxHeight: mobileMenuOpen ? 0 : `${(1 - p) * 288}px`,
+          paddingTop: mobileMenuOpen ? 0 : `${(1 - p) * 16}px`,
+          paddingBottom: mobileMenuOpen ? 0 : `${(1 - p) * 12}px`,
+          opacity: mobileMenuOpen ? 0 : bigOpacity,
+          transform: `translate(${bigX.toFixed(1)}px, ${bigY.toFixed(1)}px) scale(${bigScale.toFixed(3)})`,
+          transformOrigin: 'center top',
+          filter: !reducedMotion && p > 0.1 ? `blur(${(p * 5).toFixed(1)}px)` : 'none',
+          visibility: mobileMenuOpen || bigOpacity <= 0.03 ? 'hidden' : 'visible',
+          pointerEvents: bigOpacity <= 0.25 ? 'none' : 'auto',
+        }}
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 flex flex-col items-center justify-center text-center will-change-transform">
+          <a
+            href="#hero"
+            onClick={(e) => handleNavClick(e, 'hero')}
+            tabIndex={mobileMenuOpen || bigOpacity <= 0.25 ? -1 : 0}
+            className="inline-flex flex-col items-center group transition-transform duration-300"
+          >
+            <div className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-full p-1 sm:p-1.5 bg-black/25 border border-white/30 flex items-center justify-center group-hover:scale-105 transition-all duration-300 drop-shadow-2xl backdrop-blur-[2px]">
+              <SebbyLogo className="h-full w-full" />
+            </div>
+            <span className="mt-1.5 sm:mt-2 text-xl sm:text-3xl md:text-4xl font-serif-luxury font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+              SEBBY LOGISTICS LTD
+            </span>
+            <span className="mt-0.5 sm:mt-1 text-xs sm:text-base md:text-lg font-serif-luxury font-semibold italic text-[#00E575] tracking-wide drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+              &quot;For Purchase of Flowers from Kenya including Freight&quot;
+            </span>
+          </a>
         </div>
       </div>
 
@@ -276,25 +356,5 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
         </div>
       )}
     </header>
-    <div className="absolute top-[120px] sm:top-[132px] left-0 right-0 z-20 py-4">
-        <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 flex flex-col items-center justify-center text-center will-change-transform">
-          <a
-            href="#hero"
-            onClick={(e) => handleNavClick(e, 'hero')}
-            className="inline-flex flex-col items-center group transition-transform duration-300"
-          >
-            <div className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-full p-1 sm:p-1.5 bg-black/25 border border-white/30 flex items-center justify-center group-hover:scale-105 transition-all duration-300 drop-shadow-2xl backdrop-blur-[2px]">
-              <SebbyLogo className="h-full w-full" />
-            </div>
-            <span className="mt-1.5 sm:mt-2 text-xl sm:text-3xl md:text-4xl font-serif-luxury font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
-              SEBBY LOGISTICS LTD
-            </span>
-            <span className="mt-0.5 sm:mt-1 text-xs sm:text-base md:text-lg font-serif-luxury font-semibold italic text-[#00E575] tracking-wide drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
-              &quot;For Purchase of Flowers from Kenya including Freight&quot;
-            </span>
-          </a>
-        </div>
-    </div>
-    </>
   );
 };

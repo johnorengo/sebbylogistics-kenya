@@ -6,17 +6,12 @@
   button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
   input, select, textarea { font-size: 1rem; }
   body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    line-height: 1.65;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     color: #1F2823;
     background-color: #F8FAF8;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Manrope', 'Inter', sans-serif;
-    letter-spacing: -0.035em;
     color: #0B110E;
   }
 }
@@ -36,15 +31,15 @@
 }
 
 .font-serif-luxury {
-  font-family: 'Manrope', 'Inter', sans-serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
 }
 
 .font-sans-clean {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
 .font-data {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'JetBrains Mono', monospace;
   font-variant-numeric: tabular-nums;
 }
 
