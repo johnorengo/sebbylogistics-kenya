@@ -1,39 +1,12 @@
-import React, { useState } from 'react';
-import { Mail, Send, CheckCircle2, ShieldCheck, Building2, Receipt, Phone, Clock } from 'lucide-react';
+import React from 'react';
+import { Mail, Phone, Clock, Building2, Receipt } from 'lucide-react';
 import { SebbyLogo } from './SebbyLogo';
 import { PartnersSection } from './PartnersSection';
+import { QuoteSection } from './QuoteSection';
 
 export const ContactSection: React.FC = () => {
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    department: 'Sales@sebbylogistics.com (Flower Purchase & Rates)',
-    inquiryType: 'Floral Purchase & Freight',
-    message: '',
-  });
-
-  const [submitted, setSubmitted] = useState(false);
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const errs: { [key: string]: string } = {};
-    if (!form.name.trim()) errs.name = 'Contact name is required';
-    if (!form.email.trim() || !form.email.includes('@')) errs.email = 'Valid corporate email is required';
-    if (!form.message.trim()) errs.message = 'Please provide consignment requirements';
-
-    if (Object.keys(errs).length > 0) {
-      setErrors(errs);
-      return;
-    }
-
-    setSubmitted(true);
-  };
-
   return (
-    <section id="contact" className="relative py-20 sm:py-24 bg-[#F8FAF8] border-b border-[#D9E1DC] scroll-mt-20">
+    <section id="contact" className="relative py-20 sm:py-24 bg-[#F8FAF8] border-b border-[#D9E1DC] scroll-mt-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-[#D9E1DC]">
@@ -63,8 +36,11 @@ export const ContactSection: React.FC = () => {
           </div>
         </div>
 
-        {/* 4 Official Contact & Desk Cards Bar */}
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* Request a Quote form — on top */}
+        <QuoteSection />
+
+        {/* Dispatch Desk Cards — below the quote form */}
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {/* 1. Direct Phone Calls Card (First Tab) */}
           <div className="p-6 rounded-2xl bg-white border-2 border-[#007A3D]/30 hover:border-[#007A3D] transition-all shadow-sm relative overflow-hidden group flex flex-col justify-between">
             <div>
@@ -187,177 +163,6 @@ export const ContactSection: React.FC = () => {
               <Mail className="h-4 w-4" />
               Invoices@sebbylogistics.com
             </a>
-          </div>
-        </div>
-
-        {/* Direct Trade Inquiries Form - Centered */}
-        <div className="mt-10 max-w-3xl mx-auto">
-          <div className="rounded-2xl bg-white border border-[#D9E1DC] p-6 sm:p-10 shadow-lg">
-            {submitted ? (
-              <div className="h-full flex flex-col items-center justify-center text-center p-8">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#EBF6F0] text-[#007A3D] mb-4">
-                  <CheckCircle2 className="h-8 w-8 text-[#007A3D]" />
-                </div>
-                <h3 className="text-2xl font-serif-luxury font-bold text-[#0B110E]">
-                  Inquiry Received by Sebby Logistics
-                </h3>
-                <p className="mt-3 text-xs sm:text-sm text-[#3A453F] max-w-md leading-relaxed">
-                  Thank you, <strong>{form.name}</strong>. Your consignment inquiry has been dispatched to <strong>{form.department.split(' ')[0]}</strong>. One of our trade coordinators will respond promptly with confirmed pricing and harvest allocation.
-                </p>
-                <div className="mt-4 p-3 rounded-lg bg-[#F8FAF8] border border-[#D9E1DC] text-xs font-data text-[#0B110E]">
-                  Urgent booking? WhatsApp us directly at <span className="font-bold text-[#007A3D]">+254 719707003</span>
-                </div>
-                <button
-                  onClick={() => {
-                    setSubmitted(false);
-                    setForm({
-                      name: '',
-                      email: '',
-                      phone: '',
-                      company: '',
-                      department: 'Sales@sebbylogistics.com (Flower Purchase & Rates)',
-                      inquiryType: 'Floral Purchase & Freight',
-                      message: '',
-                    });
-                  }}
-                  className="mt-6 px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white bg-[#C8102E] hover:bg-[#A30922] rounded-md transition-colors shadow-sm"
-                >
-                  Submit Another Request
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="pb-3 border-b border-[#D9E1DC] text-center">
-                  <div className="text-xs font-bold uppercase tracking-wider text-[#C8102E]">
-                    Direct Trade Inquiries
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-serif-luxury font-bold text-[#0B110E] mt-1">
-                    Request Stems Assortment, Stunning Prices & Airfreight Rates
-                  </h3>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-[#111814] mb-1">
-                      Full Name / Contact Person *
-                    </label>
-                    <input
-                      type="text"
-                      value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      placeholder="e.g. Robert Van Der Meer"
-                      className={`w-full rounded-md border px-3 py-2 text-xs focus:outline-none ${
-                        errors.name ? 'border-[#C8102E] bg-red-50' : 'border-[#D9E1DC] focus:border-[#007A3D]'
-                      }`}
-                    />
-                    {errors.name && <span className="text-[10px] text-[#C8102E] mt-0.5">{errors.name}</span>}
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-[#111814] mb-1">
-                      Corporate Email *
-                    </label>
-                    <input
-                      type="email"
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      placeholder="buyer@floraldistributor.com"
-                      className={`w-full rounded-md border px-3 py-2 text-xs focus:outline-none ${
-                        errors.email ? 'border-[#C8102E] bg-red-50' : 'border-[#D9E1DC] focus:border-[#007A3D]'
-                      }`}
-                    />
-                    {errors.email && <span className="text-[10px] text-[#C8102E] mt-0.5">{errors.email}</span>}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-[#111814] mb-1">
-                      Phone / WhatsApp Number
-                    </label>
-                    <input
-                      type="text"
-                      value={form.phone}
-                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      placeholder="+31 6 12345678"
-                      className="w-full rounded-md border border-[#D9E1DC] px-3 py-2 text-xs focus:border-[#007A3D] focus:outline-none"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-[#111814] mb-1">
-                      Company / Organization
-                    </label>
-                    <input
-                      type="text"
-                      value={form.company}
-                      onChange={(e) => setForm({ ...form, company: e.target.value })}
-                      placeholder="e.g. European Flower Importers BV"
-                      className="w-full rounded-md border border-[#D9E1DC] px-3 py-2 text-xs focus:border-[#007A3D] focus:outline-none"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-[#111814] mb-1">
-                      Target Department
-                    </label>
-                    <select
-                      value={form.department}
-                      onChange={(e) => setForm({ ...form, department: e.target.value })}
-                      className="w-full rounded-md border border-[#D9E1DC] px-3 py-2 text-xs bg-white focus:border-[#007A3D] focus:outline-none"
-                    >
-                      <option value="Sales@sebbylogistics.com (Flower Purchase & Rates)">Sales@sebbylogistics.com (Flower Purchase & Rates)</option>
-                      <option value="support@sebbylogistics.com (General Inquiries & Support)">support@sebbylogistics.com (General Inquiries & Support)</option>
-                      <option value="Invoices@sebbylogistics.com (Billing & Accounts)">Invoices@sebbylogistics.com (Billing & Accounts)</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-[#111814] mb-1">
-                      Destination Airport / Market
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. AMS (Amsterdam), LHR (London), DXB (Dubai)"
-                      className="w-full rounded-md border border-[#D9E1DC] px-3 py-2 text-xs focus:border-[#007A3D] focus:outline-none"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-[#111814] mb-1">
-                    Flower Assortment / Freight Requirements *
-                  </label>
-                  <textarea
-                    rows={4}
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    placeholder="Please specify flower varieties (e.g. Rhodos roses 60cm, spray roses), required weekly volume/boxes, target delivery date, and whether you need FOB Nairobi or CIF destination airport..."
-                    className={`w-full rounded-md border p-3 text-xs focus:outline-none ${
-                      errors.message ? 'border-[#C8102E] bg-red-50' : 'border-[#D9E1DC] focus:border-[#007A3D]'
-                    }`}
-                  />
-                  {errors.message && <span className="text-[10px] text-[#C8102E] mt-0.5">{errors.message}</span>}
-                </div>
-
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
-                  <div className="flex items-center gap-2 text-xs text-[#4F5752]">
-                    <ShieldCheck className="h-4 w-4 text-[#007A3D]" />
-                    <span>Direct response with stunning farm prices</span>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white bg-[#C8102E] hover:bg-[#A30922] rounded-md transition-colors shadow-md active:scale-95"
-                  >
-                    <span>Send Consignment Inquiry</span>
-                    <Send className="h-3.5 w-3.5" />
-                  </button>
-                </div>
-              </form>
-            )}
           </div>
         </div>
 

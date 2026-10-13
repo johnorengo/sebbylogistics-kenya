@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { CheckCircle2, ChevronLeft, ChevronRight, FileText } from 'lucide-react';
 
 import pic1Img from '../assets/images/pic1_orange_roses_harvest.jpg';
 import pic2Img from '../assets/images/pic2_kenya_airways_cargo.jpg';
@@ -37,7 +37,7 @@ interface HeroVideoProps {
   onOpenRFQ: () => void;
 }
 
-export const HeroVideo: React.FC<HeroVideoProps> = () => {
+export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen w-full overflow-hidden bg-[#0B0F0D] flex flex-col justify-between pt-52 sm:pt-60 md:pt-64 pb-12 sm:pb-16">
+    <section id="hero" className="relative min-h-screen w-full overflow-hidden bg-[#0B0F0D] flex flex-col justify-between pt-[264px] sm:pt-[304px] md:pt-[336px] pb-8 sm:pb-12 scroll-mt-20">
       {/* Full-bleed Cinematic Visual Story Canvas - Featuring 4 Uploaded Hero Pictures */}
       <div className="absolute inset-0 z-0">
         {HERO_IMAGES.map((item, idx) => (
@@ -116,55 +116,81 @@ export const HeroVideo: React.FC<HeroVideoProps> = () => {
           </div>
         </div>
 
-        {/* Bottom Carousel Controls: 4 Picture Thumbnails / Indicator Bars & Arrow Navigation */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/10">
-          {/* 4 Interactive Slide Indicator Tabs */}
-          <div className="flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
-            {HERO_IMAGES.map((item, idx) => (
+        {/* Bottom Zone: Request a Quote + current slide + carousel controls */}
+        <div className="mt-8 border-t border-white/15 pt-5 flex flex-col gap-5">
+          {/* Row 1: current story caption (left) + Request Quote CTA (right) */}
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5">
+            <div key={activeImageIndex} className="max-w-2xl animate-in fade-in duration-500">
+              <p className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#00E575]">
+                {HERO_IMAGES[activeImageIndex].title}
+              </p>
+              <p className="mt-1 text-sm sm:text-base text-white/85 font-sans-clean">
+                {HERO_IMAGES[activeImageIndex].caption}
+              </p>
+            </div>
+
+            <div className="flex shrink-0">
               <button
-                key={item.id}
-                onClick={() => setActiveImageIndex(idx)}
-                className={`group flex items-center gap-2 py-1.5 px-3 rounded-lg transition-all text-left ${
-                  activeImageIndex === idx
-                    ? 'bg-white/20 border border-white/40 shadow-md backdrop-blur-sm'
-                    : 'bg-black/40 border border-white/10 hover:bg-white/10'
-                }`}
-                title={item.title}
+                onClick={onOpenRFQ}
+                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-white bg-[#C8102E] hover:bg-[#A30922] transition-all rounded-lg shadow-[0_8px_30px_rgba(200,16,46,0.45)] hover:shadow-[0_8px_36px_rgba(200,16,46,0.6)] hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
               >
-                <div
-                  className={`h-2 rounded-full transition-all duration-500 ${
-                    activeImageIndex === idx
-                      ? 'w-6 bg-[#00E575]'
-                      : 'w-2 bg-white/40 group-hover:bg-white/70'
-                  }`}
-                />
-                <span className={`text-xs font-medium font-sans-clean hidden md:inline ${
-                  activeImageIndex === idx ? 'text-white' : 'text-white/70 group-hover:text-white'
-                }`}>
-                  0{item.id}
-                </span>
+                <FileText className="h-4 w-4" />
+                Request a Quote
+                <ChevronRight className="h-4 w-4" />
               </button>
-            ))}
+            </div>
           </div>
 
-          {/* Prev / Next Navigation Arrows */}
-          <div className="flex items-center gap-2 ml-auto">
-            <button
-              onClick={goToPrevious}
-              className="p-2 rounded-full bg-black/50 border border-white/20 hover:bg-white/20 text-white transition-all backdrop-blur-sm active:scale-95"
-              aria-label="Previous slide"
-              title="Previous picture"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </button>
-            <button
-              onClick={goToNext}
-              className="p-2 rounded-full bg-black/50 border border-white/20 hover:bg-white/20 text-white transition-all backdrop-blur-sm active:scale-95"
-              aria-label="Next slide"
-              title="Next picture"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
+          {/* Row 2: slide indicators (left) + arrows (right) */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            {/* 4 Interactive Slide Indicator Tabs */}
+            <div className="flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+              {HERO_IMAGES.map((item, idx) => (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveImageIndex(idx)}
+                  className={`group flex items-center gap-2 py-1.5 px-3 rounded-lg transition-all text-left ${
+                    activeImageIndex === idx
+                      ? 'bg-white/20 border border-white/40 shadow-md backdrop-blur-sm'
+                      : 'bg-black/40 border border-white/10 hover:bg-white/10'
+                  }`}
+                  title={item.title}
+                >
+                  <div
+                    className={`h-2 rounded-full transition-all duration-500 ${
+                      activeImageIndex === idx
+                        ? 'w-6 bg-[#00E575]'
+                        : 'w-2 bg-white/40 group-hover:bg-white/70'
+                    }`}
+                  />
+                  <span className={`text-xs font-medium font-sans-clean hidden md:inline ${
+                    activeImageIndex === idx ? 'text-white' : 'text-white/70 group-hover:text-white'
+                  }`}>
+                    0{item.id}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* Prev / Next Navigation Arrows */}
+            <div className="flex items-center gap-2 ml-auto">
+              <button
+                onClick={goToPrevious}
+                className="p-2 rounded-full bg-black/50 border border-white/20 hover:bg-white/20 text-white transition-all backdrop-blur-sm active:scale-95"
+                aria-label="Previous slide"
+                title="Previous picture"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                onClick={goToNext}
+                className="p-2 rounded-full bg-black/50 border border-white/20 hover:bg-white/20 text-white transition-all backdrop-blur-sm active:scale-95"
+                aria-label="Next slide"
+                title="Next picture"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
           </div>
         </div>
       </div>

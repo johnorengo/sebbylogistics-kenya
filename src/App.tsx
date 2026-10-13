@@ -13,7 +13,7 @@ export default function App() {
   const [catalogModalOpen, setCatalogModalOpen] = useState(false);
 
   const handleOpenRFQ = () => {
-    const el = document.getElementById('contact');
+    const el = document.getElementById('quote');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
@@ -43,7 +43,7 @@ export default function App() {
         {/* 4. Why Choose Us Section */}
         <WhyChooseUsSection />
 
-        {/* 5. Official Contact & Cargo Dispatch Desk */}
+        {/* 5. Official Contact & Cargo Dispatch Desk (quote form on top) */}
         <ContactSection />
       </main>
 

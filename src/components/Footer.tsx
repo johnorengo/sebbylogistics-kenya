@@ -1,6 +1,7 @@
 import React from 'react';
-import { ArrowUp } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
 import { KenyaFlagWordmark } from './KenyaFlagWordmark';
+import { SebbyLogo } from './SebbyLogo';
 
 interface FooterProps {
   onOpenCatalog?: () => void;
@@ -8,10 +9,6 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <footer className="relative border-t border-white/10 bg-[#0B0F0D] text-white pt-0 pb-12 overflow-hidden">
       {/* 1. Kenyan National Flag Accent Ribbon */}
@@ -30,9 +27,40 @@ export const Footer: React.FC<FooterProps> = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10">
           {/* Brand & Overview (Col 1-8) */}
           <div className="md:col-span-8 space-y-4">
+            {/* Logo lockup on top of the brand text */}
+            <div className="flex items-center gap-4">
+              <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-full p-1 bg-white/10 border border-white/25 flex items-center justify-center shadow-md shrink-0">
+                <SebbyLogo className="h-full w-full" />
+              </div>
+              <div className="min-w-0">
+                <div className="font-serif-luxury font-bold text-xl sm:text-2xl tracking-tight text-white leading-tight">
+                  SEBBY LOGISTICS LTD
+                </div>
+                <div className="mt-0.5 text-xs sm:text-sm text-[#00E575] font-serif-luxury italic tracking-wide">
+                  &quot;For Purchase of Flowers from Kenya including Freight&quot;
+                </div>
+              </div>
+            </div>
+
             <p className="text-sm sm:text-base text-white/85 leading-relaxed font-sans-clean max-w-2xl">
               We offer to buy flowers from good farms at the best prices. We take care of the whole purchase process and the logistics, including airfreight to any destination worldwide. Because of combined national efforts we are better and cheaper than your current suppliers.
             </p>
+
+            {/* Direct contact lines */}
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-x-6 gap-y-2 text-sm text-white/80 font-sans-clean">
+              <a href="tel:+254719707003" className="inline-flex items-center gap-2 hover:text-white transition-colors">
+                <Phone className="h-4 w-4 text-[#00E575] shrink-0" />
+                <span className="font-data">+254 719 707 003</span>
+              </a>
+              <a href="mailto:support@sebbylogistics.com" className="inline-flex items-center gap-2 hover:text-white transition-colors">
+                <Mail className="h-4 w-4 text-[#009E49] shrink-0" />
+                <span className="font-data">support@sebbylogistics.com</span>
+              </a>
+              <span className="inline-flex items-center gap-2 text-white/70">
+                <MapPin className="h-4 w-4 text-[#C8102E] shrink-0" />
+                <span>JKIA · 1st Freight Lane Avenue (Cargo), Nairobi</span>
+              </span>
+            </div>
 
             {/* Social Media Channels Icons - Facebook, Instagram & YouTube only */}
             <div className="pt-2">
@@ -95,7 +123,7 @@ export const Footer: React.FC<FooterProps> = () => {
                 <a href="#why-choose-us" className="hover:text-white transition-colors">Why Choose Us</a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-white transition-colors">Request a Quote</a>
+                <a href="#quote" className="hover:text-white transition-colors">Request a Quote</a>
               </li>
               <li>
                 <a href="#contact" className="hover:text-white transition-colors font-semibold text-[#009E49]">
@@ -106,20 +134,17 @@ export const Footer: React.FC<FooterProps> = () => {
           </div>
         </div>
 
-        {/* Bottom Bar Legal */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60 font-sans-clean">
-          <div>
+        {/* Bottom Bar Legal — details arranged left, marker right
+            (Back to Top now floats below the WhatsApp button) */}
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/60 font-sans-clean">
+          <div className="text-center sm:text-left">
             © {new Date().getFullYear()} SEBBY LOGISTICS LTD. All rights reserved.
           </div>
 
-          <div className="flex items-center gap-6">
-            <button
-              onClick={scrollToTop}
-              className="inline-flex items-center gap-1.5 text-[#009E49] hover:text-white transition-colors"
-            >
-              <span>Back to Top</span>
-              <ArrowUp className="h-3.5 w-3.5" />
-            </button>
+          <div className="flex items-center gap-2 text-white/50">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#C8102E] shrink-0" />
+            <span className="tracking-wide">Fresh Flowers & Freight · Nairobi, Kenya</span>
+            <span className="h-1.5 w-1.5 rounded-full bg-[#009E49] shrink-0" />
           </div>
         </div>
       </div>

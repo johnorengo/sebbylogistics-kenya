@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronRight, Mail, MapPin } from 'lucide-react';
+import { Menu, X, ChevronRight, Mail, MapPin, Phone } from 'lucide-react';
 import { SebbyLogo } from './SebbyLogo';
 
 interface HeaderProps {
@@ -9,20 +9,29 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isPastHero, setIsPastHero] = useState(false);
+  // Solid dark background ONLY once the hero image has truly scrolled away.
+  // While over the hero the header stays fully transparent (no bg, no lines)
+  // so the background photo shows through cleanly.
+  const [isSolid, setIsSolid] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      // Determine if the visitor has scrolled past the hero section
-      const heroElement = document.getElementById('hero');
-      if (heroElement) {
-        const rect = heroElement.getBoundingClientRect();
-        // When hero bottom is near or above header (e.g. within 120px from top or scrolled > 350px)
-        const past = rect.bottom <= 140 || window.scrollY > 380;
-        setIsPastHero(past);
-      } else {
-        setIsPastHero(window.scrollY > 380);
-      }
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        setScrollY(y);
+        const heroElement = document.getElementById('hero');
+        if (heroElement) {
+          const rect = heroElement.getBoundingClientRect();
+          setIsSolid(rect.bottom <= 90);
+        } else {
+          setIsSolid(y > (window.innerHeight || 800) - 140);
+        }
+        ticking = false;
+      });
     };
 
     handleScroll();
@@ -33,6 +42,30 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
       window.removeEventListener('resize', handleScroll);
     };
   }, []);
+
+  // ONE shared progress (0 = landing, 1 = compact) drives the logo, the
+  // compact brand AND the menu position together, so everything glides
+  // simultaneously on the same scroll.
+  const fadeRange = 160;
+  const p = Math.min(Math.max(scrollY / fadeRange, 0), 1);
+  // Big block collapses once the fade finishes (still over the hero,
+  // header remains transparent — no lines, no solid panel).
+  const collapsed = p >= 1;
+
+  // Big centered brand: drifts left, shrinks and dissolves IN PLACE —
+  // almost no upward travel, so it can never slide under / be overlapped
+  // by the thin contact strip or the navbar. Gone by ~60% of the scroll.
+  const bigOpacity = Math.max(1 - p * 1.6, 0);
+  const bigX = -p * 140;
+  const bigY = -p * 12;
+  const bigScale = 1 - p * 0.15;
+
+  // Compact navbar brand (top-left): fades/slides in on the same `p`,
+  // so both logos are half-visible together mid-scroll — but the big one
+  // is already nearly transparent before it could touch the strip.
+  const compactOpacity = p;
+  const compactX = (1 - p) * -28;
+  const compactScale = 0.92 + p * 0.08;
 
   const handleNavClick = (id: string) => {
     setMobileMenuOpen(false);
@@ -45,65 +78,183 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-in-out ${
-        isPastHero
+        // Transparent only at landing; solid color background as soon as
+        // the bar compacts so nav text never overlays hero text/photo.
+        isSolid || collapsed
           ? 'bg-[#0B0F0D]/95 backdrop-blur-md border-b border-white/10 shadow-2xl'
-          : 'bg-transparent border-b border-transparent'
+          : 'bg-gradient-to-b from-black/70 via-black/35 to-transparent border-b border-transparent'
       }`}
     >
-      {/* 1. Kenyan National Flag Accent Ribbon */}
+      {/* 1. Kenyan National Flag Accent Ribbon — always sticky */}
       <div className="h-1 w-full kenya-ribbon-bar" />
 
-      {/* 2. Top Micro-Bar: Location on Left and Support Email on Right (Transparent on hero, solid when scrolled) */}
+      {/* 2. Thin contact strip — ABOVE the centered logo, always visible.
+          Hairline only in solid state: no line drawn over the hero. */}
       <div
-        className={`transition-all duration-300 ${
-          isPastHero
-            ? 'bg-[#0B0F0D]/90 border-b border-white/10 py-1 px-4 sm:px-8 lg:px-12'
-            : 'bg-transparent border-b border-white/10 py-1.5 px-4 sm:px-8 lg:px-12'
+        className={`px-4 sm:px-8 lg:px-12 py-1.5 bg-transparent border-b transition-colors duration-500 ${
+          isSolid || collapsed ? 'border-white/10' : 'border-transparent'
         }`}
       >
-        <div className="mx-auto max-w-7xl flex items-center justify-between text-xs sm:text-[13px] font-sans-clean">
-          {/* Left: Location Only */}
-          <div className="flex items-center gap-2 text-white font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] truncate">
-            <MapPin className="h-4 w-4 text-[#C8102E] shrink-0" />
-            <span className="truncate">Jomo Kenyatta International Airport JKIA · 1st Freight Lane Avenue (Cargo)</span>
-          </div>
-
-          {/* Right: Support Email */}
+        <div className="mx-auto max-w-7xl flex items-center justify-between gap-3 text-[11px] sm:text-[13px] font-sans-clean">
+          {/* Left: location (roomy screens only so nothing wraps) */}
           <a
-            href="mailto:support@sebbylogistics.com"
-            className="flex items-center gap-2 text-white/95 hover:text-white transition-colors shrink-0 font-medium pl-3 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]"
+            href="https://www.google.com/maps/search/?api=1&query=JKIA+Cargo+1st+Freight+Lane+Avenue+Nairobi"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open cargo desk location in Maps"
+            className="group hidden md:flex items-center gap-2 text-white/90 hover:text-white font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] truncate min-w-0 rounded-md px-2 -ml-2 py-0.5 hover:bg-white/15 transition-all duration-200"
           >
-            <Mail className="h-3.5 w-3.5 text-[#009E49] shrink-0" />
-            <span className="font-data">support@sebbylogistics.com</span>
+            <MapPin className="h-4 w-4 text-[#C8102E] group-hover:text-[#ff4d6a] group-hover:scale-125 transition-all duration-200 shrink-0" />
+            <span className="truncate group-hover:underline underline-offset-4 decoration-white/40">Jomo Kenyatta International Airport JKIA · 1st Freight Lane Avenue (Cargo)</span>
           </a>
+          {/* Right group: phone + email (spread edge-to-edge on mobile) */}
+          <div className="flex items-center gap-2 sm:gap-3 max-sm:flex-1 max-sm:justify-between">
+            <a
+              href="tel:+254719707003"
+              title="Call the dispatch desk"
+              className="group flex items-center gap-1.5 text-white/90 hover:text-white transition-all duration-200 shrink-0 font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] rounded-md px-2 py-0.5 hover:bg-white/15"
+            >
+              <Phone className="h-3.5 w-3.5 text-[#00E575] group-hover:scale-125 transition-transform duration-200 shrink-0" />
+              <span className="font-data whitespace-nowrap group-hover:underline underline-offset-4 decoration-[#00E575]/70">+254 719 707 003</span>
+            </a>
+            <a
+              href="mailto:support@sebbylogistics.com"
+              title="Email support"
+              className="group flex items-center gap-2 text-white/90 hover:text-white transition-all duration-200 shrink-0 font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] min-w-0 rounded-md px-2 py-0.5 hover:bg-white/15"
+            >
+              <Mail className="h-3.5 w-3.5 text-[#009E49] group-hover:text-[#00E575] group-hover:scale-125 transition-all duration-200 shrink-0" />
+              <span className="font-data truncate group-hover:underline underline-offset-4 decoration-[#00E575]/70">support@sebbylogistics.com</span>
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* 3. Hero-State Large Centered Branding (Clean, transparent, seamlessly blending into hero image) */}
+      {/* 3. Nav row — sits ABOVE the centered logo. No logo, no quote at
+          landing: just the centered menu. Transparent + lineless while
+          over the hero; solid only once the hero is truly gone. */}
       <div
-        className={`overflow-hidden transition-all duration-500 ease-in-out ${
-          isPastHero
-            ? 'max-h-0 opacity-0 pointer-events-none py-0'
-            : 'max-h-72 opacity-100 pt-2.5 sm:pt-4 pb-2'
+        className={`relative z-10 transition-all duration-500 ease-in-out border-b ${
+          isSolid || collapsed || mobileMenuOpen
+            ? 'bg-[#0B0F0D]/95 border-white/10 backdrop-blur-md shadow-2xl'
+            : 'bg-gradient-to-b from-transparent to-black/20 border-transparent'
         }`}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 flex flex-col items-center justify-center text-center">
+        <div className="relative mx-auto max-w-7xl flex items-center px-4 sm:px-8 lg:px-12 h-14 md:h-16 transition-all duration-500">
+          {/* Compact TOP-LEFT brand + FULL tagline — invisible at landing,
+              fades in while the big logo travels up-left toward it.
+              Offset clear of the hamburger + contact strip: no overlap. */}
+          <div
+            // NOTE: vertical centering comes ONLY from the inline
+            // translateY(-50%) below — Tailwind v4 `-translate-y-1/2` uses
+            // the separate `translate` property, which would stack on top
+            // of it and shove the logo up over the contact strip.
+            className="absolute left-12 sm:left-8 lg:left-12 top-1/2"
+            aria-hidden={p < 0.15}
+            style={{
+              opacity: compactOpacity,
+              transform: `translateY(-50%) translateX(${compactX.toFixed(1)}px) scale(${compactScale.toFixed(3)})`,
+              visibility: compactOpacity <= 0.03 ? 'hidden' : 'visible',
+              pointerEvents: compactOpacity <= 0.25 ? 'none' : 'auto',
+            }}
+          >
+            <a
+              href="#hero"
+              onClick={() => handleNavClick('hero')}
+              className="flex items-center gap-3 group shrink-0"
+              title="Return to top"
+              tabIndex={compactOpacity <= 0.25 ? -1 : 0}
+            >
+              <div className="h-10 w-10 sm:h-11 sm:w-11 rounded-full p-1 bg-white/10 border border-white/25 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
+                <SebbyLogo className="h-full w-full" />
+              </div>
+              <div className="hidden sm:flex flex-col text-left">
+                <span className="font-serif-luxury font-bold text-sm sm:text-base tracking-tight text-white leading-tight">
+                  SEBBY LOGISTICS
+                </span>
+                {/* Same full tagline as the centered hero brand — not shortened */}
+                <span className="whitespace-nowrap text-[10px] lg:text-xs text-[#00E575] font-serif-luxury italic leading-none drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                  &quot;For Purchase of Flowers from Kenya including Freight&quot;
+                </span>
+              </div>
+            </a>
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="absolute left-4 top-1/2 -translate-y-1/2 p-2 -ml-2 text-white sm:hidden focus:outline-none drop-shadow-md"
+            aria-label="Toggle navigation menu"
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6 text-white" />}
+          </button>
+
+          {/* Menu links — centered at landing, gliding to the farthest
+              right as the logo travels center → left. The two spacers are
+              driven by the SAME scroll progress `p`, so the glide happens
+              simultaneously with the logo move (smooth, no jump). */}
+          <div className="flex-1 hidden sm:flex items-center min-w-0">
+            <div aria-hidden className="h-1" style={{ flexGrow: 0.5 + 0.5 * p, flexShrink: 1 }} />
+            <nav className="flex items-center gap-8 md:gap-10 lg:gap-12 shrink-0">
+              <a
+                href="#hero"
+                onClick={() => handleNavClick('hero')}
+                className="text-sm md:text-base font-bold text-white hover:text-[#00E575] transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] uppercase"
+              >
+                Home
+              </a>
+              <a
+                href="#about"
+                onClick={() => handleNavClick('about')}
+                className="text-sm md:text-base font-bold text-white hover:text-[#00E575] transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] uppercase"
+              >
+                About Us
+              </a>
+              <a
+                href="#contact"
+                onClick={() => handleNavClick('contact')}
+                className="text-sm md:text-base font-bold text-white hover:text-[#C8102E] transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] uppercase"
+              >
+                Contact
+              </a>
+            </nav>
+            <div aria-hidden className="h-1" style={{ flexGrow: Math.max(0.5 - 0.5 * p, 0), flexShrink: 1 }} />
+          </div>
+
+          {/* Request a Quote lives at the hero bottom + mobile drawer —
+              intentionally nothing else on this bar. */}
+        </div>
+      </div>
+
+      {/* 4. Big CENTERED branding — BELOW the nav row. On scroll it drifts
+          left, shrinks and dissolves in place (never travels upward, so no
+          strip/nav overlap) while the compact brand fades in top-left and
+          the menu glides right — all on the same progress `p`. */}
+      <div
+        aria-hidden={p > 0.85}
+        className={`relative z-0 overflow-hidden transition-[max-height,padding] duration-500 ease-in-out ${
+          collapsed ? 'max-h-0 pt-0 pb-0' : 'max-h-72 pt-2.5 sm:pt-4 pb-3'
+        }`}
+        style={{
+          opacity: bigOpacity,
+          transform: `translate(${bigX.toFixed(1)}px, ${bigY.toFixed(1)}px) scale(${bigScale.toFixed(3)})`,
+          transformOrigin: 'center top',
+          filter: p > 0.1 ? `blur(${(p * 5).toFixed(1)}px)` : 'none',
+          visibility: bigOpacity <= 0.03 ? 'hidden' : 'visible',
+          pointerEvents: bigOpacity <= 0.25 ? 'none' : 'auto',
+        }}
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 flex flex-col items-center justify-center text-center will-change-transform">
           <a
             href="#hero"
             onClick={() => handleNavClick('hero')}
             className="inline-flex flex-col items-center group transition-transform duration-300"
           >
-            {/* Proportionally scaled Sebby Flower Logo (Transparent container, no dark fill) */}
-            <div className="h-16 w-16 sm:h-22 sm:w-22 md:h-28 md:w-28 rounded-full p-1 sm:p-1.5 bg-transparent border border-white/30 flex items-center justify-center group-hover:scale-105 transition-all duration-300 drop-shadow-2xl">
+            <div className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-full p-1 sm:p-1.5 bg-black/25 border border-white/30 flex items-center justify-center group-hover:scale-105 transition-all duration-300 drop-shadow-2xl backdrop-blur-[2px]">
               <SebbyLogo className="h-full w-full" />
             </div>
-
-            {/* Company Name */}
             <span className="mt-1.5 sm:mt-2 text-xl sm:text-3xl md:text-4xl font-serif-luxury font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
               SEBBY LOGISTICS LTD
             </span>
-
-            {/* Tagline: Clear, Visible & Prominent */}
             <span className="mt-0.5 sm:mt-1 text-xs sm:text-base md:text-lg font-serif-luxury font-semibold italic text-[#00E575] tracking-wide drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
               &quot;For Purchase of Flowers from Kenya including Freight&quot;
             </span>
@@ -111,109 +262,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
         </div>
       </div>
 
-      {/* 4. Navigation Bar:
-          - Transparent on hero section (zero black strip)
-          - Solid dark background when scrolled past hero
-      */}
-      <div
-        className={`transition-all duration-500 ease-in-out ${
-          isPastHero
-            ? 'bg-[#0B0F0D]/95 border-t border-white/10 backdrop-blur-md'
-            : 'bg-transparent border-t border-white/10'
-        }`}
-      >
-        <div
-          className={`mx-auto max-w-7xl flex items-center justify-between px-4 sm:px-8 lg:px-12 transition-all duration-500 ease-in-out ${
-            isPastHero ? 'h-16' : 'h-14 sm:justify-center relative'
-          }`}
-        >
-          {/* Left Side Container in Scrolled State: Compact Logo + Company Name */}
-          <div
-            className={`flex items-center gap-3 transition-all duration-500 ease-in-out ${
-              isPastHero
-                ? 'opacity-100 translate-x-0 w-auto'
-                : 'opacity-0 -translate-x-4 pointer-events-none w-0 overflow-hidden sm:absolute sm:left-4'
-            }`}
-          >
-            <a
-              href="#hero"
-              onClick={() => handleNavClick('hero')}
-              className="flex items-center gap-3 group shrink-0"
-              title="Return to top"
-            >
-              <div className="h-10 w-10 sm:h-11 sm:w-11 rounded-full p-1 bg-white/10 border border-white/25 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
-                <SebbyLogo className="h-full w-full" />
-              </div>
-              <div className="flex flex-col text-left">
-                <span className="font-serif-luxury font-bold text-sm sm:text-base tracking-tight text-white leading-tight">
-                  SEBBY LOGISTICS
-                </span>
-                <span className="text-[10px] sm:text-xs text-[#009E49] font-serif-luxury italic leading-none hidden md:inline">
-                  &quot;Purchase & Freight&quot;
-                </span>
-              </div>
-            </a>
-          </div>
-
-          {/* Mobile Hamburger Toggle (Left on mobile) */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 -ml-2 text-white sm:hidden focus:outline-none drop-shadow-md"
-            aria-label="Toggle navigation menu"
-          >
-            {mobileMenuOpen ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6 text-white" />}
-          </button>
-
-          {/* Navigation Links:
-              - When Past Hero: Positioned to the right of the compact logo
-              - When At Top Hero: Centered with readable drop-shadow
-          */}
-          <nav
-            className={`hidden sm:flex items-center gap-8 md:gap-12 transition-all duration-500 ease-in-out ${
-              isPastHero ? 'ml-6 mr-auto' : ''
-            }`}
-          >
-            <a
-              href="#hero"
-              onClick={() => handleNavClick('hero')}
-              className="text-sm md:text-base font-bold text-white hover:text-[#00E575] transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] uppercase"
-            >
-              Home
-            </a>
-            <a
-              href="#about"
-              onClick={() => handleNavClick('about')}
-              className="text-sm md:text-base font-bold text-white hover:text-[#00E575] transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] uppercase"
-            >
-              About Us
-            </a>
-            <a
-              href="#contact"
-              onClick={() => handleNavClick('contact')}
-              className="text-sm md:text-base font-bold text-white hover:text-[#C8102E] transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] uppercase"
-            >
-              Contact
-            </a>
-          </nav>
-
-          {/* Request a Quote Button: Always prominent on the right */}
-          <div
-            className={`transition-all duration-500 ${
-              isPastHero ? 'shrink-0' : 'sm:absolute sm:right-6 lg:right-12'
-            }`}
-          >
-            <button
-              onClick={onOpenRFQ}
-              className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-[#C8102E] hover:bg-[#A30922] transition-all rounded-md shadow-lg active:scale-95 shrink-0"
-            >
-              REQUEST A QUOTE
-              <ChevronRight className="h-4 w-4 text-white" />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Drawer (Clean, non-repetitive navigation without duplicated logo) */}
+      {/* Mobile drawer */}
       {mobileMenuOpen && (
         <div className="border-b border-white/10 bg-[#0B0F0D]/98 backdrop-blur-xl px-6 py-5 sm:hidden shadow-2xl animate-in fade-in duration-150 text-white">
           <div className="flex flex-col space-y-4">
@@ -242,7 +291,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
               </a>
             </nav>
 
-            {/* Mobile Location Info */}
             <div className="flex items-start gap-2 pt-2 text-xs text-white/90 border-t border-white/10">
               <MapPin className="h-4 w-4 text-[#C8102E] shrink-0 mt-0.5" />
               <div>
@@ -251,7 +299,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
               </div>
             </div>
 
-            {/* Mobile Support Email */}
             <div>
               <a
                 href="mailto:support@sebbylogistics.com"
@@ -280,4 +327,3 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
     </header>
   );
 };
-
