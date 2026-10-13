@@ -10,18 +10,18 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = () => {
   return (
-    <footer className="relative border-t border-white/10 bg-[#0B0F0D] text-white pt-0 pb-12 overflow-hidden">
+    <footer className="relative border-t border-white/10 bg-gradient-to-b from-[#0E1C15] via-[#0B100D] to-[#08100B] text-white pt-0 pb-12 overflow-hidden">
       {/* 1. Kenyan National Flag Accent Ribbon */}
       <div className="h-1.5 w-full kenya-ribbon-bar relative z-10" />
 
-      {/* 2. Kenya Flag Wordmark watermark — bottom-anchored, fading out toward
-          the top so footer text stays crystal clear above it */}
-      <div className="absolute inset-x-0 top-0 bottom-0 z-0 flex items-end justify-center pointer-events-none overflow-hidden opacity-40 [mask-image:linear-gradient(to_bottom,transparent,black_45%)]">
-        <KenyaFlagWordmark className="w-full max-w-6xl h-auto translate-y-[12%] drop-shadow-[0_0_50px_rgba(200,16,46,0.3)]" />
+      {/* 2. Kenya Flag Wordmark artwork — bottom-anchored and clearly visible,
+          gently dissolving toward the top so text stays legible above it */}
+      <div className="absolute inset-x-0 top-0 bottom-0 z-0 flex items-end justify-center pointer-events-none overflow-hidden opacity-60 [mask-image:linear-gradient(to_bottom,transparent,black_40%)]">
+        <KenyaFlagWordmark className="w-full max-w-7xl h-auto translate-y-[10%] drop-shadow-[0_0_60px_rgba(200,16,46,0.35)]" />
       </div>
 
-      {/* Soft darkness wash to keep all text legible over the artwork */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#0B0F0D]/80 via-[#0B0F0D]/60 to-[#0B0F0D]/90 pointer-events-none" />
+      {/* Light uniform veil only — keeps text legible without burying the artwork */}
+      <div className="absolute inset-0 z-0 bg-[#0B0F0D]/40 pointer-events-none" />
 
       {/* 3. Footer Main Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12 pt-14">
