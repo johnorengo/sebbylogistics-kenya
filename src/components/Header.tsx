@@ -79,19 +79,16 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
         // Transparent only at landing; solid color background as soon as
         // the bar compacts so nav text never overlays hero text/photo.
         isSolid || collapsed
-          ? 'bg-[#0B0F0D]/95 backdrop-blur-md border-b border-white/10 shadow-2xl'
-          : 'bg-gradient-to-b from-black/70 via-black/35 to-transparent border-b border-transparent'
+          ? 'bg-[#0B0F0D]/95 backdrop-blur-md'
+          : 'bg-transparent'
       }`}
     >
       {/* 1. Kenyan National Flag Accent Ribbon — always sticky */}
       <div className="h-1 w-full kenya-ribbon-bar" />
 
-      {/* 2. Thin contact strip — ABOVE the centered logo, always visible.
-          Hairline only in solid state: no line drawn over the hero. */}
+      {/* 2. Contact strip — above the centered logo, without a divider. */}
       <div
-        className={`px-4 sm:px-8 lg:px-12 py-1.5 bg-transparent border-b transition-colors duration-500 ${
-          isSolid || collapsed ? 'border-white/10' : 'border-transparent'
-        }`}
+        className="px-4 sm:px-8 lg:px-12 py-1.5 bg-transparent"
       >
         <div className="mx-auto max-w-7xl flex items-center justify-between gap-3 text-[11px] sm:text-[13px] font-sans-clean">
           {/* Left: location (roomy screens only so nothing wraps) */}
@@ -131,10 +128,10 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
           landing: just the centered menu. Transparent + lineless while
           over the hero; solid only once the hero is truly gone. */}
       <div
-        className={`relative z-10 transition-all duration-500 ease-in-out border-b ${
+        className={`relative z-10 transition-all duration-500 ease-in-out ${
           isSolid || collapsed || mobileMenuOpen
-            ? 'bg-[#0B0F0D]/95 border-white/10 backdrop-blur-md shadow-2xl'
-            : 'bg-gradient-to-b from-transparent to-black/20 border-transparent'
+            ? 'bg-[#0B0F0D]/95 backdrop-blur-md'
+            : 'bg-transparent'
         }`}
       >
         <div className="relative mx-auto max-w-7xl flex items-center px-4 sm:px-8 lg:px-12 h-14 md:h-16 transition-all duration-500">
