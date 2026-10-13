@@ -59,7 +59,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
   }, [reducedMotion]);
 
   return (
-    <section id="hero" aria-label="Kenyan flower sourcing and airfreight" className="hero-shell relative min-h-[100svh] w-full overflow-hidden bg-[#0B0F0D] flex flex-col pt-[264px] sm:pt-[304px] md:pt-[296px] pb-6 scroll-mt-20">
+    <section id="hero" aria-label="Kenyan flower sourcing and airfreight" className="hero-shell relative min-h-[100svh] w-full overflow-hidden bg-[#0B0F0D] flex flex-col pt-[332px] sm:pt-[364px] md:pt-[380px] pb-6 scroll-mt-20">
       {/* Full-bleed Cinematic Visual Story Canvas - Featuring 4 Uploaded Hero Pictures */}
       <div className="absolute inset-0 z-0">
         {HERO_IMAGES.map((item, idx) => (

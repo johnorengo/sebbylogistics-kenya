@@ -22,7 +22,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
 
   useEffect(() => {
     if (!mobileMenuOpen) return;
-    const media = window.matchMedia('(min-width: 640px)');
+    const media = window.matchMedia('(min-width: 768px)');
     const closeOnDesktop = () => { if (media.matches) setMobileMenuOpen(false); };
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -161,7 +161,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
             : 'bg-transparent'
         }`}
       >
-        <div className="relative mx-auto max-w-7xl flex items-center px-4 sm:px-8 lg:px-12 h-14 md:h-16 transition-all duration-500">
+        <div className="relative mx-auto max-w-7xl flex items-center px-4 sm:px-8 lg:px-12 h-20 md:h-24 transition-all duration-500">
           {/* Compact TOP-LEFT brand + FULL tagline — invisible at landing,
               fades in while the big logo travels up-left toward it.
               Offset clear of the hamburger + contact strip: no overlap. */}
@@ -170,7 +170,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
             // translateY(-50%) below — Tailwind v4 `-translate-y-1/2` uses
             // the separate `translate` property, which would stack on top
             // of it and shove the logo up over the contact strip.
-            className="absolute left-12 sm:left-8 lg:left-12 top-1/2"
+            className="absolute left-12 md:left-8 lg:left-12 top-1/2"
             aria-hidden={p < 0.15}
             style={{
               opacity: compactOpacity,
@@ -186,15 +186,15 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
               title="Return to top"
               tabIndex={compactOpacity <= 0.25 ? -1 : 0}
             >
-              <div className="h-10 w-10 sm:h-11 sm:w-11 rounded-full p-1 bg-white/10 border border-white/25 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
+              <div className="h-14 w-14 md:h-16 md:w-16 shrink-0 rounded-full p-1 bg-white/10 border border-white/25 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
                 <SebbyLogo className="h-full w-full" />
               </div>
-              <div className="hidden sm:flex flex-col text-left">
-                <span className="font-serif-luxury font-bold text-sm sm:text-base tracking-tight text-white leading-tight">
+              <div className="flex flex-col text-left max-w-[calc(100vw-10rem)] md:max-w-[260px] lg:max-w-[420px]">
+                <span className="font-serif-luxury font-bold text-base md:text-xl lg:text-2xl tracking-tight text-white leading-tight">
                   SEBBY LOGISTICS
                 </span>
                 {/* Same full tagline as the centered hero brand — not shortened */}
-                <span className="whitespace-nowrap text-[10px] lg:text-xs text-[#00E575] font-serif-luxury italic leading-none drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                <span className="mt-1 text-xs md:text-sm lg:text-base text-[#00E575] font-serif-luxury font-semibold italic leading-snug drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
                   &quot;For Purchase of Flowers from Kenya including Freight&quot;
                 </span>
               </div>
@@ -208,7 +208,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-navigation"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="absolute left-4 top-1/2 -translate-y-1/2 p-2 -ml-2 text-white sm:hidden focus:outline-none drop-shadow-md"
+            className="absolute left-4 top-1/2 -translate-y-1/2 p-2 -ml-2 text-white md:hidden focus:outline-none drop-shadow-md"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6 text-white" />}
@@ -218,7 +218,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
               right as the logo travels center → left. The two spacers are
               driven by the SAME scroll progress `p`, so the glide happens
               simultaneously with the logo move (smooth, no jump). */}
-          <div className="flex-1 hidden sm:flex items-center min-w-0">
+          <div className="flex-1 hidden md:flex items-center min-w-0">
             <div aria-hidden className="h-1" style={{ flexGrow: 0.5 + 0.5 * p, flexShrink: 1 }} />
             <nav className="flex items-center gap-8 md:gap-10 lg:gap-12 shrink-0">
               <a
@@ -277,13 +277,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
             tabIndex={mobileMenuOpen || bigOpacity <= 0.25 ? -1 : 0}
             className="inline-flex flex-col items-center group transition-transform duration-300"
           >
-            <div className="hero-brand-logo h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 rounded-full p-1 sm:p-1.5 bg-black/25 border border-white/30 flex items-center justify-center group-hover:scale-105 transition-all duration-300 drop-shadow-2xl backdrop-blur-[2px]">
+            <div className="hero-brand-logo h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 rounded-full p-1 sm:p-1.5 bg-black/25 border border-white/30 flex items-center justify-center group-hover:scale-105 transition-all duration-300 drop-shadow-2xl backdrop-blur-[2px]">
               <SebbyLogo className="h-full w-full" />
             </div>
-            <span className="hero-brand-title mt-1.5 sm:mt-2 text-xl sm:text-3xl font-serif-luxury font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+            <span className="hero-brand-title mt-1.5 sm:mt-2 text-2xl sm:text-4xl font-serif-luxury font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
               SEBBY LOGISTICS LTD
             </span>
-            <span className="hero-brand-tagline mt-1 text-sm sm:text-lg md:text-xl font-serif-luxury font-semibold italic text-[#00E575] tracking-wide drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+            <span className="hero-brand-tagline mt-1 text-base sm:text-xl md:text-2xl font-serif-luxury font-semibold italic text-[#00E575] tracking-wide drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
               &quot;For Purchase of Flowers from Kenya including Freight&quot;
             </span>
           </a>
@@ -292,7 +292,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
 
       {/* Mobile drawer */}
       {mobileMenuOpen && (
-        <div ref={drawer} id="mobile-navigation" className="bg-[#0B0F0D]/98 backdrop-blur-xl px-6 py-5 sm:hidden text-white max-h-[calc(100svh-7rem)] overflow-y-auto">
+        <div ref={drawer} id="mobile-navigation" className="bg-[#0B0F0D]/98 backdrop-blur-xl px-6 py-5 md:hidden text-white max-h-[calc(100svh-9rem)] overflow-y-auto">
           <div className="flex flex-col space-y-4">
             <nav className="flex flex-col space-y-3">
               <a
