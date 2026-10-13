@@ -91,8 +91,8 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               fetchPriority={idx === 0 ? 'high' : 'low'}
               decoding="async"
               referrerPolicy="no-referrer"
-              className={`h-full w-full object-cover transition-transform duration-[12000ms] ease-out ${
-                activeImageIndex === idx ? 'scale-105 filter brightness-[1.02] contrast-[1.02] saturate-[1.06]' : 'scale-100'
+              className={`h-full w-full object-contain md:object-cover transition-transform duration-[12000ms] ease-out ${
+                activeImageIndex === idx ? 'md:scale-105 filter brightness-[1.02] contrast-[1.02] saturate-[1.06]' : 'scale-100'
               }`}
             />
             {/* Luminous, Airy Overlays: Enhancing Light while Preserving Text Legibility */}
