@@ -2,7 +2,7 @@ const REVEAL_TARGETS = [
   '#hero h1', '#hero h1 + p', 'main h2', 'main h2 + p',
   'main > section:not(#hero):not(#about):not(#contact) > div > .grid > div',
   '#about .space-y-4', '#about img',
-  '#contact > div > .mt-12.grid > div',
+  '#contact > div > .grid > div',
   '#partners h3', '#partners > .grid > div',
 ].join(',');
 

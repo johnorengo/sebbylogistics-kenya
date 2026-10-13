@@ -5,7 +5,7 @@ import { SebbyLogo } from './SebbyLogo';
 
 export const AboutUsSection: React.FC = () => {
   return (
-    <section id="about" className="relative py-20 sm:py-28 bg-[#F7F6F1] border-b border-[#D8DED8] scroll-mt-24">
+    <section id="about" className="relative py-10 sm:py-14 bg-[#F7F6F1] border-b border-[#D8DED8] scroll-mt-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Eyebrow Header */}
         <div className="flex items-center gap-3 mb-4">
@@ -19,7 +19,7 @@ export const AboutUsSection: React.FC = () => {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           {/* Left Column: Content */}
           <div className="lg:col-span-7 space-y-6">
             <div>

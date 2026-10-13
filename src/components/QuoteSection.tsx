@@ -95,7 +95,7 @@ export const QuoteSection: React.FC = () => {
   const errorClass = 'border-[#C8102E] bg-red-50';
 
   return (
-    <div id="quote" className="mt-10 scroll-mt-28">
+    <div id="quote" className="mt-6 scroll-mt-28">
       <div className="w-full">
         {/* Section Header */}
         <div className="max-w-3xl text-left">

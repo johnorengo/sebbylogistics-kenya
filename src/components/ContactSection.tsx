@@ -5,10 +5,10 @@ import { QuoteSection } from './QuoteSection';
 
 export const ContactSection: React.FC = () => {
   return (
-    <section id="contact" className="relative py-20 sm:py-24 bg-[#F8FAF8] border-b border-[#D9E1DC] scroll-mt-28">
+    <section id="contact" className="relative py-10 sm:py-14 bg-[#F8FAF8] border-b border-[#D9E1DC] scroll-mt-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Header */}
-        <div className="pb-10 border-b border-[#D9E1DC]">
+        <div className="pb-6 border-b border-[#D9E1DC]">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-2">
               <span className="h-2 w-2 rounded-full bg-[#C8102E]"></span>
@@ -29,7 +29,7 @@ export const ContactSection: React.FC = () => {
         <QuoteSection />
 
         {/* Dispatch Desk Cards — below the quote form */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {/* 1. Direct Phone Calls Card (First Tab) */}
           <div className="p-6 rounded-2xl bg-white border-2 border-[#007A3D]/30 hover:border-[#007A3D] transition-all shadow-sm relative overflow-hidden group flex flex-col justify-between">
             <div>

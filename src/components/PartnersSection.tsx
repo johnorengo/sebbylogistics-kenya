@@ -54,9 +54,9 @@ const LegalTeamLogo: React.FC = () => (
 
 export const PartnersSection: React.FC = () => {
   return (
-    <div id="partners" className="mt-16 sm:mt-20 pt-14 border-t border-[#D9E1DC]">
+    <div id="partners" className="mt-10 sm:mt-12 pt-8 border-t border-[#D9E1DC]">
       {/* Section Header */}
-      <div className="text-center max-w-2xl mx-auto mb-10">
+      <div className="text-center max-w-2xl mx-auto mb-6">
         <div className="flex items-center justify-center gap-2 mb-2">
           <span className="h-2 w-2 rounded-full bg-[#007A3D]" />
           <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#007A3D]">

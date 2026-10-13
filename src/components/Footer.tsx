@@ -24,8 +24,8 @@ export const Footer: React.FC<FooterProps> = () => {
       <div className="absolute inset-0 z-0 bg-[#0B0F0D]/40 pointer-events-none" />
 
       {/* 3. Footer Main Content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12 pt-14">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12 pt-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8 border-b border-white/10">
           {/* Brand & Overview (Col 1-8) */}
           <div className="md:col-span-8 space-y-4">
             {/* Logo lockup on top of the brand text */}
