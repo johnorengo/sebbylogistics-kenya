@@ -109,7 +109,7 @@ export const QuoteSection: React.FC = () => {
             Get Farm Prices Including Airfreight
           </h2>
           <p className="mt-3 text-[#3A453F] text-sm sm:text-base leading-relaxed">
-            Fill in what you need below and our sales desk will reply with confirmed farm prices
+            Fill in what you need below and our support desk will reply with confirmed farm prices
             plus airfreight to your airport.
           </p>
         </div>
