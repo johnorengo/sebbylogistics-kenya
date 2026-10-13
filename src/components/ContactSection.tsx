@@ -1,6 +1,5 @@
 import React from 'react';
 import { Mail, Phone, Clock, Building2, Receipt } from 'lucide-react';
-import { SebbyLogo } from './SebbyLogo';
 import { PartnersSection } from './PartnersSection';
 import { QuoteSection } from './QuoteSection';
 
@@ -9,7 +8,7 @@ export const ContactSection: React.FC = () => {
     <section id="contact" className="relative py-20 sm:py-24 bg-[#F8FAF8] border-b border-[#D9E1DC] scroll-mt-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-[#D9E1DC]">
+        <div className="pb-10 border-b border-[#D9E1DC]">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-2">
               <span className="h-2 w-2 rounded-full bg-[#C8102E]"></span>
@@ -23,16 +22,6 @@ export const ContactSection: React.FC = () => {
             <p className="mt-3 text-[#3A453F] text-sm sm:text-base leading-relaxed">
               &quot;For Purchase of Flowers from Kenya including Freight&quot; — Operating from our airside dispatch facilities at <strong>Jomo Kenyatta International Airport JKIA, 1st Freight Lane Avenue (Cargo)</strong>.
             </p>
-          </div>
-
-          <div className="flex items-center gap-3 shrink-0">
-            <div className="h-14 w-14 rounded-full p-1 bg-white border border-[#D9E1DC] flex items-center justify-center shadow-sm">
-              <SebbyLogo className="h-full w-full" />
-            </div>
-            <div className="text-left font-serif-luxury">
-              <div className="font-bold text-base text-[#0B110E]">SEBBY LOGISTICS LTD</div>
-              <div className="text-xs text-[#007A3D] font-medium">JKIA · 1st Freight Lane Avenue (Cargo)</div>
-            </div>
           </div>
         </div>
 

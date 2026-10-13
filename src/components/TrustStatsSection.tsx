@@ -40,6 +40,23 @@ export const TrustStatsSection: React.FC = () => {
   return (
     <section className="relative py-14 sm:py-16 bg-[#EEF1EB] border-b border-[#D8DED8]">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        {/* Proper heading explaining the cards below */}
+        <div className="max-w-2xl mb-8 sm:mb-10">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="h-2 w-2 rounded-full bg-[#007A3D]"></span>
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#007A3D]">
+              Why Buyers Choose Sebby
+            </span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif-luxury font-bold text-[#0B110E] tracking-tight">
+            Farm Prices, Handled Freight — One Accountable Partner
+          </h2>
+          <p className="mt-2 text-[#3A453F] text-sm sm:text-base leading-relaxed">
+            We buy directly from vetted Kenyan farms and fly your flowers cold-chain from JKIA
+            to any airport worldwide — purchase and logistics under one roof.
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {STATS.map((stat, idx) => {
             const Icon = stat.icon;

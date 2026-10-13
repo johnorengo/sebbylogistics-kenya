@@ -135,10 +135,10 @@ export const Footer: React.FC<FooterProps> = () => {
           </div>
         </div>
 
-        {/* Bottom Bar Legal — details arranged left, marker right
+        {/* Bottom Bar Legal — centered at the very bottom of the footer
             (Back to Top now floats below the WhatsApp button) */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/60 font-sans-clean">
-          <div className="text-center sm:text-left">
+        <div className="mt-8 flex flex-col items-center text-center gap-2 text-xs text-white/60 font-sans-clean">
+          <div>
             © {new Date().getFullYear()} SEBBY LOGISTICS LTD. All rights reserved.
           </div>
 
