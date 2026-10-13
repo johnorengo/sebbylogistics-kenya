@@ -71,7 +71,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
   };
 
   return (
-    <section id="hero" aria-label="Kenyan flower sourcing and airfreight" onMouseEnter={() => setInteracting(true)} onMouseLeave={() => setInteracting(false)} onFocusCapture={() => setInteracting(true)} onBlurCapture={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setInteracting(false); }} className="relative min-h-[100svh] w-full overflow-hidden bg-[#0B0F0D] flex flex-col justify-between pt-[264px] sm:pt-[304px] md:pt-[336px] pb-8 sm:pb-12 scroll-mt-20">
+    <section id="hero" aria-label="Kenyan flower sourcing and airfreight" onMouseEnter={() => setInteracting(true)} onMouseLeave={() => setInteracting(false)} onFocusCapture={() => setInteracting(true)} onBlurCapture={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setInteracting(false); }} className="hero-shell relative min-h-[100svh] w-full overflow-hidden bg-[#0B0F0D] flex flex-col pt-[264px] sm:pt-[304px] md:pt-[296px] pb-6 scroll-mt-20">
       {/* Full-bleed Cinematic Visual Story Canvas - Featuring 4 Uploaded Hero Pictures */}
       <div className="absolute inset-0 z-0">
         {HERO_IMAGES.map((item, idx) => (
@@ -103,20 +103,20 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
       </div>
 
       {/* Main Content Layout */}
-      <div className="relative z-20 mx-auto flex min-h-[calc(100vh-18rem)] max-w-7xl flex-col justify-between px-6 py-4 sm:py-6 lg:px-12 w-full">
+      <div className="hero-layout relative z-20 mx-auto flex flex-1 max-w-7xl flex-col justify-between gap-5 px-6 lg:px-12 w-full">
         {/* Center Editorial Hero - Direct Heading & Customer Copy */}
-        <div className="my-auto max-w-4xl py-6 sm:py-10">
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif-luxury font-bold tracking-tight text-white leading-[1.08] text-balance drop-shadow-md">
+        <div className="hero-copy my-auto max-w-5xl">
+          <h1 className="hero-title text-3xl sm:text-4xl lg:text-5xl font-serif-luxury font-bold tracking-tight text-white leading-[1.08] text-balance drop-shadow-md">
             Buy Premium Kenyan Flowers Direct from Farms, Including Worldwide Airfreight.
           </h1>
 
           {/* Customer Copy from Brief */}
-          <p className="mt-5 text-base sm:text-lg text-white/95 leading-relaxed font-sans-clean max-w-3xl font-normal drop-shadow-sm">
+          <p className="hero-description mt-3 text-sm sm:text-base text-white/95 leading-relaxed font-sans-clean max-w-5xl font-normal drop-shadow-sm">
             We offer you to buy flowers from good farms at the best prices. We take care of the whole purchase process and the logistics, including airfreight to any destination worldwide. Because of combined national efforts we are better and cheaper than your current suppliers.
           </p>
 
           {/* 4 Feature Items Under 'We Offer' Copy */}
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 max-w-3xl">
+          <div className="hero-features mt-4 grid grid-cols-2 lg:grid-cols-4 gap-2 max-w-4xl">
             {[
               { label: 'Premium Quality Flowers', color: 'text-[#009E49]' },
               { label: 'Competitive Farm Prices', color: 'text-[#C8102E]' },
@@ -125,7 +125,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="flex items-center gap-2.5 p-3.5 rounded-xl bg-black/60 border border-white/20 backdrop-blur-md shadow-md"
+                className="hero-feature flex items-center gap-2 p-2.5 rounded-xl bg-black/60 border border-white/20 backdrop-blur-md shadow-md"
               >
                 <CheckCircle2 className={`h-4 w-4 ${item.color} shrink-0`} />
                 <span className="text-xs sm:text-sm font-semibold text-white tracking-wide font-sans-clean">
@@ -137,14 +137,14 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
         </div>
 
         {/* Bottom Zone: Request a Quote + current slide + carousel controls */}
-        <div className="mt-8 border-t border-white/15 pt-5 flex flex-col gap-5">
+        <div className="hero-bottom border-t border-white/15 pt-3 flex flex-col gap-3">
           {/* Row 1: current story caption (left) + Request Quote CTA (right) */}
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5">
             <div key={activeImageIndex} className="max-w-2xl animate-in fade-in duration-500">
               <p className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#00E575]">
                 {HERO_IMAGES[activeImageIndex].title}
               </p>
-              <p className="mt-1 text-sm sm:text-base text-white/85 font-sans-clean">
+              <p className="hero-slide-caption mt-1 text-sm text-white/85 font-sans-clean">
                 {HERO_IMAGES[activeImageIndex].caption}
               </p>
             </div>
@@ -162,7 +162,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
           </div>
 
           {/* Row 2: slide indicators (left) + arrows (right) */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pr-16 lg:pr-20">
             {/* 4 Interactive Slide Indicator Tabs */}
             <div className="flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
               {HERO_IMAGES.map((item, idx) => (

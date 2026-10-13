@@ -280,13 +280,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
             tabIndex={mobileMenuOpen || bigOpacity <= 0.25 ? -1 : 0}
             className="inline-flex flex-col items-center group transition-transform duration-300"
           >
-            <div className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-full p-1 sm:p-1.5 bg-black/25 border border-white/30 flex items-center justify-center group-hover:scale-105 transition-all duration-300 drop-shadow-2xl backdrop-blur-[2px]">
+            <div className="hero-brand-logo h-16 w-16 sm:h-20 sm:w-20 md:h-20 md:w-20 rounded-full p-1 sm:p-1.5 bg-black/25 border border-white/30 flex items-center justify-center group-hover:scale-105 transition-all duration-300 drop-shadow-2xl backdrop-blur-[2px]">
               <SebbyLogo className="h-full w-full" />
             </div>
-            <span className="mt-1.5 sm:mt-2 text-xl sm:text-3xl md:text-4xl font-serif-luxury font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+            <span className="hero-brand-title mt-1.5 sm:mt-2 text-xl sm:text-3xl font-serif-luxury font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
               SEBBY LOGISTICS LTD
             </span>
-            <span className="mt-0.5 sm:mt-1 text-xs sm:text-base md:text-lg font-serif-luxury font-semibold italic text-[#00E575] tracking-wide drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+            <span className="hero-brand-tagline mt-0.5 sm:mt-1 text-xs sm:text-base font-serif-luxury font-semibold italic text-[#00E575] tracking-wide drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
               &quot;For Purchase of Flowers from Kenya including Freight&quot;
             </span>
           </a>
