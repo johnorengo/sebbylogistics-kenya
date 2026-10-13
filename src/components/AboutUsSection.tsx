@@ -1,6 +1,6 @@
 import React from 'react';
 import { ShieldCheck, Sparkles, Sprout } from 'lucide-react';
-import pic1Img from '../assets/images/pic1_orange_roses_harvest.jpg';
+const pic1Img = '/images/kenyan-roses.jpg';
 import { SebbyLogo } from './SebbyLogo';
 
 export const AboutUsSection: React.FC = () => {
@@ -79,6 +79,10 @@ export const AboutUsSection: React.FC = () => {
               <img
                 src={pic1Img}
                 alt="Fresh Harvest Orange Roses Hand-Cut in Kenya Greenhouse"
+                width={1376}
+                height={768}
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
                 className="w-full h-[460px] sm:h-[520px] object-cover transition-transform duration-700 group-hover:scale-105"
               />

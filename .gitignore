@@ -1,6 +1,8 @@
 node_modules/
 build/
 dist/
+.prerender.mjs
+artifacts/
 coverage/
 .DS_Store
 *.log

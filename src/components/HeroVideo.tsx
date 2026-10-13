@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CheckCircle2, ChevronLeft, ChevronRight, FileText } from 'lucide-react';
 
-import pic1Img from '../assets/images/pic1_orange_roses_harvest.jpg';
+const pic1Img = '/images/kenyan-roses.jpg';
 import pic2Img from '../assets/images/pic2_kenya_airways_cargo.jpg';
 import pic3Img from '../assets/images/pic3_red_pink_roses_harvest.jpg';
 import pic4Img from '../assets/images/pic4_klm_cargo_airside.jpg';
@@ -70,6 +70,11 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
             <img
               src={item.image}
               alt={item.title}
+              width={1376}
+              height={768}
+              loading={idx === 0 ? 'eager' : 'lazy'}
+              fetchPriority={idx === 0 ? 'high' : 'low'}
+              decoding="async"
               referrerPolicy="no-referrer"
               className={`h-full w-full object-cover transition-transform duration-[12000ms] ease-out ${
                 activeImageIndex === idx ? 'scale-105 filter brightness-[1.02] contrast-[1.02] saturate-[1.06]' : 'scale-100'
@@ -155,6 +160,8 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
                       : 'bg-black/40 border border-white/10 hover:bg-white/10'
                   }`}
                   title={item.title}
+                  aria-label={`Show ${item.title}`}
+                  aria-pressed={activeImageIndex === idx}
                 >
                   <div
                     className={`h-2 rounded-full transition-all duration-500 ${

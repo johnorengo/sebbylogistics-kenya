@@ -21,6 +21,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#F7F6F1] text-[#4F5752] selection:bg-[#174D3B] selection:text-white relative">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-[#174D3B]">
+        Skip to main content
+      </a>
       {/* Dynamic Header with Transparent Top & Sleek Scrolled State */}
       <Header
         onOpenCatalog={() => setCatalogModalOpen(true)}
