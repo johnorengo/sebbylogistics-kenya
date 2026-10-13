@@ -96,9 +96,9 @@ export const QuoteSection: React.FC = () => {
 
   return (
     <div id="quote" className="mt-10 scroll-mt-28">
-      <div className="mx-auto max-w-3xl">
+      <div className="w-full">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto">
+        <div className="max-w-3xl text-left">
           <div className="inline-flex items-center gap-2 mb-2">
             <span className="h-2 w-2 rounded-full bg-[#C8102E]" />
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C8102E]">
@@ -115,9 +115,9 @@ export const QuoteSection: React.FC = () => {
         </div>
 
         {/* Form Card */}
-        <div className="mt-10 rounded-2xl bg-white border border-[#D9E1DC] p-6 sm:p-10 shadow-lg">
+        <div className="mt-6 w-full rounded-2xl bg-white border border-[#D9E1DC] p-5 sm:p-6 lg:p-8 shadow-lg">
           {submitted ? (
-            <div ref={confirmation} tabIndex={-1} role="status" className="flex flex-col items-center text-center">
+            <div ref={confirmation} tabIndex={-1} role="status" className="mx-auto max-w-3xl flex flex-col items-center text-center">
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#EBF6F0] mb-4">
                 <CheckCircle2 className="h-8 w-8 text-[#007A3D]" />
               </div>
