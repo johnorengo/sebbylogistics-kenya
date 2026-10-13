@@ -12,7 +12,7 @@ export function seoHead() {
     telephone: '+254719707003', email: 'support@sebbylogistics.com',
     address: { '@type': 'PostalAddress', streetAddress: 'Jomo Kenyatta International Airport, 1st Freight Lane Avenue (Cargo)', addressLocality: 'Nairobi', addressCountry: 'KE' },
     contactPoint: [
-      { '@type': 'ContactPoint', contactType: 'sales', telephone: '+254719707003', email: 'Sales@sebbylogistics.com', availableLanguage: 'English' },
+      { '@type': 'ContactPoint', contactType: 'sales', telephone: '+254719707003', email: 'sales@sebbylogistics.com', availableLanguage: 'English' },
       { '@type': 'ContactPoint', contactType: 'customer support', email: 'support@sebbylogistics.com' },
     ],
   };
@@ -51,7 +51,7 @@ export function seoPlugin() {
     transformIndexHtml(html) { return html.replace('<!-- seo-head -->', seoHead()); },
     generateBundle() {
       this.emitFile({ type: 'asset', fileName: 'robots.txt', source: `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}sitemap.xml\n` });
-      this.emitFile({ type: 'asset', fileName: 'sitemap.xml', source: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${escape(siteUrl)}</loc></url></urlset>\n` });
+      this.emitFile({ type: 'asset', fileName: 'sitemap.xml', source: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${escape(siteUrl)}</loc><changefreq>weekly</changefreq><priority>1.0</priority></url></urlset>\n` });
     },
   };
 }

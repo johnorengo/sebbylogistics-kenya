@@ -86,11 +86,11 @@ export const ContactSection: React.FC = () => {
               </p>
             </div>
             <a
-              href="mailto:Sales@sebbylogistics.com"
+              href="mailto:sales@sebbylogistics.com"
               className="inline-flex items-center gap-2 text-sm font-bold text-[#C8102E] font-data hover:underline mt-auto"
             >
               <Mail className="h-4 w-4" />
-              Sales@sebbylogistics.com
+              sales@sebbylogistics.com
             </a>
           </div>
 
@@ -146,11 +146,11 @@ export const ContactSection: React.FC = () => {
               </p>
             </div>
             <a
-              href="mailto:Invoices@sebbylogistics.com"
+              href="mailto:invoices@sebbylogistics.com"
               className="inline-flex items-center gap-2 text-sm font-bold text-[#0B110E] font-data hover:underline mt-auto"
             >
               <Mail className="h-4 w-4" />
-              Invoices@sebbylogistics.com
+              invoices@sebbylogistics.com
             </a>
           </div>
         </div>

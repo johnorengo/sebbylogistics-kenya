@@ -1,5 +1,4 @@
 import React from 'react';
-import { Mail, MapPin, Phone } from 'lucide-react';
 import { KenyaFlagWordmark } from './KenyaFlagWordmark';
 import { SebbyLogo } from './SebbyLogo';
 import { scrollToSection } from '../utils/scroll';
@@ -46,22 +45,6 @@ export const Footer: React.FC<FooterProps> = () => {
             <p className="text-sm sm:text-base text-white/85 leading-relaxed font-sans-clean max-w-2xl">
               We offer to buy flowers from good farms at the best prices. We take care of the whole purchase process and the logistics, including airfreight to any destination worldwide. Because of combined national efforts we are better and cheaper than your current suppliers.
             </p>
-
-            {/* Direct contact lines */}
-            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-x-6 gap-y-2 text-sm text-white/80 font-sans-clean">
-              <a href="tel:+254719707003" className="inline-flex items-center gap-2 hover:text-white transition-colors">
-                <Phone className="h-4 w-4 text-[#00E575] shrink-0" />
-                <span className="font-data">+254 719 707 003</span>
-              </a>
-              <a href="mailto:support@sebbylogistics.com" className="inline-flex items-center gap-2 hover:text-white transition-colors">
-                <Mail className="h-4 w-4 text-[#009E49] shrink-0" />
-                <span className="font-data">support@sebbylogistics.com</span>
-              </a>
-              <span className="inline-flex items-center gap-2 text-white/70">
-                <MapPin className="h-4 w-4 text-[#C8102E] shrink-0" />
-                <span>JKIA · 1st Freight Lane Avenue (Cargo), Nairobi</span>
-              </span>
-            </div>
 
             {/* Social Media Channels Icons - Facebook, Instagram & YouTube only */}
             <div className="pt-2">

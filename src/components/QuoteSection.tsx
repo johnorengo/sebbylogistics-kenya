@@ -276,7 +276,7 @@ export const QuoteSection: React.FC = () => {
                 Submit Quote Request
               </button>
               <div className="text-center text-[11px] text-[#4F5752]">
-                Handled personally by <span className="font-semibold text-[#0B110E]">Sales@sebbylogistics.com</span> · WhatsApp: <span className="font-semibold text-[#007A3D]">+254 719707003</span>
+                Handled personally by <span className="font-semibold text-[#0B110E]">sales@sebbylogistics.com</span> · WhatsApp: <span className="font-semibold text-[#007A3D]">+254 719707003</span>
               </div>
             </form>
           )}

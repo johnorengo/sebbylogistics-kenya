@@ -55,8 +55,8 @@ Product: ${h.name} (${h.botanicalName})
 DIRECT COMMERCIAL & FREIGHT INQUIRIES:
 Tel / WhatsApp: +254 719707003
 General Support: support@sebbylogistics.com
-Sales & Quotes: Sales@sebbylogistics.com
-Invoicing & Accounts: Invoices@sebbylogistics.com
+Sales & Quotes: sales@sebbylogistics.com
+Invoicing & Accounts: invoices@sebbylogistics.com
 `;
 
     const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
@@ -108,7 +108,7 @@ Invoicing & Accounts: Invoices@sebbylogistics.com
             <span>Tel / WhatsApp: +254 719707003</span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-[#C8102E]">Sales@sebbylogistics.com</span>
+            <span className="text-[#C8102E]">sales@sebbylogistics.com</span>
             <span className="text-white/40">|</span>
             <span className="text-[#009E49]">support@sebbylogistics.com</span>
           </div>
