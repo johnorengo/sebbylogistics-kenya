@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile, access } from 'node:fs/promises';
 import { siteUrl } from './seo.mjs';
+import { securityPolicy } from './security.mjs';
 
 const output = new URL('../dist/', import.meta.url);
 const html = await readFile(new URL('index.html', output), 'utf8');
@@ -26,3 +27,12 @@ for (const asset of ['favicon.svg', 'images/sebby-logo.svg', 'images/kenyan-rose
   await access(new URL(asset, output));
 }
 console.log('SEO checks passed: rendered content, metadata, structured data, sitemap and asset URLs.');
+const headers = await readFile(new URL('.htaccess', output), 'utf8');
+assert.ok(headers.includes(securityPolicy(html)), 'Hosting CSP does not match the page scripts');
+assert.ok(html.includes('http-equiv="Content-Security-Policy"'), 'Missing browser CSP fallback');
+for (const label of html.matchAll(/<label\b[^>]*\bfor="([^"]+)"/g)) {
+  assert.ok(html.includes(`id="${label[1]}"`), `Label has no matching form control: ${label[1]}`);
+}
+assert.equal((html.match(/<label\b/g) || []).length, 11, 'Missing quote form labels');
+assert.ok(html.includes('G-PZCH170K9E'), 'Missing Analytics tag');
+console.log('Security policy and accessible form markup checks passed.');

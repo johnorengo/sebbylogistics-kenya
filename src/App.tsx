@@ -8,15 +8,13 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { CatalogModal } from './components/CatalogModal';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { scrollToElement } from './utils/scroll';
 
 export default function App() {
   const [catalogModalOpen, setCatalogModalOpen] = useState(false);
 
   const handleOpenRFQ = () => {
-    const el = document.getElementById('quote');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToElement('quote');
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { CheckCircle2, Send } from 'lucide-react';
 import { submitQuote, WEB3FORMS_ACCESS_KEY, WEB3FORMS_ENDPOINT, type QuoteSubmission } from '../utils/submitQuote';
 
@@ -22,6 +22,10 @@ export const QuoteSection: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState('');
   const inFlight = useRef(false);
+  const confirmation = useRef<HTMLDivElement>(null);
+  const errorMessage = useRef<HTMLParagraphElement>(null);
+  useEffect(() => { if (submitted) confirmation.current?.focus(); }, [submitted]);
+  useEffect(() => { if (submissionError) errorMessage.current?.focus(); }, [submissionError]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,12 +38,13 @@ export const QuoteSection: React.FC = () => {
     if (!form.varieties.trim()) errs.varieties = 'Please tell us which flowers you need';
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
+      e.currentTarget.querySelector<HTMLElement>(`[name="${Object.keys(errs)[0]}"]`)?.focus();
       return;
     }
 
     setErrors({});
     const request: QuoteSubmission = {
-      reference: `INQ-${Math.floor(100000 + Math.random() * 900000)}`,
+      reference: `INQ-${Array.from(crypto.getRandomValues(new Uint8Array(6)), byte => byte.toString(16).padStart(2, '0')).join('').toUpperCase()}`,
       date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
       ...form,
       name: form.name.trim(),
@@ -112,7 +117,7 @@ export const QuoteSection: React.FC = () => {
         {/* Form Card */}
         <div className="mt-10 rounded-2xl bg-white border border-[#D9E1DC] p-6 sm:p-10 shadow-lg">
           {submitted ? (
-            <div className="flex flex-col items-center text-center">
+            <div ref={confirmation} tabIndex={-1} role="status" className="flex flex-col items-center text-center">
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#EBF6F0] mb-4">
                 <CheckCircle2 className="h-8 w-8 text-[#007A3D]" />
               </div>
@@ -160,7 +165,7 @@ export const QuoteSection: React.FC = () => {
               </button>
             </div>
           ) : (
-            <form action={WEB3FORMS_ENDPOINT} method="POST" onSubmit={handleSubmit} className="space-y-4" aria-busy={isSubmitting}>
+            <form action={WEB3FORMS_ENDPOINT} method="POST" noValidate onSubmit={handleSubmit} className="space-y-4" aria-busy={isSubmitting}>
               <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
               <input type="hidden" name="subject" value="New Sebby Logistics quote request" />
               <input type="hidden" name="from_name" value="Sebby Logistics Website" />
@@ -168,24 +173,32 @@ export const QuoteSection: React.FC = () => {
               <fieldset disabled={isSubmitting} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-[#111814] mb-1">Full Name *</label>
+                  <label htmlFor="quote-name" className="block text-xs font-semibold text-[#111814] mb-1">Full Name *</label>
                   <input
                     type="text"
                     value={form.name}
                     name="name"
+                    id="quote-name"
+                    autoComplete="name"
+                    maxLength={120}
+                    aria-invalid={!!errors.name}
+                    aria-describedby={errors.name ? 'quote-name-error' : undefined}
                     required
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="e.g. Robert Van Der Meer"
                     className={`${inputClass} ${errors.name ? errorClass : ''}`}
                   />
-                  {errors.name && <span className="text-[10px] text-[#C8102E] mt-0.5 block">{errors.name}</span>}
+                  {errors.name && <span id="quote-name-error" className="text-xs text-[#C8102E] mt-0.5 block">{errors.name}</span>}
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-[#111814] mb-1">Company</label>
+                  <label htmlFor="quote-company" className="block text-xs font-semibold text-[#111814] mb-1">Company</label>
                   <input
                     type="text"
                     value={form.company}
                     name="company"
+                    id="quote-company"
+                    autoComplete="organization"
+                    maxLength={160}
                     onChange={(e) => setForm({ ...form, company: e.target.value })}
                     placeholder="e.g. European Flower Importers BV"
                     className={inputClass}
@@ -195,24 +208,33 @@ export const QuoteSection: React.FC = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-[#111814] mb-1">Email *</label>
+                  <label htmlFor="quote-email" className="block text-xs font-semibold text-[#111814] mb-1">Email *</label>
                   <input
                     type="email"
                     value={form.email}
                     name="email"
+                    id="quote-email"
+                    autoComplete="email"
+                    maxLength={254}
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? 'quote-email-error' : undefined}
                     required
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="buyer@floraldistributor.com"
                     className={`${inputClass} ${errors.email ? errorClass : ''}`}
                   />
-                  {errors.email && <span className="text-[10px] text-[#C8102E] mt-0.5 block">{errors.email}</span>}
+                  {errors.email && <span id="quote-email-error" className="text-xs text-[#C8102E] mt-0.5 block">{errors.email}</span>}
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-[#111814] mb-1">Phone / WhatsApp</label>
+                  <label htmlFor="quote-phone" className="block text-xs font-semibold text-[#111814] mb-1">Phone / WhatsApp</label>
                   <input
                     type="text"
                     value={form.phone}
                     name="phone"
+                    id="quote-phone"
+                    autoComplete="tel"
+                    inputMode="tel"
+                    maxLength={60}
                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
                     placeholder="+31 6 12345678"
                     className={inputClass}
@@ -222,24 +244,31 @@ export const QuoteSection: React.FC = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-[#111814] mb-1">Destination Country *</label>
+                  <label htmlFor="quote-country" className="block text-xs font-semibold text-[#111814] mb-1">Destination Country *</label>
                   <input
                     type="text"
                     value={form.country}
                     name="country"
+                    id="quote-country"
+                    autoComplete="country-name"
+                    maxLength={100}
+                    aria-invalid={!!errors.country}
+                    aria-describedby={errors.country ? 'quote-country-error' : undefined}
                     required
                     onChange={(e) => setForm({ ...form, country: e.target.value })}
                     placeholder="e.g. Netherlands"
                     className={`${inputClass} ${errors.country ? errorClass : ''}`}
                   />
-                  {errors.country && <span className="text-[10px] text-[#C8102E] mt-0.5 block">{errors.country}</span>}
+                  {errors.country && <span id="quote-country-error" className="text-xs text-[#C8102E] mt-0.5 block">{errors.country}</span>}
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-[#111814] mb-1">Destination Airport</label>
+                  <label htmlFor="quote-airport" className="block text-xs font-semibold text-[#111814] mb-1">Destination Airport</label>
                   <input
                     type="text"
                     value={form.airport}
                     name="airport"
+                    id="quote-airport"
+                    maxLength={100}
                     onChange={(e) => setForm({ ...form, airport: e.target.value })}
                     placeholder="e.g. AMS Amsterdam"
                     className={inputClass}
@@ -248,36 +277,43 @@ export const QuoteSection: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#111814] mb-1">Flower Varieties Needed *</label>
+                <label htmlFor="quote-varieties" className="block text-xs font-semibold text-[#111814] mb-1">Flower Varieties Needed *</label>
                 <input
                   type="text"
                   value={form.varieties}
                   name="varieties"
+                  id="quote-varieties"
+                  maxLength={1000}
+                  aria-invalid={!!errors.varieties}
+                  aria-describedby={errors.varieties ? 'quote-varieties-error' : undefined}
                   required
                   onChange={(e) => setForm({ ...form, varieties: e.target.value })}
                   placeholder="e.g. Red roses 60cm, pink spray roses"
                   className={`${inputClass} ${errors.varieties ? errorClass : ''}`}
                 />
-                {errors.varieties && <span className="text-[10px] text-[#C8102E] mt-0.5 block">{errors.varieties}</span>}
+                {errors.varieties && <span id="quote-varieties-error" className="text-xs text-[#C8102E] mt-0.5 block">{errors.varieties}</span>}
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-[#111814] mb-1">Quantity</label>
+                  <label htmlFor="quote-quantity" className="block text-xs font-semibold text-[#111814] mb-1">Quantity</label>
                   <input
                     type="text"
                     value={form.quantity}
                     name="quantity"
+                    id="quote-quantity"
+                    maxLength={100}
                     onChange={(e) => setForm({ ...form, quantity: e.target.value })}
                     placeholder="e.g. 100 boxes"
                     className={inputClass}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-[#111814] mb-1">Frequency</label>
+                  <label htmlFor="quote-frequency" className="block text-xs font-semibold text-[#111814] mb-1">Frequency</label>
                   <select
                     value={form.frequency}
                     name="frequency"
+                    id="quote-frequency"
                     onChange={(e) => setForm({ ...form, frequency: e.target.value })}
                     className={`${inputClass} bg-white`}
                   >
@@ -288,11 +324,12 @@ export const QuoteSection: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-[#111814] mb-1">Target Arrival</label>
+                  <label htmlFor="quote-arrivalDate" className="block text-xs font-semibold text-[#111814] mb-1">Target Arrival</label>
                   <input
                     type="date"
                     value={form.arrivalDate}
                     name="arrivalDate"
+                    id="quote-arrivalDate"
                     onChange={(e) => setForm({ ...form, arrivalDate: e.target.value })}
                     className={inputClass}
                   />
@@ -300,11 +337,13 @@ export const QuoteSection: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#111814] mb-1">Additional Notes</label>
+                <label htmlFor="quote-notes" className="block text-xs font-semibold text-[#111814] mb-1">Additional Notes</label>
                 <textarea
                   rows={3}
                   value={form.notes}
                   name="notes"
+                  id="quote-notes"
+                  maxLength={3000}
                   onChange={(e) => setForm({ ...form, notes: e.target.value })}
                   placeholder="Packaging, stem lengths, FOB or CIF preference, anything else…"
                   className={inputClass}
@@ -314,13 +353,13 @@ export const QuoteSection: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-md bg-[#C8102E] hover:bg-[#A30922] text-white font-bold text-xs uppercase tracking-wider transition-colors shadow-md active:scale-95"
+                className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-md bg-[#C8102E] hover:bg-[#A30922] text-white font-bold text-xs uppercase tracking-wider transition-colors shadow-md active:scale-95 disabled:opacity-60 disabled:cursor-wait"
               >
                 <Send className="h-4 w-4 text-white" />
                 {isSubmitting ? 'Sending request…' : 'Submit Quote Request'}
               </button>
               </fieldset>
-              {submissionError && <p role="alert" className="text-sm text-[#C8102E]">{submissionError}</p>}
+              {submissionError && <p ref={errorMessage} tabIndex={-1} role="alert" className="text-sm text-[#C8102E]">{submissionError}</p>}
               <p role="status" className="sr-only">{isSubmitting ? 'Sending your quote request. Please wait.' : ''}</p>
               <div className="text-center text-[11px] text-[#4F5752]">
                 Handled personally by <span className="font-semibold text-[#0B110E]">support@sebbylogistics.com</span> · WhatsApp: <span className="font-semibold text-[#007A3D]">+254 719707003</span>

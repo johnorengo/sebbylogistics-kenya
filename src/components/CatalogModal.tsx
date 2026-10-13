@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { flowerVarieties, horticultureProducts } from '../data/flowerData';
 import { X, Download, FileText, Plane, Phone, Mail } from 'lucide-react';
 import { SebbyLogo } from './SebbyLogo';
@@ -10,6 +10,24 @@ interface CatalogModalProps {
 }
 
 export const CatalogModal: React.FC<CatalogModalProps> = ({ isOpen, onClose, onOpenRFQ }) => {
+  const dialog = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!isOpen) return;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    dialog.current?.querySelector<HTMLElement>('button')?.focus();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+      if (event.key !== 'Tab') return;
+      const controls = Array.from(dialog.current?.querySelectorAll<HTMLElement>('button, a[href], input, select, textarea') || []);
+      const first = controls[0], last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => { document.body.style.overflow = previousOverflow; document.removeEventListener('keydown', onKey); previousFocus?.focus({ preventScroll: true }); };
+  }, [isOpen, onClose]);
   if (!isOpen) return null;
 
   const handleDownloadPDF = () => {
@@ -72,7 +90,7 @@ Invoicing & Accounts: invoices@sebbylogistics.com
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white border border-[#D9E1DC] p-6 sm:p-10 shadow-2xl">
+      <div ref={dialog} role="dialog" aria-modal="true" aria-label="Sebby Logistics product catalog" className="relative w-full max-w-4xl max-h-[90svh] overflow-y-auto overscroll-contain rounded-2xl bg-white border border-[#D9E1DC] p-6 sm:p-10 shadow-2xl">
         {/* Header */}
         <div className="flex items-start justify-between border-b border-[#D9E1DC] pb-6">
           <div className="flex items-start gap-4">

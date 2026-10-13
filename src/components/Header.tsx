@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronRight, Mail, MapPin, Phone } from 'lucide-react';
 import { SebbyLogo } from './SebbyLogo';
 import { scrollToSection } from '../utils/scroll';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 interface HeaderProps {
   onOpenCatalog: () => void;
@@ -15,15 +16,42 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
   // so the background photo shows through cleanly.
   const [isSolid, setIsSolid] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  const reducedMotion = useReducedMotion();
+  const menuButton = useRef<HTMLButtonElement>(null);
+  const drawer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let ticking = false;
+    if (!mobileMenuOpen) return;
+    const media = window.matchMedia('(min-width: 640px)');
+    const closeOnDesktop = () => { if (media.matches) setMobileMenuOpen(false); };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMobileMenuOpen(false);
+        menuButton.current?.focus();
+      }
+      if (event.key === 'Tab') {
+        const controls = [menuButton.current, ...Array.from(drawer.current?.querySelectorAll<HTMLElement>('a, button') || [])].filter(Boolean) as HTMLElement[];
+        const first = controls[0], last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+        if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+      }
+    };
+    drawer.current?.querySelector<HTMLElement>('a')?.focus();
+    media.addEventListener('change', closeOnDesktop);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      media.removeEventListener('change', closeOnDesktop);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    let frame: number | null = null;
     const handleScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
+      if (frame !== null) return;
+      frame = requestAnimationFrame(() => {
         const y = window.scrollY;
-        setScrollY(y);
+        setScrollY(Math.min(Math.max(y, 0), 160));
         const heroElement = document.getElementById('hero');
         if (heroElement) {
           const rect = heroElement.getBoundingClientRect();
@@ -31,7 +59,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
         } else {
           setIsSolid(y > (window.innerHeight || 800) - 140);
         }
-        ticking = false;
+        frame = null;
       });
     };
 
@@ -39,6 +67,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleScroll, { passive: true });
     return () => {
+      if (frame !== null) cancelAnimationFrame(frame);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
     };
@@ -57,16 +86,16 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
   // almost no upward travel, so it can never slide under / be overlapped
   // by the thin contact strip or the navbar. Gone by ~60% of the scroll.
   const bigOpacity = Math.max(1 - p * 1.6, 0);
-  const bigX = -p * 140;
-  const bigY = -p * 12;
-  const bigScale = 1 - p * 0.15;
+  const bigX = reducedMotion ? 0 : -p * 140;
+  const bigY = reducedMotion ? 0 : -p * 12;
+  const bigScale = reducedMotion ? 1 : 1 - p * 0.15;
 
   // Compact navbar brand (top-left): fades/slides in on the same `p`,
   // so both logos are half-visible together mid-scroll — but the big one
   // is already nearly transparent before it could touch the strip.
   const compactOpacity = p;
-  const compactX = (1 - p) * -28;
-  const compactScale = 0.92 + p * 0.08;
+  const compactX = reducedMotion ? 0 : (1 - p) * -28;
+  const compactScale = reducedMotion ? 1 : 0.92 + p * 0.08;
 
   const handleNavClick = (e: React.MouseEvent, id: string) => {
     setMobileMenuOpen(false);
@@ -75,10 +104,10 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-in-out ${
+      className={`fixed top-0 left-0 right-0 z-50 w-full transition-colors duration-200 ${
         // Transparent only at landing; solid color background as soon as
         // the bar compacts so nav text never overlays hero text/photo.
-        isSolid || collapsed
+        isSolid || collapsed || mobileMenuOpen
           ? 'bg-[#0B0F0D]/95 backdrop-blur-md'
           : 'bg-transparent'
       }`}
@@ -128,7 +157,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
           landing: just the centered menu. Transparent + lineless while
           over the hero; solid only once the hero is truly gone. */}
       <div
-        className={`relative z-10 transition-all duration-500 ease-in-out ${
+        data-header-navigation
+        className={`relative z-10 transition-colors duration-200 ${
           isSolid || collapsed || mobileMenuOpen
             ? 'bg-[#0B0F0D]/95 backdrop-blur-md'
             : 'bg-transparent'
@@ -176,6 +206,10 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
 
           {/* Mobile hamburger */}
           <button
+            ref={menuButton}
+            type="button"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="absolute left-4 top-1/2 -translate-y-1/2 p-2 -ml-2 text-white sm:hidden focus:outline-none drop-shadow-md"
             aria-label="Toggle navigation menu"
@@ -225,16 +259,17 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
           strip/nav overlap) while the compact brand fades in top-left and
           the menu glides right — all on the same progress `p`. */}
       <div
-        aria-hidden={p > 0.85}
-        className={`relative z-0 overflow-hidden transition-[max-height,padding] duration-500 ease-in-out ${
-          collapsed ? 'max-h-0 pt-0 pb-0' : 'max-h-72 pt-2.5 sm:pt-4 pb-3'
-        }`}
+        aria-hidden={mobileMenuOpen || p > 0.85}
+        className="relative z-0 overflow-hidden"
         style={{
-          opacity: bigOpacity,
+          maxHeight: mobileMenuOpen ? 0 : `${(1 - p) * 288}px`,
+          paddingTop: mobileMenuOpen ? 0 : `${(1 - p) * 16}px`,
+          paddingBottom: mobileMenuOpen ? 0 : `${(1 - p) * 12}px`,
+          opacity: mobileMenuOpen ? 0 : bigOpacity,
           transform: `translate(${bigX.toFixed(1)}px, ${bigY.toFixed(1)}px) scale(${bigScale.toFixed(3)})`,
           transformOrigin: 'center top',
-          filter: p > 0.1 ? `blur(${(p * 5).toFixed(1)}px)` : 'none',
-          visibility: bigOpacity <= 0.03 ? 'hidden' : 'visible',
+          filter: !reducedMotion && p > 0.1 ? `blur(${(p * 5).toFixed(1)}px)` : 'none',
+          visibility: mobileMenuOpen || bigOpacity <= 0.03 ? 'hidden' : 'visible',
           pointerEvents: bigOpacity <= 0.25 ? 'none' : 'auto',
         }}
       >
@@ -242,6 +277,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
           <a
             href="#hero"
             onClick={(e) => handleNavClick(e, 'hero')}
+            tabIndex={mobileMenuOpen || bigOpacity <= 0.25 ? -1 : 0}
             className="inline-flex flex-col items-center group transition-transform duration-300"
           >
             <div className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-full p-1 sm:p-1.5 bg-black/25 border border-white/30 flex items-center justify-center group-hover:scale-105 transition-all duration-300 drop-shadow-2xl backdrop-blur-[2px]">
@@ -259,7 +295,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
 
       {/* Mobile drawer */}
       {mobileMenuOpen && (
-        <div className="border-b border-white/10 bg-[#0B0F0D]/98 backdrop-blur-xl px-6 py-5 sm:hidden shadow-2xl animate-in fade-in duration-150 text-white">
+        <div ref={drawer} id="mobile-navigation" className="bg-[#0B0F0D]/98 backdrop-blur-xl px-6 py-5 sm:hidden text-white max-h-[calc(100svh-7rem)] overflow-y-auto">
           <div className="flex flex-col space-y-4">
             <nav className="flex flex-col space-y-3">
               <a

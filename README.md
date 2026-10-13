@@ -48,7 +48,17 @@ Choose one canonical hostname. Configure hosting to redirect HTTP and the altern
 
 Submission requests crawling; Google determines whether and when to index the page. There is no guaranteed indexing deadline or ranking. Do not use the Indexing API for this landing page: it is intended for supported job-posting and livestream content. Do not use the retired sitemap ping endpoint.
 
-## Validation
+## Production security and accessibility
+
+Every build generates a Content Security Policy in the HTML and Apache/LiteSpeed header rules in `dist/.htaccess`. Inline Analytics and structured-data scripts are allowed by their exact SHA-256 hashes; unrestricted inline scripts and `eval` are not allowed. The policy allows the existing Google Fonts, Analytics, and Web3Forms endpoints. React's inline styling requires the style-only `unsafe-inline` permission. Hosting rules add clickjacking protection, MIME-sniffing protection, restricted browser permissions, a referrer policy, and one-day HSTS on HTTPS. They also deny directory listings and direct downloads of hidden configuration, logs, source maps and ZIP files.
+
+**If cPanel already has a `.htaccess`, back it up and merge the generated rules into it. Do not overwrite existing hosting, SSL, redirect or security rules.** Enable Show Hidden Files in cPanel so the generated file is visible. These header rules depend on the hosting server's supported Apache modules; verify the responses after deployment. This project does not modify hosting firewall or bot-protection settings.
+
+The form limits accepted field lengths and excludes unexpected fields from the submitted payload. Its Web3Forms access key is intentionally public, not a server credential. Client-side validation and the honeypot do not replace Web3Forms' server-side validation and anti-spam controls. Configure domain restrictions and stronger spam protection in Web3Forms if supported by your account. No inbox-delivery claim is made without a real delivered test email.
+
+Navigation respects reduced-motion preferences, offsets section headings below the fixed menu and moves keyboard focus to the destination. The mobile menu supports Escape and keyboard focus cycling. Slideshow autoplay pauses during interaction and in background tabs; users can pause it, and reduced-motion users receive manual slides. Form labels, field errors, status messages and modal focus are accessible to keyboard and screen-reader users. Verify the deployed site on desktop and mobile and inspect the browser console for CSP violations.
+
+SEO metadata, pre-rendered content, canonical URLs, robots.txt and the sitemap are still validated automatically. Search Console sitemap success means Google read the sitemap; it does **not** prove the homepage has been indexed. Check URL Inspection for the actual indexing status. Host TLS, security headers, Google indexing and email delivery require separate live verification.
 
 The quote form uses Web3Forms to deliver every quote field to `support@sebbylogistics.com`, the recipient registered to its public access key. The buyer's email is the reply-to address. Recipient changes must be made through Web3Forms by using a key registered to the intended mailbox. Submission errors preserve the form for retry; confirmation appears only after the API reports success. Run `npm test` for mocked submission tests (no email is sent). After deployment, submit a real quote and check the support inbox and spam folder to confirm delivery.
 

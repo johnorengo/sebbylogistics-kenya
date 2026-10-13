@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
+import { scrollToElement } from '../utils/scroll';
 
 export const FloatingWhatsApp: React.FC = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -14,7 +15,7 @@ export const FloatingWhatsApp: React.FC = () => {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToElement('hero');
   };
 
   return (

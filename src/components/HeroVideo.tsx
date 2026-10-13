@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, ChevronLeft, ChevronRight, FileText } from 'lucide-react';
+import { CheckCircle2, ChevronLeft, ChevronRight, FileText, Pause, Play } from 'lucide-react';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const pic1Img = '/images/kenyan-roses.jpg';
 import pic2Img from '../assets/images/pic2_kenya_airways_cargo.jpg';
@@ -39,25 +40,38 @@ interface HeroVideoProps {
 
 export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [interacting, setInteracting] = useState(false);
+  const [loadedImages, setLoadedImages] = useState([0]);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
+    if (activeImageIndex === 0) return;
+    setLoadedImages(previous => Array.from(new Set([...previous, activeImageIndex, (activeImageIndex + 1) % HERO_IMAGES.length])));
+  }, [activeImageIndex]);
+
+  useEffect(() => {
+    if (paused || interacting || reducedMotion) return;
     const timer = setInterval(() => {
+      if (document.hidden) return;
       setActiveImageIndex((curr) => (curr + 1) % HERO_IMAGES.length);
     }, 6500);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [paused, interacting, reducedMotion]);
 
   const goToPrevious = () => {
+    setPaused(true);
     setActiveImageIndex((curr) => (curr - 1 + HERO_IMAGES.length) % HERO_IMAGES.length);
   };
 
   const goToNext = () => {
+    setPaused(true);
     setActiveImageIndex((curr) => (curr + 1) % HERO_IMAGES.length);
   };
 
   return (
-    <section id="hero" className="relative min-h-screen w-full overflow-hidden bg-[#0B0F0D] flex flex-col justify-between pt-[264px] sm:pt-[304px] md:pt-[336px] pb-8 sm:pb-12 scroll-mt-20">
+    <section id="hero" aria-label="Kenyan flower sourcing and airfreight" onMouseEnter={() => setInteracting(true)} onMouseLeave={() => setInteracting(false)} onFocusCapture={() => setInteracting(true)} onBlurCapture={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setInteracting(false); }} className="relative min-h-[100svh] w-full overflow-hidden bg-[#0B0F0D] flex flex-col justify-between pt-[264px] sm:pt-[304px] md:pt-[336px] pb-8 sm:pb-12 scroll-mt-20">
       {/* Full-bleed Cinematic Visual Story Canvas - Featuring 4 Uploaded Hero Pictures */}
       <div className="absolute inset-0 z-0">
         {HERO_IMAGES.map((item, idx) => (
@@ -68,7 +82,8 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
             }`}
           >
             <img
-              src={item.image}
+              src={idx === activeImageIndex || loadedImages.includes(idx) ? item.image : undefined}
+              onLoad={() => { if (idx === activeImageIndex) setLoadedImages(previous => previous.includes((idx + 1) % HERO_IMAGES.length) ? previous : [...previous, (idx + 1) % HERO_IMAGES.length]); }}
               alt={item.title}
               width={1376}
               height={768}
@@ -153,7 +168,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               {HERO_IMAGES.map((item, idx) => (
                 <button
                   key={item.id}
-                  onClick={() => setActiveImageIndex(idx)}
+                  onClick={() => { setPaused(true); setActiveImageIndex(idx); }}
                   className={`group flex items-center gap-2 py-1.5 px-3 rounded-lg transition-all text-left ${
                     activeImageIndex === idx
                       ? 'bg-white/20 border border-white/40 shadow-md backdrop-blur-sm'
@@ -181,9 +196,12 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
 
             {/* Prev / Next Navigation Arrows */}
             <div className="flex items-center gap-2 ml-auto">
+            <button type="button" onClick={() => setPaused(!paused)} disabled={reducedMotion} aria-label={reducedMotion ? 'Automatic slideshow disabled by reduced-motion preference' : paused ? 'Resume slideshow' : 'Pause slideshow'} aria-pressed={paused || reducedMotion} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full bg-black/50 text-white hover:bg-white/20 disabled:opacity-50">
+              {paused || reducedMotion ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
+            </button>
               <button
                 onClick={goToPrevious}
-                className="p-2 rounded-full bg-black/50 border border-white/20 hover:bg-white/20 text-white transition-all backdrop-blur-sm active:scale-95"
+              className="min-h-11 min-w-11 inline-flex items-center justify-center rounded-full bg-black/50 border border-white/20 hover:bg-white/20 text-white transition-colors backdrop-blur-sm active:scale-95"
                 aria-label="Previous slide"
                 title="Previous picture"
               >
@@ -191,7 +209,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               </button>
               <button
                 onClick={goToNext}
-                className="p-2 rounded-full bg-black/50 border border-white/20 hover:bg-white/20 text-white transition-all backdrop-blur-sm active:scale-95"
+              className="min-h-11 min-w-11 inline-flex items-center justify-center rounded-full bg-black/50 border border-white/20 hover:bg-white/20 text-white transition-colors backdrop-blur-sm active:scale-95"
                 aria-label="Next slide"
                 title="Next picture"
               >

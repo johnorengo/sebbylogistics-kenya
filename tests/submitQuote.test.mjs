@@ -40,3 +40,21 @@ test('rejects malformed responses and network failures', async () => {
   await assert.rejects(submitQuote(request, async () => new Response('<html>Error</html>', { status: 502 })), /could not be submitted/);
   await assert.rejects(submitQuote(request, async () => { throw new Error('Network failure'); }), /could not confirm submission/);
 });
+
+test('rejects oversized or malformed input before transmitting it', async () => {
+  let calls = 0;
+  const fetcher = async () => { calls++; return new Response('{"success":true}'); };
+  await assert.rejects(submitQuote({ ...request, notes: 'x'.repeat(3001) }, fetcher), /shorten/);
+  await assert.rejects(submitQuote({ ...request, email: 'buyer@example.com\r\nBcc:other@example.com' }, fetcher), /check/);
+  assert.equal(calls, 0);
+});
+
+test('ignores unrecognized fields that would override delivery configuration', async () => {
+  await submitQuote({ ...request, access_key: 'other-key', subject: 'spoof', redirect: 'https://example.com' }, async (_url, options) => {
+    const body = JSON.parse(options.body);
+    assert.equal(body.access_key, WEB3FORMS_ACCESS_KEY);
+    assert.ok(body.subject.includes(request.reference));
+    assert.ok(!('redirect' in body));
+    return new Response('{"success":true}');
+  });
+});
