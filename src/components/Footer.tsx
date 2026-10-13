@@ -2,6 +2,7 @@ import React from 'react';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { KenyaFlagWordmark } from './KenyaFlagWordmark';
 import { SebbyLogo } from './SebbyLogo';
+import { scrollToSection } from '../utils/scroll';
 
 interface FooterProps {
   onOpenCatalog?: () => void;
@@ -117,16 +118,16 @@ export const Footer: React.FC<FooterProps> = () => {
             </div>
             <ul className="space-y-2.5 text-sm text-white/80">
               <li>
-                <a href="#about" className="hover:text-white transition-colors">About Us</a>
+                <a href="#about" onClick={(e) => scrollToSection(e, 'about')} className="hover:text-white transition-colors">About Us</a>
               </li>
               <li>
-                <a href="#why-choose-us" className="hover:text-white transition-colors">Why Choose Us</a>
+                <a href="#why-choose-us" onClick={(e) => scrollToSection(e, 'why-choose-us')} className="hover:text-white transition-colors">Why Choose Us</a>
               </li>
               <li>
-                <a href="#quote" className="hover:text-white transition-colors">Request a Quote</a>
+                <a href="#quote" onClick={(e) => scrollToSection(e, 'quote')} className="hover:text-white transition-colors">Request a Quote</a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-white transition-colors font-semibold text-[#009E49]">
+                <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="hover:text-white transition-colors font-semibold text-[#009E49]">
                   Contact Us
                 </a>
               </li>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronRight, Mail, MapPin, Phone } from 'lucide-react';
 import { SebbyLogo } from './SebbyLogo';
+import { scrollToSection } from '../utils/scroll';
 
 interface HeaderProps {
   onOpenCatalog: () => void;
@@ -67,12 +68,9 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
   const compactX = (1 - p) * -28;
   const compactScale = 0.92 + p * 0.08;
 
-  const handleNavClick = (id: string) => {
+  const handleNavClick = (e: React.MouseEvent, id: string) => {
     setMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToSection(e, id);
   };
 
   return (
@@ -159,7 +157,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
           >
             <a
               href="#hero"
-              onClick={() => handleNavClick('hero')}
+              onClick={(e) => handleNavClick(e, 'hero')}
               className="flex items-center gap-3 group shrink-0"
               title="Return to top"
               tabIndex={compactOpacity <= 0.25 ? -1 : 0}
@@ -197,21 +195,21 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
             <nav className="flex items-center gap-8 md:gap-10 lg:gap-12 shrink-0">
               <a
                 href="#hero"
-                onClick={() => handleNavClick('hero')}
+                onClick={(e) => handleNavClick(e, 'hero')}
                 className="text-sm md:text-base font-bold text-white hover:text-[#00E575] transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] uppercase"
               >
                 Home
               </a>
               <a
                 href="#about"
-                onClick={() => handleNavClick('about')}
+                onClick={(e) => handleNavClick(e, 'about')}
                 className="text-sm md:text-base font-bold text-white hover:text-[#00E575] transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] uppercase"
               >
                 About Us
               </a>
               <a
                 href="#contact"
-                onClick={() => handleNavClick('contact')}
+                onClick={(e) => handleNavClick(e, 'contact')}
                 className="text-sm md:text-base font-bold text-white hover:text-[#C8102E] transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] uppercase"
               >
                 Contact
@@ -246,7 +244,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
         <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 flex flex-col items-center justify-center text-center will-change-transform">
           <a
             href="#hero"
-            onClick={() => handleNavClick('hero')}
+            onClick={(e) => handleNavClick(e, 'hero')}
             className="inline-flex flex-col items-center group transition-transform duration-300"
           >
             <div className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-full p-1 sm:p-1.5 bg-black/25 border border-white/30 flex items-center justify-center group-hover:scale-105 transition-all duration-300 drop-shadow-2xl backdrop-blur-[2px]">
@@ -269,21 +267,21 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
             <nav className="flex flex-col space-y-3">
               <a
                 href="#hero"
-                onClick={() => handleNavClick('hero')}
+                onClick={(e) => handleNavClick(e, 'hero')}
                 className="text-base font-bold text-white hover:text-[#00E575] uppercase tracking-wide py-1 border-b border-white/5"
               >
                 Home
               </a>
               <a
                 href="#about"
-                onClick={() => handleNavClick('about')}
+                onClick={(e) => handleNavClick(e, 'about')}
                 className="text-base font-bold text-white hover:text-[#00E575] uppercase tracking-wide py-1 border-b border-white/5"
               >
                 About Us
               </a>
               <a
                 href="#contact"
-                onClick={() => handleNavClick('contact')}
+                onClick={(e) => handleNavClick(e, 'contact')}
                 className="text-base font-bold text-white hover:text-[#C8102E] uppercase tracking-wide py-1 flex items-center gap-2"
               >
                 <span className="h-2 w-2 rounded-full bg-[#C8102E]" />
