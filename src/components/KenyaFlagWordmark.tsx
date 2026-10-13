@@ -10,8 +10,8 @@ export const KenyaFlagWordmark: React.FC<KenyaFlagWordmarkProps> = ({
   opacity = 1
 }) => {
   return (
-    <svg
-      viewBox="0 0 1000 360"
+      <svg
+      viewBox="0 0 1400 360"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
@@ -28,8 +28,8 @@ export const KenyaFlagWordmark: React.FC<KenyaFlagWordmarkProps> = ({
           <path d="M 545 40 H 625 L 705 205 V 40 H 775 V 320 H 695 L 615 155 V 320 H 545 Z" />
           {/* Letter Y */}
           <path d="M 800 40 H 885 L 940 160 L 995 40 H 1080 L 980 210 V 320 H 900 V 210 Z" transform="translate(-10, 0)" />
-          {/* Letter A */}
-          <path d="M 1090 40 H 1175 L 1255 320 H 1175 L 1155 245 H 1075 L 1055 320 H 975 Z M 1115 125 L 1088 200 H 1142 Z" transform="translate(-160, 0)" />
+          {/* Letter A — parked right of Y (ends ~1070), so the glyphs no longer overlap */}
+          <path d="M 1090 40 H 1175 L 1255 320 H 1175 L 1155 245 H 1075 L 1055 320 H 975 Z M 1115 125 L 1088 200 H 1142 Z" transform="translate(110, 0)" />
         </clipPath>
 
         {/* Maasai Shield Clip */}
@@ -41,15 +41,15 @@ export const KenyaFlagWordmark: React.FC<KenyaFlagWordmarkProps> = ({
       {/* Flag Bands Clipped to the KENYA Wordmark */}
       <g clipPath="url(#kenya-letters-clip)">
         {/* Black Top Band */}
-        <rect x="0" y="30" width="1000" height="90" fill="#000000" />
+        <rect x="0" y="30" width="1400" height="90" fill="#000000" />
         {/* White Upper Border */}
-        <rect x="0" y="118" width="1000" height="16" fill="#FFFFFF" />
+        <rect x="0" y="118" width="1400" height="16" fill="#FFFFFF" />
         {/* Kenyan Red Middle Band */}
-        <rect x="0" y="132" width="1000" height="96" fill="#C8102E" />
+        <rect x="0" y="132" width="1400" height="96" fill="#C8102E" />
         {/* White Lower Border */}
-        <rect x="0" y="226" width="1000" height="16" fill="#FFFFFF" />
+        <rect x="0" y="226" width="1400" height="16" fill="#FFFFFF" />
         {/* Kenyan Green Bottom Band */}
-        <rect x="0" y="240" width="1000" height="90" fill="#007A3D" />
+        <rect x="0" y="240" width="1400" height="90" fill="#007A3D" />
       </g>
 
       {/* Central Traditional Maasai Shield & Crossed Spears on Letter N */}
