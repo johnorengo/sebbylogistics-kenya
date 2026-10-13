@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header } from './components/Header';
 import { HeroVideo } from './components/HeroVideo';
 import { TrustStatsSection } from './components/TrustStatsSection';
@@ -9,9 +9,11 @@ import { Footer } from './components/Footer';
 import { CatalogModal } from './components/CatalogModal';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { scrollToElement } from './utils/scroll';
+import { observeScrollReveals } from './utils/scrollReveals';
 
 export default function App() {
   const [catalogModalOpen, setCatalogModalOpen] = useState(false);
+  useEffect(() => observeScrollReveals(document), []);
 
   const handleOpenRFQ = () => {
     scrollToElement('quote');
