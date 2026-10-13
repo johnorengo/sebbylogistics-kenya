@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, ChevronLeft, ChevronRight, FileText, Pause, Play } from 'lucide-react';
+import { CheckCircle2, ChevronRight, FileText } from 'lucide-react';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const pic1Img = '/images/kenyan-roses.jpg';
@@ -40,8 +40,6 @@ interface HeroVideoProps {
 
 export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [interacting, setInteracting] = useState(false);
   const [loadedImages, setLoadedImages] = useState([0]);
   const reducedMotion = useReducedMotion();
 
@@ -51,27 +49,17 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
   }, [activeImageIndex]);
 
   useEffect(() => {
-    if (paused || interacting || reducedMotion) return;
+    if (reducedMotion) return;
     const timer = setInterval(() => {
       if (document.hidden) return;
       setActiveImageIndex((curr) => (curr + 1) % HERO_IMAGES.length);
     }, 6500);
 
     return () => clearInterval(timer);
-  }, [paused, interacting, reducedMotion]);
-
-  const goToPrevious = () => {
-    setPaused(true);
-    setActiveImageIndex((curr) => (curr - 1 + HERO_IMAGES.length) % HERO_IMAGES.length);
-  };
-
-  const goToNext = () => {
-    setPaused(true);
-    setActiveImageIndex((curr) => (curr + 1) % HERO_IMAGES.length);
-  };
+  }, [reducedMotion]);
 
   return (
-    <section id="hero" aria-label="Kenyan flower sourcing and airfreight" onMouseEnter={() => setInteracting(true)} onMouseLeave={() => setInteracting(false)} onFocusCapture={() => setInteracting(true)} onBlurCapture={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setInteracting(false); }} className="hero-shell relative min-h-[100svh] w-full overflow-hidden bg-[#0B0F0D] flex flex-col pt-[264px] sm:pt-[304px] md:pt-[296px] pb-6 scroll-mt-20">
+    <section id="hero" aria-label="Kenyan flower sourcing and airfreight" className="hero-shell relative min-h-[100svh] w-full overflow-hidden bg-[#0B0F0D] flex flex-col pt-[264px] sm:pt-[304px] md:pt-[296px] pb-6 scroll-mt-20">
       {/* Full-bleed Cinematic Visual Story Canvas - Featuring 4 Uploaded Hero Pictures */}
       <div className="absolute inset-0 z-0">
         {HERO_IMAGES.map((item, idx) => (
@@ -172,62 +160,6 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
             </div>
           </div>
 
-          {/* Row 2: slide indicators (left) + arrows (right) */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pr-16 lg:pr-20">
-            {/* 4 Interactive Slide Indicator Tabs */}
-            <div className="flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
-              {HERO_IMAGES.map((item, idx) => (
-                <button
-                  key={item.id}
-                  onClick={() => { setPaused(true); setActiveImageIndex(idx); }}
-                  className={`group flex items-center gap-2 py-1.5 px-3 rounded-lg transition-all text-left ${
-                    activeImageIndex === idx
-                      ? 'bg-white/20 border border-white/40 shadow-md backdrop-blur-sm'
-                      : 'bg-black/40 border border-white/10 hover:bg-white/10'
-                  }`}
-                  title={item.title}
-                  aria-label={`Show ${item.title}`}
-                  aria-pressed={activeImageIndex === idx}
-                >
-                  <div
-                    className={`h-2 rounded-full transition-all duration-500 ${
-                      activeImageIndex === idx
-                        ? 'w-6 bg-[#00E575]'
-                        : 'w-2 bg-white/40 group-hover:bg-white/70'
-                    }`}
-                  />
-                  <span className={`text-xs font-medium font-sans-clean hidden md:inline ${
-                    activeImageIndex === idx ? 'text-white' : 'text-white/70 group-hover:text-white'
-                  }`}>
-                    0{item.id}
-                  </span>
-                </button>
-              ))}
-            </div>
-
-            {/* Prev / Next Navigation Arrows */}
-            <div className="flex items-center gap-2 ml-auto">
-            <button type="button" onClick={() => setPaused(!paused)} disabled={reducedMotion} aria-label={reducedMotion ? 'Automatic slideshow disabled by reduced-motion preference' : paused ? 'Resume slideshow' : 'Pause slideshow'} aria-pressed={paused || reducedMotion} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full bg-black/50 text-white hover:bg-white/20 disabled:opacity-50">
-              {paused || reducedMotion ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
-            </button>
-              <button
-                onClick={goToPrevious}
-              className="min-h-11 min-w-11 inline-flex items-center justify-center rounded-full bg-black/50 border border-white/20 hover:bg-white/20 text-white transition-colors backdrop-blur-sm active:scale-95"
-                aria-label="Previous slide"
-                title="Previous picture"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <button
-                onClick={goToNext}
-              className="min-h-11 min-w-11 inline-flex items-center justify-center rounded-full bg-black/50 border border-white/20 hover:bg-white/20 text-white transition-colors backdrop-blur-sm active:scale-95"
-                aria-label="Next slide"
-                title="Next picture"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </section>
