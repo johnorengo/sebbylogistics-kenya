@@ -201,16 +201,18 @@ export const SebbyLogo: React.FC<SebbyLogoProps> = ({
         <circle cx="200" cy="200" r="64" fill="#009E49" stroke="#000000" strokeWidth="5.5" />
         <circle cx="200" cy="200" r="60" fill="none" stroke="#000000" strokeWidth="1.5" opacity="0.25" />
 
-        {/* Center Text "SEBBY" */}
+        {/* Center Text "SEBBY" - High Legibility */}
         <text
           x="200"
-          y="215"
+          y="216"
           textAnchor="middle"
           fontFamily="system-ui, -apple-system, 'Plus Jakarta Sans', Arial, sans-serif"
           fontWeight="900"
-          fontSize="44"
+          fontSize="48"
           fill="#000000"
-          letterSpacing="2"
+          stroke="#000000"
+          strokeWidth="1"
+          letterSpacing="2.5"
         >
           SEBBY
         </text>

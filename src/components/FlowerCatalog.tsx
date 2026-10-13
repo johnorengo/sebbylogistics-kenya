@@ -28,16 +28,16 @@ export const FlowerCatalog: React.FC<FlowerCatalogProps> = ({ onSelectForRFQ, on
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-[#D9E1DC]">
-          <div className="max-w-2xl">
-            <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#C8102E] mb-2 flex items-center gap-2">
+          <div className="max-w-3xl">
+            <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#007A3D] mb-2 flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-[#007A3D]"></span>
-              <span>Floriculture Export Line</span>
+              <span>Floriculture Portfolio</span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif-luxury font-bold text-[#0B110E] tracking-tight">
-              High-Altitude Cut Flowers of Kenya
+              Kenya&apos;s Floral Excellence
             </h2>
-            <p className="mt-3 text-[#3A453F] text-sm sm:text-base leading-relaxed">
-              Cultivated across Kenya’s high-altitude growing regions. Renowned for rich petal pigmentation, robust stem structures, and dependable post-harvest opening in export transit.
+            <p className="mt-3 text-[#3A453F] text-base sm:text-lg leading-relaxed">
+              Kenya is globally recognized as one of the world&apos;s leading flower-producing countries. Through our network of trusted farms, we provide access to fresh, high-quality flowers cultivated under ideal growing conditions.
             </p>
           </div>
 

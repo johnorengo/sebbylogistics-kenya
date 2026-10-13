@@ -39,11 +39,11 @@ export const CompanyIntro: React.FC = () => {
               <span>WhatsApp Us: +254 719707003</span>
             </a>
             <a
-              href="mailto:info@sebbylogistics.com"
+              href="mailto:support@sebbylogistics.com"
               className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold text-[#0B110E] bg-[#F2F6F3] hover:bg-[#E5ECE7] border border-[#D9E1DC] rounded-md transition-all"
             >
               <Mail className="h-4 w-4 text-[#C8102E]" />
-              <span>info@sebbylogistics.com</span>
+              <span>support@sebbylogistics.com</span>
             </a>
           </div>
         </div>
@@ -57,7 +57,7 @@ export const CompanyIntro: React.FC = () => {
                 We offer you to buy flowers from good farms at the best prices.
               </h3>
               <p className="mt-4 text-base sm:text-lg text-[#1F2823] leading-relaxed font-sans-clean">
-                We take care of the whole purchase process and the logistics, including airfreight to any destination worldwide. Because of combined local efforts we are better and cheaper than your current suppliers.
+                We take care of the whole purchase process and the logistics, including airfreight to any destination worldwide. Because of combined national efforts we are better and cheaper than your current suppliers.
               </p>
               <p className="mt-3.5 text-sm sm:text-base text-[#3A453F] leading-relaxed">
                 Contact us to discover which assortment we offer from our selected farms, for which stunning prices, and for what airfreight rates we can send your orders to your airport of choice.
@@ -71,7 +71,7 @@ export const CompanyIntro: React.FC = () => {
                 Our Corporate Mission
               </div>
               <blockquote className="text-base sm:text-lg font-serif-luxury italic text-white/95 leading-relaxed">
-                &quot;It is our mission to give all international buyers of Kenyan flowers a far better, cheaper and easier alternative. We work only with the best local partners who are determined to grow the Kenyan flower industry by joined efforts.&quot;
+                &quot;It is our mission to give all international buyers of Kenyan flowers a far better, cheaper and easier alternative. We work only with the best national partners who are determined to grow the Kenyan flower industry by joined efforts.&quot;
               </blockquote>
 
               <div className="mt-6 pt-5 border-t border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -93,8 +93,8 @@ export const CompanyIntro: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-2">
               <div className="p-4 rounded-xl bg-white border border-[#D9E1DC] text-xs">
                 <div className="font-bold text-[#0B110E] mb-1">General Inquiries</div>
-                <a href="mailto:info@sebbylogistics.com" className="text-[#007A3D] font-data hover:underline">
-                  info@sebbylogistics.com
+                <a href="mailto:support@sebbylogistics.com" className="text-[#007A3D] font-data hover:underline">
+                  support@sebbylogistics.com
                 </a>
               </div>
               <div className="p-4 rounded-xl bg-white border border-[#D9E1DC] text-xs">

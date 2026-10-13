@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Send, CheckCircle2, Phone, MessageCircle, Clock, ShieldCheck, Building2, Receipt } from 'lucide-react';
+import { Mail, Send, CheckCircle2, ShieldCheck, Building2, Receipt, Phone, Clock } from 'lucide-react';
 import { SebbyLogo } from './SebbyLogo';
+import { PartnersSection } from './PartnersSection';
 
 export const ContactSection: React.FC = () => {
   const [form, setForm] = useState({
@@ -62,86 +63,126 @@ export const ContactSection: React.FC = () => {
           </div>
         </div>
 
-        {/* 3 Department Contact Cards Bar */}
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-5">
-          {/* Sales & Purchasing Card */}
-          <div className="p-6 rounded-2xl bg-white border-2 border-[#C8102E]/30 hover:border-[#C8102E] transition-all shadow-sm relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-[#C8102E]/5 rounded-bl-full pointer-events-none" />
-            <div className="flex items-center gap-3 mb-3">
-              <div className="h-10 w-10 rounded-xl bg-[#FDF1F2] flex items-center justify-center text-[#C8102E]">
-                <Building2 className="h-5 w-5" />
+        {/* 4 Official Contact & Desk Cards Bar */}
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {/* 1. Direct Phone Calls Card (First Tab) */}
+          <div className="p-6 rounded-2xl bg-white border-2 border-[#007A3D]/30 hover:border-[#007A3D] transition-all shadow-sm relative overflow-hidden group flex flex-col justify-between">
+            <div>
+              <div className="absolute top-0 right-0 w-24 h-24 bg-[#007A3D]/5 rounded-bl-full pointer-events-none" />
+              <div className="flex items-center gap-3 mb-3">
+                <div className="h-10 w-10 rounded-xl bg-[#EBF6F0] flex items-center justify-center text-[#007A3D]">
+                  <Phone className="h-5 w-5" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#007A3D] block">
+                    Voice Support Desk
+                  </span>
+                  <h3 className="text-base font-serif-luxury font-bold text-[#0B110E]">
+                    Direct Phone Calls
+                  </h3>
+                </div>
               </div>
-              <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#C8102E] block">
-                  Primary Department
-                </span>
-                <h3 className="text-base font-serif-luxury font-bold text-[#0B110E]">
-                  Sales & Purchasing
-                </h3>
+              <p className="text-xs text-[#4F5752] leading-relaxed mb-3">
+                Direct calls for urgent orders, harvest stock availability, and immediate flight coordination.
+              </p>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#F2F6F3] border border-[#D9E1DC] text-[11px] font-medium text-[#174D3B] mb-4">
+                <Clock className="h-3 w-3 text-[#007A3D] shrink-0" />
+                <span>Monday to Friday 9am - 5pm EAT</span>
               </div>
             </div>
-            <p className="text-xs text-[#4F5752] leading-relaxed mb-4">
-              Direct flower purchases, farm assortments, rate cards, and wholesale consignment contracts.
-            </p>
+            <a
+              href="tel:+254719707003"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#007A3D] font-data hover:underline mt-auto"
+            >
+              <Phone className="h-4 w-4" />
+              +254 719 707 003
+            </a>
+          </div>
+
+          {/* 2. Sales & Purchasing Card (Primary Department) */}
+          <div className="p-6 rounded-2xl bg-white border-2 border-[#C8102E]/30 hover:border-[#C8102E] transition-all shadow-sm relative overflow-hidden group flex flex-col justify-between">
+            <div>
+              <div className="absolute top-0 right-0 w-24 h-24 bg-[#C8102E]/5 rounded-bl-full pointer-events-none" />
+              <div className="flex items-center gap-3 mb-3">
+                <div className="h-10 w-10 rounded-xl bg-[#FDF1F2] flex items-center justify-center text-[#C8102E]">
+                  <Building2 className="h-5 w-5" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#C8102E] block">
+                    Primary Department
+                  </span>
+                  <h3 className="text-base font-serif-luxury font-bold text-[#0B110E]">
+                    Sales & Purchasing
+                  </h3>
+                </div>
+              </div>
+              <p className="text-xs text-[#4F5752] leading-relaxed mb-4">
+                Direct flower purchases, farm assortments, rate cards, and wholesale consignment contracts.
+              </p>
+            </div>
             <a
               href="mailto:Sales@sebbylogistics.com"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#C8102E] font-data hover:underline"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#C8102E] font-data hover:underline mt-auto"
             >
               <Mail className="h-4 w-4" />
               Sales@sebbylogistics.com
             </a>
           </div>
 
-          {/* General Inquiries Card */}
-          <div className="p-6 rounded-2xl bg-white border-2 border-[#007A3D]/30 hover:border-[#007A3D] transition-all shadow-sm relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-[#007A3D]/5 rounded-bl-full pointer-events-none" />
-            <div className="flex items-center gap-3 mb-3">
-              <div className="h-10 w-10 rounded-xl bg-[#EBF6F0] flex items-center justify-center text-[#007A3D]">
-                <Mail className="h-5 w-5" />
+          {/* 3. General Inquiries Card */}
+          <div className="p-6 rounded-2xl bg-white border-2 border-[#007A3D]/30 hover:border-[#007A3D] transition-all shadow-sm relative overflow-hidden group flex flex-col justify-between">
+            <div>
+              <div className="absolute top-0 right-0 w-24 h-24 bg-[#007A3D]/5 rounded-bl-full pointer-events-none" />
+              <div className="flex items-center gap-3 mb-3">
+                <div className="h-10 w-10 rounded-xl bg-[#EBF6F0] flex items-center justify-center text-[#007A3D]">
+                  <Mail className="h-5 w-5" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#007A3D] block">
+                    Information Desk
+                  </span>
+                  <h3 className="text-base font-serif-luxury font-bold text-[#0B110E]">
+                    General Inquiries
+                  </h3>
+                </div>
               </div>
-              <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#007A3D] block">
-                  Information Desk
-                </span>
-                <h3 className="text-base font-serif-luxury font-bold text-[#0B110E]">
-                  General Inquiries
-                </h3>
-              </div>
+              <p className="text-xs text-[#4F5752] leading-relaxed mb-4">
+                General partner requests, flight schedule confirmations, and farm visits coordination.
+              </p>
             </div>
-            <p className="text-xs text-[#4F5752] leading-relaxed mb-4">
-              General partner requests, flight schedule confirmations, and farm visits coordination.
-            </p>
             <a
-              href="mailto:info@sebbylogistics.com"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#007A3D] font-data hover:underline"
+              href="mailto:support@sebbylogistics.com"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#007A3D] font-data hover:underline mt-auto"
             >
               <Mail className="h-4 w-4" />
-              info@sebbylogistics.com
+              support@sebbylogistics.com
             </a>
           </div>
 
-          {/* Invoices & Accounts Card */}
-          <div className="p-6 rounded-2xl bg-white border-2 border-[#111814]/20 hover:border-[#111814] transition-all shadow-sm relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-black/5 rounded-bl-full pointer-events-none" />
-            <div className="flex items-center gap-3 mb-3">
-              <div className="h-10 w-10 rounded-xl bg-[#F2F6F3] flex items-center justify-center text-[#111814]">
-                <Receipt className="h-5 w-5" />
+          {/* 4. Invoices & Accounts Card */}
+          <div className="p-6 rounded-2xl bg-white border-2 border-[#111814]/20 hover:border-[#111814] transition-all shadow-sm relative overflow-hidden group flex flex-col justify-between">
+            <div>
+              <div className="absolute top-0 right-0 w-24 h-24 bg-black/5 rounded-bl-full pointer-events-none" />
+              <div className="flex items-center gap-3 mb-3">
+                <div className="h-10 w-10 rounded-xl bg-[#F2F6F3] flex items-center justify-center text-[#111814]">
+                  <Receipt className="h-5 w-5" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#111814] block">
+                    Finance & Accounts
+                  </span>
+                  <h3 className="text-base font-serif-luxury font-bold text-[#0B110E]">
+                    Invoices & Accounts
+                  </h3>
+                </div>
               </div>
-              <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#111814] block">
-                  Finance & Accounts
-                </span>
-                <h3 className="text-base font-serif-luxury font-bold text-[#0B110E]">
-                  Invoices & Accounts
-                </h3>
-              </div>
+              <p className="text-xs text-[#4F5752] leading-relaxed mb-4">
+                Commercial invoicing, phytosanitary charges, customs paperwork, and airway bill receipts.
+              </p>
             </div>
-            <p className="text-xs text-[#4F5752] leading-relaxed mb-4">
-              Commercial invoicing, phytosanitary charges, customs paperwork, and airway bill receipts.
-            </p>
             <a
               href="mailto:Invoices@sebbylogistics.com"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#0B110E] font-data hover:underline"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#0B110E] font-data hover:underline mt-auto"
             >
               <Mail className="h-4 w-4" />
               Invoices@sebbylogistics.com
@@ -149,93 +190,9 @@ export const ContactSection: React.FC = () => {
           </div>
         </div>
 
-        {/* 2-Column: Direct Operational Contacts & Interactive Inquiry Form */}
-        <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column: Direct Telephone, WhatsApp & Physical Facilities */}
-          <div className="lg:col-span-5 space-y-5">
-            {/* Direct Telephone & WhatsApp Box */}
-            <div className="p-6 rounded-2xl bg-[#0B0F0D] text-white border border-white/10 shadow-lg">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="h-10 w-10 rounded-xl bg-[#007A3D] flex items-center justify-center text-white">
-                  <Phone className="h-5 w-5" />
-                </div>
-                <div>
-                  <div className="text-[10px] uppercase tracking-wider text-[#009E49] font-bold">
-                    Direct Voice & WhatsApp
-                  </div>
-                  <h3 className="text-xl font-serif-luxury font-bold text-white">
-                    +254 719707003
-                  </h3>
-                </div>
-              </div>
-
-              <p className="text-xs text-white/80 leading-relaxed font-sans-clean mt-2">
-                Available daily for real-time harvest stock availability, spot airfreight bookings, and urgent order coordination.
-              </p>
-
-              <div className="mt-5 flex flex-wrap gap-2.5">
-                <a
-                  href="https://wa.me/254719707003"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-white bg-[#007A3D] hover:bg-[#009E49] rounded-md transition-all shadow-md"
-                >
-                  <MessageCircle className="h-4 w-4" />
-                  <span>Chat on WhatsApp</span>
-                </a>
-                <a
-                  href="tel:+254719707003"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold text-white bg-white/10 hover:bg-white/20 border border-white/20 rounded-md transition-all"
-                >
-                  <Phone className="h-3.5 w-3.5 text-[#C8102E]" />
-                  <span>Call Directly</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Location Card */}
-            <div className="p-6 rounded-2xl bg-white border-2 border-[#D9E1DC] hover:border-[#007A3D] transition-all shadow-sm">
-              <div className="flex items-center gap-3 text-[#0B110E] mb-3">
-                <MapPin className="h-5 w-5 text-[#C8102E]" />
-                <h3 className="text-base font-serif-luxury font-bold text-[#0B110E]">
-                  Location
-                </h3>
-              </div>
-              <div className="text-sm text-[#0B110E] leading-relaxed">
-                <p className="font-bold text-base text-[#0B110E]">
-                  Jomo Kenyatta International Airport JKIA.
-                </p>
-                <p className="text-[#3A453F] font-semibold mt-1">
-                  1st Freight Lane Avenue (Cargo).
-                </p>
-                <p className="text-xs text-[#007A3D] font-data mt-2 font-medium">
-                  Nairobi, Kenya
-                </p>
-              </div>
-              <div className="mt-3 pt-3 border-t border-[#D9E1DC] text-xs font-data text-[#007A3D] font-medium flex items-center gap-1.5">
-                <Clock className="h-3.5 w-3.5" />
-                <span>Synchronized with all scheduled international cargo flights</span>
-              </div>
-            </div>
-
-            {/* Regional Packhouse Card */}
-            <div className="p-6 rounded-2xl bg-white border border-[#D9E1DC] shadow-sm">
-              <div className="flex items-center gap-3 text-[#0B110E] mb-3">
-                <MapPin className="h-5 w-5 text-[#007A3D]" />
-                <h3 className="text-base font-serif-luxury font-bold text-[#0B110E]">
-                  Great Rift Valley Farm Network
-                </h3>
-              </div>
-              <p className="text-xs text-[#3A453F] leading-relaxed">
-                Selected High-Altitude Partner Estates<br />
-                Lake Naivasha Basin & Mount Kenya Highlands<br />
-                Kenya
-              </p>
-            </div>
-          </div>
-
-          {/* Right Column: Direct Inquiries Form */}
-          <div className="lg:col-span-7 rounded-2xl bg-white border border-[#D9E1DC] p-6 sm:p-8 shadow-sm">
+        {/* Direct Trade Inquiries Form - Centered */}
+        <div className="mt-10 max-w-3xl mx-auto">
+          <div className="rounded-2xl bg-white border border-[#D9E1DC] p-6 sm:p-10 shadow-lg">
             {submitted ? (
               <div className="h-full flex flex-col items-center justify-center text-center p-8">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#EBF6F0] text-[#007A3D] mb-4">
@@ -270,11 +227,11 @@ export const ContactSection: React.FC = () => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="pb-3 border-b border-[#D9E1DC]">
+                <div className="pb-3 border-b border-[#D9E1DC] text-center">
                   <div className="text-xs font-bold uppercase tracking-wider text-[#C8102E]">
                     Direct Trade Inquiries
                   </div>
-                  <h3 className="text-lg font-serif-luxury font-bold text-[#0B110E]">
+                  <h3 className="text-lg sm:text-xl font-serif-luxury font-bold text-[#0B110E] mt-1">
                     Request Stems Assortment, Stunning Prices & Airfreight Rates
                   </h3>
                 </div>
@@ -352,7 +309,7 @@ export const ContactSection: React.FC = () => {
                       className="w-full rounded-md border border-[#D9E1DC] px-3 py-2 text-xs bg-white focus:border-[#007A3D] focus:outline-none"
                     >
                       <option value="Sales@sebbylogistics.com (Flower Purchase & Rates)">Sales@sebbylogistics.com (Flower Purchase & Rates)</option>
-                      <option value="info@sebbylogistics.com (General Inquiries)">info@sebbylogistics.com (General Inquiries)</option>
+                      <option value="support@sebbylogistics.com (General Inquiries & Support)">support@sebbylogistics.com (General Inquiries & Support)</option>
                       <option value="Invoices@sebbylogistics.com (Billing & Accounts)">Invoices@sebbylogistics.com (Billing & Accounts)</option>
                     </select>
                   </div>
@@ -403,6 +360,9 @@ export const ContactSection: React.FC = () => {
             )}
           </div>
         </div>
+
+        {/* Our Partners Section - NCBA Group, Stanbic Bank, Legal Team */}
+        <PartnersSection />
       </div>
     </section>
   );
