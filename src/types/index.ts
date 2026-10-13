@@ -33,30 +33,3 @@ export interface HorticultureProduct {
   description: string;
   image: string;
 }
-
-export interface FlightRoute {
-  id: string;
-  destination: string;
-  city: string;
-  airportCode: string;
-  carrier: string;
-  transitHours: string;
-  weeklyFrequencies: number;
-  aircraftType: string;
-  coldChainGuarantee: string;
-}
-
-export interface RFQFormData {
-  buyerName: string;
-  companyName: string;
-  email: string;
-  phone: string;
-  country: string;
-  destinationAirport: string;
-  productId: string;
-  stemLength: string;
-  quantityBoxes: number;
-  incoterm: 'FOB Nairobi (JKIA)' | 'CIF Destination Airport';
-  targetArrivalDate: string;
-  customNotes: string;
-}

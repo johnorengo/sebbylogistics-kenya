@@ -3,7 +3,6 @@ import { FlowerVariety, HorticultureProduct } from '../types';
 import rosesCollectionImg from '../assets/images/premium_roses_collection_1791289297118.jpg';
 import naivashaFarmImg from '../assets/images/kenya_rose_farm_naivasha_1791289265374.jpg';
 import packhouseImg from '../assets/images/kenya_cold_chain_packhouse_1791289277218.jpg';
-import airfreightImg from '../assets/images/jkia_cargo_airfreight_export_1791289288100.jpg';
 import horticultureImg from '../assets/images/kenya_horticulture_harvest_1791289307374.jpg';
 
 export const flowerVarieties: FlowerVariety[] = [

@@ -42,36 +42,6 @@
   );
 }
 
-.kenya-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  background-color: #0B0F0D;
-  color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-/* Editorial Cards & Glass Panels */
-.editorial-card {
-  background: #FFFFFF;
-  border: 1px solid #D9E1DC;
-  box-shadow: 0 4px 20px -4px rgba(11, 15, 13, 0.06);
-}
-
-.editorial-card-subtle {
-  background: #F2F6F3;
-  border: 1px solid #D9E1DC;
-}
-
-.glass-header {
-  background: rgba(11, 15, 13, 0.94);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
 /* Refined Kenyan-Themed Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
