@@ -50,6 +50,8 @@ Submission requests crawling; Google determines whether and when to index the pa
 
 ## Validation
 
+The quote form uses Web3Forms to deliver every quote field to `support@sebbylogistics.com`, the recipient registered to its public access key. The buyer's email is the reply-to address. Recipient changes must be made through Web3Forms by using a key registered to the intended mailbox. Submission errors preserve the form for retry; confirmation appears only after the API reports success. Run `npm test` for mocked submission tests (no email is sent). After deployment, submit a real quote and check the support inbox and spam folder to confirm delivery.
+
 Every production build checks that the HTML contains one H1, all visible page sections, consistent canonical/structured-data URLs, a crawlable sitemap, and existing image/script/style assets. JavaScript hydrates the pre-rendered markup to enable the menu, carousel, and form interactions. Changes to components are automatically reflected in the next build.
 
 Official references: [JavaScript SEO](https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics), [sitemap submission](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap), and [requesting a recrawl](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl).

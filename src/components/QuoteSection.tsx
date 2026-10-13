@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { CheckCircle2, Send } from 'lucide-react';
+import { submitQuote, WEB3FORMS_ACCESS_KEY, WEB3FORMS_ENDPOINT, type QuoteSubmission } from '../utils/submitQuote';
 
 export const QuoteSection: React.FC = () => {
   const [form, setForm] = useState({
@@ -16,14 +17,19 @@ export const QuoteSection: React.FC = () => {
     notes: '',
   });
 
-  const [submitted, setSubmitted] = useState<any | null>(null);
+  const [submitted, setSubmitted] = useState<QuoteSubmission | null>(null);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState('');
+  const inFlight = useRef(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (inFlight.current || new FormData(e.currentTarget).get('botcheck')) return;
+    setSubmissionError('');
     const errs: { [key: string]: string } = {};
     if (!form.name.trim()) errs.name = 'Full name is required';
-    if (!form.email.trim() || !form.email.includes('@')) errs.email = 'Valid email is required';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) errs.email = 'Valid email is required';
     if (!form.country.trim()) errs.country = 'Destination country is required';
     if (!form.varieties.trim()) errs.varieties = 'Please tell us which flowers you need';
     if (Object.keys(errs).length > 0) {
@@ -31,17 +37,33 @@ export const QuoteSection: React.FC = () => {
       return;
     }
 
-    setSubmitted({
+    setErrors({});
+    const request: QuoteSubmission = {
       reference: `INQ-${Math.floor(100000 + Math.random() * 900000)}`,
       date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
       ...form,
+      name: form.name.trim(),
+      email: form.email.trim(),
+      country: form.country.trim(),
+      varieties: form.varieties.trim(),
       phone: form.phone.trim() || 'Not provided',
       company: form.company.trim() || '—',
       airport: form.airport.trim() || '—',
       quantity: form.quantity.trim() || '—',
       arrivalDate: form.arrivalDate || 'Flexible',
       notes: form.notes.trim() || '—',
-    });
+    };
+    inFlight.current = true;
+    setIsSubmitting(true);
+    try {
+      await submitQuote(request);
+      setSubmitted(request);
+    } catch (error) {
+      setSubmissionError(error instanceof Error ? error.message : 'Please try again, or email support@sebbylogistics.com.');
+    } finally {
+      inFlight.current = false;
+      setIsSubmitting(false);
+    }
   };
 
   const reset = () => {
@@ -60,6 +82,7 @@ export const QuoteSection: React.FC = () => {
       notes: '',
     });
     setErrors({});
+    setSubmissionError('');
   };
 
   const inputClass =
@@ -99,7 +122,7 @@ export const QuoteSection: React.FC = () => {
               <p className="mt-2 text-xs sm:text-sm text-[#3A453F] max-w-md leading-relaxed">
                 Thank you, <strong>{submitted.name}</strong>. Your request{' '}
                 <strong className="font-data">{submitted.reference}</strong> ({submitted.date}) is with our
-                sales desk — expect a reply at <strong>{submitted.email}</strong> shortly.
+                support team — we will reply at <strong>{submitted.email}</strong>.
               </p>
 
               <div className="mt-6 w-full rounded-xl bg-[#F7F6F1] border border-[#D8DED8] p-5 font-data text-xs text-left space-y-2.5">
@@ -137,13 +160,20 @@ export const QuoteSection: React.FC = () => {
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form action={WEB3FORMS_ENDPOINT} method="POST" onSubmit={handleSubmit} className="space-y-4" aria-busy={isSubmitting}>
+              <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+              <input type="hidden" name="subject" value="New Sebby Logistics quote request" />
+              <input type="hidden" name="from_name" value="Sebby Logistics Website" />
+              <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} aria-hidden="true" />
+              <fieldset disabled={isSubmitting} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-[#111814] mb-1">Full Name *</label>
                   <input
                     type="text"
                     value={form.name}
+                    name="name"
+                    required
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="e.g. Robert Van Der Meer"
                     className={`${inputClass} ${errors.name ? errorClass : ''}`}
@@ -155,6 +185,7 @@ export const QuoteSection: React.FC = () => {
                   <input
                     type="text"
                     value={form.company}
+                    name="company"
                     onChange={(e) => setForm({ ...form, company: e.target.value })}
                     placeholder="e.g. European Flower Importers BV"
                     className={inputClass}
@@ -168,6 +199,8 @@ export const QuoteSection: React.FC = () => {
                   <input
                     type="email"
                     value={form.email}
+                    name="email"
+                    required
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="buyer@floraldistributor.com"
                     className={`${inputClass} ${errors.email ? errorClass : ''}`}
@@ -179,6 +212,7 @@ export const QuoteSection: React.FC = () => {
                   <input
                     type="text"
                     value={form.phone}
+                    name="phone"
                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
                     placeholder="+31 6 12345678"
                     className={inputClass}
@@ -192,6 +226,8 @@ export const QuoteSection: React.FC = () => {
                   <input
                     type="text"
                     value={form.country}
+                    name="country"
+                    required
                     onChange={(e) => setForm({ ...form, country: e.target.value })}
                     placeholder="e.g. Netherlands"
                     className={`${inputClass} ${errors.country ? errorClass : ''}`}
@@ -203,6 +239,7 @@ export const QuoteSection: React.FC = () => {
                   <input
                     type="text"
                     value={form.airport}
+                    name="airport"
                     onChange={(e) => setForm({ ...form, airport: e.target.value })}
                     placeholder="e.g. AMS Amsterdam"
                     className={inputClass}
@@ -215,6 +252,8 @@ export const QuoteSection: React.FC = () => {
                 <input
                   type="text"
                   value={form.varieties}
+                  name="varieties"
+                  required
                   onChange={(e) => setForm({ ...form, varieties: e.target.value })}
                   placeholder="e.g. Red roses 60cm, pink spray roses"
                   className={`${inputClass} ${errors.varieties ? errorClass : ''}`}
@@ -228,6 +267,7 @@ export const QuoteSection: React.FC = () => {
                   <input
                     type="text"
                     value={form.quantity}
+                    name="quantity"
                     onChange={(e) => setForm({ ...form, quantity: e.target.value })}
                     placeholder="e.g. 100 boxes"
                     className={inputClass}
@@ -237,6 +277,7 @@ export const QuoteSection: React.FC = () => {
                   <label className="block text-xs font-semibold text-[#111814] mb-1">Frequency</label>
                   <select
                     value={form.frequency}
+                    name="frequency"
                     onChange={(e) => setForm({ ...form, frequency: e.target.value })}
                     className={`${inputClass} bg-white`}
                   >
@@ -251,6 +292,7 @@ export const QuoteSection: React.FC = () => {
                   <input
                     type="date"
                     value={form.arrivalDate}
+                    name="arrivalDate"
                     onChange={(e) => setForm({ ...form, arrivalDate: e.target.value })}
                     className={inputClass}
                   />
@@ -262,6 +304,7 @@ export const QuoteSection: React.FC = () => {
                 <textarea
                   rows={3}
                   value={form.notes}
+                  name="notes"
                   onChange={(e) => setForm({ ...form, notes: e.target.value })}
                   placeholder="Packaging, stem lengths, FOB or CIF preference, anything else…"
                   className={inputClass}
@@ -270,13 +313,17 @@ export const QuoteSection: React.FC = () => {
 
               <button
                 type="submit"
+                disabled={isSubmitting}
                 className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-md bg-[#C8102E] hover:bg-[#A30922] text-white font-bold text-xs uppercase tracking-wider transition-colors shadow-md active:scale-95"
               >
                 <Send className="h-4 w-4 text-white" />
-                Submit Quote Request
+                {isSubmitting ? 'Sending request…' : 'Submit Quote Request'}
               </button>
+              </fieldset>
+              {submissionError && <p role="alert" className="text-sm text-[#C8102E]">{submissionError}</p>}
+              <p role="status" className="sr-only">{isSubmitting ? 'Sending your quote request. Please wait.' : ''}</p>
               <div className="text-center text-[11px] text-[#4F5752]">
-                Handled personally by <span className="font-semibold text-[#0B110E]">sales@sebbylogistics.com</span> · WhatsApp: <span className="font-semibold text-[#007A3D]">+254 719707003</span>
+                Handled personally by <span className="font-semibold text-[#0B110E]">support@sebbylogistics.com</span> · WhatsApp: <span className="font-semibold text-[#007A3D]">+254 719707003</span>
               </div>
             </form>
           )}
