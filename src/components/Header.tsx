@@ -125,28 +125,25 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
             href="https://www.google.com/maps/search/?api=1&query=JKIA+Cargo+1st+Freight+Lane+Avenue+Nairobi"
             target="_blank"
             rel="noopener noreferrer"
-            title="Open cargo desk location in Maps"
-            className="group hidden md:flex items-center gap-2 text-white/90 hover:text-white font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] truncate min-w-0 rounded-md px-2 -ml-2 py-0.5 hover:bg-white/15 transition-all duration-200"
+            className="hidden md:flex items-center gap-2 text-white/90 font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] truncate min-w-0 px-2 -ml-2 py-0.5"
           >
-            <MapPin className="h-4 w-4 text-[#C8102E] group-hover:text-[#ff4d6a] group-hover:scale-125 transition-all duration-200 shrink-0" />
+            <MapPin className="h-4 w-4 text-[#C8102E] shrink-0" />
             <span className="truncate no-underline">Jomo Kenyatta International Airport JKIA · 1st Freight Lane Avenue (Cargo)</span>
           </a>
           {/* Right group: phone + email (spread edge-to-edge on mobile) */}
           <div className="flex items-center gap-2 sm:gap-3 max-sm:flex-1 max-sm:justify-between">
             <a
               href="tel:+254719707003"
-              title="Call the dispatch desk"
-              className="group flex items-center gap-1.5 text-white/90 hover:text-white transition-all duration-200 shrink-0 font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] rounded-md px-2 py-0.5 hover:bg-white/15"
+              className="flex items-center gap-1.5 text-white/90 shrink-0 font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] px-2 py-0.5"
             >
-              <Phone className="h-3.5 w-3.5 text-[#00E575] group-hover:scale-125 transition-transform duration-200 shrink-0" />
+              <Phone className="h-3.5 w-3.5 text-[#00E575] shrink-0" />
               <span className="font-data whitespace-nowrap no-underline">+254 719 707 003</span>
             </a>
             <a
               href="mailto:support@sebbylogistics.com"
-              title="Email support"
-              className="group flex items-center gap-2 text-white/90 hover:text-white transition-all duration-200 shrink-0 font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] min-w-0 rounded-md px-2 py-0.5 hover:bg-white/15"
+              className="flex items-center gap-2 text-white/90 shrink-0 font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] min-w-0 px-2 py-0.5"
             >
-              <Mail className="h-3.5 w-3.5 text-[#009E49] group-hover:text-[#00E575] group-hover:scale-125 transition-all duration-200 shrink-0" />
+              <Mail className="h-3.5 w-3.5 text-[#009E49] shrink-0" />
               <span className="font-data truncate no-underline">support@sebbylogistics.com</span>
             </a>
           </div>
