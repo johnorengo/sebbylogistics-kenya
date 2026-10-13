@@ -129,7 +129,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
             className="group hidden md:flex items-center gap-2 text-white/90 hover:text-white font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] truncate min-w-0 rounded-md px-2 -ml-2 py-0.5 hover:bg-white/15 transition-all duration-200"
           >
             <MapPin className="h-4 w-4 text-[#C8102E] group-hover:text-[#ff4d6a] group-hover:scale-125 transition-all duration-200 shrink-0" />
-            <span className="truncate group-hover:underline underline-offset-4 decoration-white/40">Jomo Kenyatta International Airport JKIA · 1st Freight Lane Avenue (Cargo)</span>
+            <span className="truncate no-underline">Jomo Kenyatta International Airport JKIA · 1st Freight Lane Avenue (Cargo)</span>
           </a>
           {/* Right group: phone + email (spread edge-to-edge on mobile) */}
           <div className="flex items-center gap-2 sm:gap-3 max-sm:flex-1 max-sm:justify-between">
@@ -139,7 +139,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
               className="group flex items-center gap-1.5 text-white/90 hover:text-white transition-all duration-200 shrink-0 font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] rounded-md px-2 py-0.5 hover:bg-white/15"
             >
               <Phone className="h-3.5 w-3.5 text-[#00E575] group-hover:scale-125 transition-transform duration-200 shrink-0" />
-              <span className="font-data whitespace-nowrap group-hover:underline underline-offset-4 decoration-[#00E575]/70">+254 719 707 003</span>
+              <span className="font-data whitespace-nowrap no-underline">+254 719 707 003</span>
             </a>
             <a
               href="mailto:support@sebbylogistics.com"
@@ -147,7 +147,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
               className="group flex items-center gap-2 text-white/90 hover:text-white transition-all duration-200 shrink-0 font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] min-w-0 rounded-md px-2 py-0.5 hover:bg-white/15"
             >
               <Mail className="h-3.5 w-3.5 text-[#009E49] group-hover:text-[#00E575] group-hover:scale-125 transition-all duration-200 shrink-0" />
-              <span className="font-data truncate group-hover:underline underline-offset-4 decoration-[#00E575]/70">support@sebbylogistics.com</span>
+              <span className="font-data truncate no-underline">support@sebbylogistics.com</span>
             </a>
           </div>
         </div>

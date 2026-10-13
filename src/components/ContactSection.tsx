@@ -57,7 +57,7 @@ export const ContactSection: React.FC = () => {
             </div>
             <a
               href="tel:+254719707003"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#007A3D] font-data hover:underline mt-auto"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#007A3D] font-data no-underline hover:no-underline mt-auto"
             >
               <Phone className="h-4 w-4" />
               +254 719 707 003
@@ -87,7 +87,7 @@ export const ContactSection: React.FC = () => {
             </div>
             <a
               href="mailto:sales@sebbylogistics.com"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#C8102E] font-data hover:underline mt-auto"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#C8102E] font-data no-underline hover:no-underline mt-auto"
             >
               <Mail className="h-4 w-4" />
               sales@sebbylogistics.com
@@ -117,7 +117,7 @@ export const ContactSection: React.FC = () => {
             </div>
             <a
               href="mailto:support@sebbylogistics.com"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#007A3D] font-data hover:underline mt-auto"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#007A3D] font-data no-underline hover:no-underline mt-auto"
             >
               <Mail className="h-4 w-4" />
               support@sebbylogistics.com
@@ -147,7 +147,7 @@ export const ContactSection: React.FC = () => {
             </div>
             <a
               href="mailto:invoices@sebbylogistics.com"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#0B110E] font-data hover:underline mt-auto"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#0B110E] font-data no-underline hover:no-underline mt-auto"
             >
               <Mail className="h-4 w-4" />
               invoices@sebbylogistics.com
