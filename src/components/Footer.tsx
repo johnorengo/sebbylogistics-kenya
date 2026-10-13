@@ -55,7 +55,7 @@ export const Footer: React.FC<FooterProps> = () => {
               <div className="flex items-center gap-3">
                 {/* Facebook */}
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/profile.php?id=61576578089104"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"
@@ -68,7 +68,7 @@ export const Footer: React.FC<FooterProps> = () => {
 
                 {/* Instagram */}
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/sebbylogistics/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
