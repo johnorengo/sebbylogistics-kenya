@@ -362,7 +362,7 @@ export const QuoteSection: React.FC = () => {
               {submissionError && <p ref={errorMessage} tabIndex={-1} role="alert" className="text-sm text-[#C8102E]">{submissionError}</p>}
               <p role="status" className="sr-only">{isSubmitting ? 'Sending your quote request. Please wait.' : ''}</p>
               <div className="text-center text-[11px] text-[#4F5752]">
-                Handled personally by <span className="font-semibold text-[#0B110E]">support@sebbylogistics.com</span> · WhatsApp: <span className="font-semibold text-[#007A3D]">+254 719707003</span>
+                Handled personally by <span className="font-semibold text-[#0B110E]">support@sebbylogistics.com</span>
               </div>
             </form>
           )}
