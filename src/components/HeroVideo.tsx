@@ -81,6 +81,17 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               activeImageIndex === idx ? 'opacity-100' : 'opacity-0 pointer-events-none'
             }`}
           >
+            {/* Fill portrait-screen space while retaining the full foreground photo. */}
+            <img
+              src={idx === activeImageIndex || loadedImages.includes(idx) ? item.image : undefined}
+              alt=""
+              aria-hidden="true"
+              width={1376}
+              height={768}
+              loading={idx === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover blur-xl scale-110 opacity-80 md:hidden"
+            />
             <img
               src={idx === activeImageIndex || loadedImages.includes(idx) ? item.image : undefined}
               onLoad={() => { if (idx === activeImageIndex) setLoadedImages(previous => previous.includes((idx + 1) % HERO_IMAGES.length) ? previous : [...previous, (idx + 1) % HERO_IMAGES.length]); }}
@@ -96,8 +107,8 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               }`}
             />
             {/* Luminous, Airy Overlays: Enhancing Light while Preserving Text Legibility */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F0D]/90 via-black/25 to-black/35" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0B0F0D]/80 via-[#0B0F0D]/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F0D]/70 via-black/20 to-black/30 md:from-[#0B0F0D]/90 md:via-black/25 md:to-black/35" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0B0F0D]/35 via-[#0B0F0D]/10 to-transparent md:from-[#0B0F0D]/80 md:via-[#0B0F0D]/30" />
           </div>
         ))}
       </div>
