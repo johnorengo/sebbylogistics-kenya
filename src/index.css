@@ -24,6 +24,8 @@
 }
 
 @layer base {
+  html, body { max-width: 100%; overflow-x: clip; }
+  #root { width: 100%; min-width: 0; }
   html { scrollbar-gutter: stable; scroll-padding-top: 7rem; }
   :focus-visible { outline: 3px solid #007A3D; outline-offset: 4px; }
   button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
@@ -36,6 +38,16 @@
   
   h1, h2, h3, h4, h5, h6 {
     color: #0B110E;
+  }
+}
+
+.hero-layout, .hero-copy { min-width: 0; }
+.hero-title, .hero-brand-title, .hero-brand-tagline { overflow-wrap: break-word; }
+@media (hover: none), (pointer: coarse) {
+  /* Avoid Android WebView GPU artifacts from filtered, transformed fixed layers. */
+  header, header [data-header-navigation], .hero-feature {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 }
 

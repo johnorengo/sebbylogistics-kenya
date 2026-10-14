@@ -268,19 +268,18 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
           opacity: mobileMenuOpen ? 0 : bigOpacity,
           transform: `translate(${bigX.toFixed(1)}px, ${bigY.toFixed(1)}px) scale(${bigScale.toFixed(3)})`,
           transformOrigin: 'center top',
-          filter: !reducedMotion && p > 0.1 ? `blur(${(p * 5).toFixed(1)}px)` : 'none',
           visibility: mobileMenuOpen || bigOpacity <= 0.03 ? 'hidden' : 'visible',
           pointerEvents: bigOpacity <= 0.25 ? 'none' : 'auto',
         }}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 flex flex-col items-center justify-center text-center will-change-transform">
+        <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 flex flex-col items-center justify-center text-center">
           <a
             href="#hero"
             onClick={(e) => handleNavClick(e, 'hero')}
             tabIndex={mobileMenuOpen || bigOpacity <= 0.25 ? -1 : 0}
-            className="inline-flex flex-col items-center group transition-transform duration-300"
+            className="inline-flex max-w-full flex-col items-center group transition-transform duration-300"
           >
-            <div className="hero-brand-logo h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 rounded-full p-1 sm:p-1.5 bg-black/25 border border-white/30 flex items-center justify-center group-hover:scale-105 transition-all duration-300 drop-shadow-2xl backdrop-blur-[2px]">
+            <div className="hero-brand-logo h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 rounded-full p-1 sm:p-1.5 bg-black/25 border border-white/30 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
               <SebbyLogo className="h-full w-full" />
             </div>
             <span className="hero-brand-title mt-1.5 sm:mt-2 text-2xl sm:text-4xl font-serif-luxury font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
