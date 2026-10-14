@@ -119,17 +119,20 @@ export const Footer: React.FC<FooterProps> = () => {
           </div>
         </div>
 
-        {/* Bottom Bar Legal — centered at the very bottom of the footer
+        {/* Bottom Bar Legal — centered at the very bottom of the footer.
+            Dark blurred pill lifts the text off the watermark artwork behind it.
             (Back to Top now floats below the WhatsApp button) */}
-        <div className="mt-8 flex flex-col items-center text-center gap-2 text-xs text-white/60 font-sans-clean">
-          <div>
-            © {new Date().getFullYear()} SEBBY LOGISTICS LTD. All rights reserved.
-          </div>
+        <div className="mt-8 flex justify-center">
+          <div className="flex flex-col items-center text-center gap-1.5 text-xs font-sans-clean rounded-xl bg-black/55 backdrop-blur-sm border border-white/10 px-6 py-3.5 shadow-xl">
+            <div className="text-white/85 font-medium drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+              © {new Date().getFullYear()} SEBBY LOGISTICS LTD. All rights reserved.
+            </div>
 
-          <div className="flex items-center gap-2 text-white/50">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#C8102E] shrink-0" />
-            <span className="tracking-wide">Fresh Flowers & Freight · Nairobi, Kenya</span>
-            <span className="h-1.5 w-1.5 rounded-full bg-[#009E49] shrink-0" />
+            <div className="flex items-center gap-2 text-white/70 drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#C8102E] shrink-0" />
+              <span className="tracking-wide">Fresh Flowers & Freight · Nairobi, Kenya</span>
+              <span className="h-1.5 w-1.5 rounded-full bg-[#009E49] shrink-0" />
+            </div>
           </div>
         </div>
       </div>
