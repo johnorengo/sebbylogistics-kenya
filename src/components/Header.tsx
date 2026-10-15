@@ -140,14 +140,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
           <a
             href="#hero"
             onClick={(e) => handleNavClick(e, 'hero')}
-            className="group flex min-w-0 items-center gap-2 sm:gap-4 rounded-md"
+            className="group grid flex-1 min-w-0 grid-cols-[80px_minmax(0,1fr)] items-center gap-2 sm:grid-cols-[109px_minmax(0,1fr)] sm:gap-4 md:flex md:flex-none rounded-md"
             title="Sebby Logistics - return to top"
           >
-            <div className="h-16 w-[72px] sm:h-24 sm:w-[109px] lg:h-28 lg:w-32 shrink-0 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+            <div className="h-20 w-20 sm:h-24 sm:w-[109px] lg:h-28 lg:w-32 shrink-0 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
               <SebbyLogo className="h-full w-full" />
             </div>
-            <div className="relative md:top-4 min-w-0 max-w-[14rem] sm:max-w-[21rem] lg:max-w-[28rem] text-left">
-              <span className="block font-serif-luxury font-bold text-[clamp(16px,5vw,22px)] sm:text-2xl lg:text-3xl tracking-tight text-white leading-tight drop-shadow-md whitespace-nowrap">
+            <div className="relative top-4 min-w-0 md:max-w-[21rem] lg:max-w-[28rem] text-left">
+              <span className="block font-serif-luxury font-bold text-[clamp(14px,4.4vw,22px)] sm:text-2xl lg:text-3xl tracking-tight text-white leading-tight drop-shadow-md whitespace-nowrap">
                 SEBBY LOGISTICS LTD
               </span>
               <span className="mt-1.5 block text-[13px] sm:text-sm lg:text-base text-[#00E575] font-serif-luxury font-semibold italic leading-snug drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
