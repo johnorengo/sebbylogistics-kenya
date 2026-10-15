@@ -45,7 +45,6 @@ interface HeroVideoProps {
 export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [loadedImages, setLoadedImages] = useState([0]);
-  const [interacting, setInteracting] = useState(false);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
@@ -54,17 +53,17 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
   }, [activeImageIndex]);
 
   useEffect(() => {
-    if (reducedMotion || interacting) return;
+    if (reducedMotion) return;
     const timer = setInterval(() => {
       if (document.hidden) return;
       setActiveImageIndex((curr) => (curr + 1) % HERO_IMAGES.length);
     }, 6500);
 
     return () => clearInterval(timer);
-  }, [reducedMotion, interacting]);
+  }, [reducedMotion]);
 
   return (
-    <section onMouseEnter={() => setInteracting(true)} onMouseLeave={() => setInteracting(false)} onFocusCapture={() => setInteracting(true)} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setInteracting(false); }} id="hero" aria-label="Kenyan flower sourcing and airfreight" className="hero-shell relative min-h-[100svh] w-full overflow-hidden bg-[#0B0F0D] flex flex-col pt-[184px] sm:pt-[200px] md:pt-[216px] pb-6 scroll-mt-20">
+    <section id="hero" aria-label="Kenyan flower sourcing and airfreight" className="hero-shell relative min-h-[100svh] w-full overflow-hidden bg-[#0B0F0D] flex flex-col pt-[184px] sm:pt-[200px] md:pt-[216px] pb-6 scroll-mt-20">
       {/* Full-bleed Cinematic Visual Story Canvas - Featuring 4 Uploaded Hero Pictures */}
       <div className="hero-visual absolute inset-0 z-0">
         {HERO_IMAGES.map((item, idx) => (
@@ -87,7 +86,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               alt={item.title}
               width={1376}
               height={768}
-              loading={idx === 0 ? 'eager' : 'lazy'}
+              loading="eager"
               fetchPriority={idx === 0 ? 'high' : 'low'}
               decoding="async"
               referrerPolicy="no-referrer"
