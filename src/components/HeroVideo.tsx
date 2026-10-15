@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CheckCircle2, ChevronRight, FileText } from 'lucide-react';
+import { WhatsAppButton } from './FloatingWhatsApp';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const pic1Img = '/images/kenyan-roses.jpg';
@@ -138,7 +139,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
         {/* Bottom Zone: Request a Quote + current slide + carousel controls */}
         <div className="hero-bottom border-t border-white/15 pt-3 flex flex-col gap-3">
           {/* Row 1: current story caption (left) + Request Quote CTA (right) */}
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
             <div key={activeImageIndex} className="max-w-2xl animate-in fade-in duration-500">
               <p className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#00E575]">
                 {HERO_IMAGES[activeImageIndex].title}
@@ -148,16 +149,17 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               </p>
             </div>
 
-            {/* Reserve space for the fixed WhatsApp action on phones and desktop. */}
-            <div className="flex shrink-0 pb-24 sm:pb-0 lg:mr-20">
+            {/* Both hero actions share the same row and vertical alignment. */}
+            <div className="flex shrink-0 items-center gap-3 sm:gap-4">
               <button
                 onClick={onOpenRFQ}
-                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-white bg-[#C8102E] hover:bg-[#A30922] transition-all rounded-lg shadow-[0_8px_30px_rgba(200,16,46,0.45)] hover:shadow-[0_8px_36px_rgba(200,16,46,0.6)] hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
+                className="inline-flex min-w-0 flex-1 sm:flex-none sm:w-auto items-center justify-center gap-2 px-3 sm:px-7 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-[#C8102E] hover:bg-[#A30922] transition-all rounded-lg shadow-[0_8px_30px_rgba(200,16,46,0.45)] hover:shadow-[0_8px_36px_rgba(200,16,46,0.6)] hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
               >
                 <FileText className="h-4 w-4" />
                 Request a Quote
                 <ChevronRight className="h-4 w-4" />
               </button>
+              <WhatsAppButton />
             </div>
           </div>
 

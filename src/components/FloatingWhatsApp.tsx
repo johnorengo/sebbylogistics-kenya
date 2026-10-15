@@ -2,26 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
 import { scrollToElement } from '../utils/scroll';
 
-export const FloatingWhatsApp: React.FC = () => {
-  const [showBackToTop, setShowBackToTop] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowBackToTop(window.scrollY > 500);
-    };
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    scrollToElement('hero');
-  };
-
-  return (
-    <aside aria-label="Quick actions" className="fixed bottom-6 right-6 z-50 flex flex-col items-center">
-      {/* WhatsApp chat */}
-      <div className="group">
+export const WhatsAppButton: React.FC = () => (
+  <div className="group shrink-0">
         <a
           href="https://wa.me/254719707003"
           target="_blank"
@@ -47,6 +29,39 @@ export const FloatingWhatsApp: React.FC = () => {
           </span>
         </a>
       </div>
+);
+
+export const FloatingWhatsApp: React.FC = () => {
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const [heroVisible, setHeroVisible] = useState(true);
+
+  useEffect(() => {
+    const hero = document.getElementById('hero');
+    if (!hero) { setHeroVisible(false); return; }
+    const observer = new IntersectionObserver(([entry]) => setHeroVisible(entry.isIntersecting));
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 500);
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    scrollToElement('hero');
+  };
+
+  if (heroVisible) return null;
+
+  return (
+    <aside aria-label="Quick actions" className="fixed bottom-6 right-6 z-50 flex flex-col items-center">
+      {/* WhatsApp chat */}
+      <WhatsAppButton />
 
       {/* Back to Top — icon circle directly below WhatsApp, appears on scroll.
           Collapses fully when hidden so it takes no space at landing. */}
