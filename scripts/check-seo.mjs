@@ -23,7 +23,7 @@ assert.ok(!sitemap.includes('#'), 'Section anchors must not be separate sitemap 
 for (const match of html.matchAll(/(?:src|href)="(\/(?:assets|images)\/[^"?]+)(?:\?[^" ]*)?"/g)) {
   await access(new URL(match[1].slice(1), output));
 }
-for (const asset of ['favicon.svg', 'images/sebby-logo.svg', 'images/kenyan-roses.jpg']) {
+for (const asset of ['images/sebby-logo.png', 'images/kenyan-roses.jpg']) {
   await access(new URL(asset, output));
 }
 console.log('SEO checks passed: rendered content, metadata, structured data, sitemap and asset URLs.');

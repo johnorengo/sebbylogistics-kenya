@@ -45,7 +45,7 @@ After each website change, run the TypeScript checks and production build, refre
    ```
 
    Deploy the complete `dist/` output, then click Verify in Search Console. Keep the token in subsequent builds. The build reads environment variables from the process; it does not read `.env` files for these settings.
-3. After deployment, confirm the home page, `/robots.txt`, `/sitemap.xml`, `/images/sebby-logo.svg`, and `/images/kenyan-roses.jpg` load publicly over HTTPS. Inspect View Page Source: the business copy and contact details should already be present, without waiting for JavaScript.
+3. After deployment, confirm the home page, `/robots.txt`, `/sitemap.xml`, `/images/sebby-logo.png`, and `/images/kenyan-roses.jpg` load publicly over HTTPS. Inspect View Page Source: the business copy and contact details should already be present, without waiting for JavaScript.
 4. In Search Console → Sitemaps, submit `sitemap.xml`. It contains the single public landing-page URL; section anchors are not separate pages.
 5. In URL Inspection, inspect `https://sebbylogistics.com/`, select **Test live URL**, confirm indexing is allowed and rendering works, then select **Request indexing**.
 6. Validate the deployed page at https://search.google.com/test/rich-results. Review Search Console's Page indexing and Core Web Vitals reports as Google collects data.

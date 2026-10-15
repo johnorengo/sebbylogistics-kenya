@@ -143,13 +143,10 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
             className="group flex min-w-0 items-center gap-3 sm:gap-4 rounded-md"
             title="Sebby Logistics - return to top"
           >
-            <div className="h-14 w-14 sm:h-16 sm:w-16 lg:h-20 lg:w-20 shrink-0 rounded-full p-1 bg-black/25 border border-white/25 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
+            <div className="h-20 w-[91px] sm:h-24 sm:w-[109px] lg:h-28 lg:w-32 shrink-0 overflow-hidden rounded-md bg-white flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
               <SebbyLogo className="h-full w-full" />
             </div>
             <div className="min-w-0 max-w-[14rem] sm:max-w-[21rem] lg:max-w-[28rem] text-left">
-              <span className="block font-serif-luxury font-bold text-lg sm:text-2xl lg:text-3xl tracking-tight text-white leading-tight drop-shadow-md">
-                SEBBY LOGISTICS LTD
-              </span>
               <span className="mt-1 block text-[11px] sm:text-sm lg:text-base text-[#00E575] font-serif-luxury font-semibold italic leading-snug drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
                 &quot;For Purchase of Flowers from Kenya including Freight&quot;
               </span>
