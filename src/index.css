@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Keep mobile copy over a sharp, full-bleed photo, matching desktop. */
+/* Fit the entire mobile photo without cropping; keep hero text overlaid. */
 @media (max-width: 767px) {
   .hero-shell { min-height: 100svh; padding-top: 168px; padding-bottom: 20px; }
   .hero-layout { gap: 14px; padding-inline: 20px; }
