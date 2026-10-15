@@ -29,7 +29,7 @@ const HERO_IMAGES = [
   {
     id: 4,
     title: 'Airside Cold-Chain Loading at JKIA',
-    caption: 'KLM Cargo Widebody Palletized Cartons Flown Direct to European Hubs',
+    caption: 'KLM Cargo Widebody Palletized Boxes Flown Direct to European Hubs',
     image: pic4Img,
   },
 ];
