@@ -10,18 +10,14 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = () => {
   return (
-    <footer className="relative border-t border-white/10 bg-gradient-to-b from-[#0E1C15] via-[#0B100D] to-[#08100B] text-white pt-0 pb-12 overflow-hidden">
+    <footer className="relative border-t border-white/10 bg-gradient-to-b from-[#09152D] via-[#090F1C] to-[#101318] text-white pt-0 pb-[24vw] sm:pb-[23vw] lg:pb-72 overflow-hidden">
       {/* 1. Kenyan National Flag Accent Ribbon */}
       <div className="h-1.5 w-full kenya-ribbon-bar relative z-10" />
 
-      {/* 2. Kenya Flag Wordmark artwork — bottom-anchored and clearly visible,
-          gently dissolving toward the top so text stays legible above it */}
-      <div className="absolute inset-x-0 top-0 bottom-0 z-0 flex items-end justify-center pointer-events-none overflow-hidden opacity-60 [mask-image:linear-gradient(to_bottom,transparent,black_40%)]">
-        <KenyaFlagWordmark className="w-full max-w-7xl h-auto translate-y-[10%] drop-shadow-[0_0_60px_rgba(200,16,46,0.35)]" />
+      {/* Dedicated background space keeps the national wordmark visible below the content. */}
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 z-0 flex justify-center pointer-events-none overflow-hidden">
+        <KenyaFlagWordmark className="w-full max-w-7xl h-auto opacity-75" />
       </div>
-
-      {/* Light uniform veil only — keeps text legible without burying the artwork */}
-      <div className="absolute inset-0 z-0 bg-[#0B0F0D]/40 pointer-events-none" />
 
       {/* 3. Footer Main Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12 pt-8">
@@ -30,20 +26,20 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className="md:col-span-8 space-y-4">
             {/* Logo lockup on top of the brand text */}
             <div className="flex items-center gap-4">
-              <div className="h-24 w-[109px] sm:h-28 sm:w-32 flex items-center justify-center shadow-md shrink-0">
+              <div className="h-16 w-[73px] sm:h-20 sm:w-[91px] flex items-center justify-center shadow-md shrink-0">
                 <SebbyLogo className="h-full w-full" />
               </div>
               <div className="min-w-0">
                 <div className="font-serif-luxury font-bold text-xl sm:text-2xl tracking-tight text-white leading-tight">
                   SEBBY LOGISTICS LTD
                 </div>
-                <div className="mt-0.5 text-xs sm:text-sm text-[#00E575] font-serif-luxury italic tracking-wide">
+                <div className="mt-0.5 text-xs sm:text-sm text-[#BACBFF] font-serif-luxury italic tracking-wide">
                   &quot;For Purchase of Flowers from Kenya including Freight&quot;
                 </div>
               </div>
             </div>
 
-            <p className="text-sm sm:text-base text-white/85 leading-relaxed font-sans-clean max-w-2xl">
+            <p className="text-sm sm:text-base text-white/85 leading-relaxed font-sans-clean max-w-xl">
               We offer to buy flowers from good farms at the best prices. We take care of the whole purchase process and the logistics, including airfreight to any destination worldwide. Because of combined national efforts we are better and cheaper than your current suppliers.
             </p>
 
@@ -97,7 +93,7 @@ export const Footer: React.FC<FooterProps> = () => {
 
           {/* Quick Navigation Links (Col 9-12) */}
           <div className="md:col-span-4 space-y-3 md:pl-6">
-            <div className="text-xs font-bold uppercase tracking-wider text-[#009E49]">
+            <div className="text-xs font-bold uppercase tracking-wider text-[#BACBFF]">
               Quick Navigation
             </div>
             <ul className="space-y-2.5 text-sm text-white/80">
@@ -111,7 +107,7 @@ export const Footer: React.FC<FooterProps> = () => {
                 <a href="#quote" onClick={(e) => scrollToSection(e, 'quote')} className="hover:text-white transition-colors">Request a Quote</a>
               </li>
               <li>
-                <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="hover:text-white transition-colors font-semibold text-[#009E49]">
+                <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="hover:text-white transition-colors font-semibold text-[#BACBFF]">
                   Contact Us
                 </a>
               </li>
@@ -123,7 +119,7 @@ export const Footer: React.FC<FooterProps> = () => {
             Dark blurred pill lifts the text off the watermark artwork behind it.
             (Back to Top now floats below the WhatsApp button) */}
         <div className="mt-8 flex justify-center">
-          <div className="flex flex-col items-center text-center gap-1.5 text-xs font-sans-clean rounded-xl bg-black/55 backdrop-blur-sm border border-white/10 px-6 py-3.5 shadow-xl">
+          <div className="flex flex-col items-center text-center gap-1.5 text-xs font-sans-clean px-6 py-2">
             <div className="text-white/85 font-medium drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
               © {new Date().getFullYear()} SEBBY LOGISTICS LTD. All rights reserved.
             </div>

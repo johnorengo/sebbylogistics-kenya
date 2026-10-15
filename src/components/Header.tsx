@@ -82,7 +82,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
         // Transparent only at landing; solid color background as soon as
         // page scrolls so navigation stays readable over the content.
         isSolid || collapsed || mobileMenuOpen
-          ? 'bg-[#0B0F0D]/95 backdrop-blur-md'
+          ? 'bg-[#081A56]/95 backdrop-blur-md'
           : 'bg-transparent'
       }`}
     >
@@ -112,7 +112,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
               title="Call the dispatch desk"
               className="group flex items-center gap-1.5 text-white/90 hover:text-white shrink-0 font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] rounded-md px-2 py-0.5 hover:bg-white/15 transition-all duration-200"
             >
-              <Phone className="h-3.5 w-3.5 text-[#00E575] group-hover:scale-125 transition-transform duration-200 shrink-0" />
+              <Phone className="h-3.5 w-3.5 text-[#CBD7FF] group-hover:scale-125 transition-transform duration-200 shrink-0" />
               <span className="font-data whitespace-nowrap no-underline group-hover:underline underline-offset-4 decoration-[#00E575]/70">+254 719 707 003</span>
             </a>
             <a
@@ -120,7 +120,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
               title="Email support"
               className="group flex items-center gap-2 text-white/90 hover:text-white shrink-0 font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] min-w-0 rounded-md px-2 py-0.5 hover:bg-white/15 transition-all duration-200"
             >
-              <Mail className="h-3.5 w-3.5 text-[#009E49] group-hover:text-[#00E575] group-hover:scale-125 transition-all duration-200 shrink-0" />
+              <Mail className="h-3.5 w-3.5 text-[#009E49] group-hover:text-[#CBD7FF] group-hover:scale-125 transition-all duration-200 shrink-0" />
               <span className="font-data truncate no-underline group-hover:underline underline-offset-4 decoration-[#00E575]/70">support@sebbylogistics.com</span>
             </a>
           </div>
@@ -132,7 +132,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
         data-header-navigation
         className={`relative z-10 transition-colors duration-200 ${
           isSolid || collapsed || mobileMenuOpen
-            ? 'bg-[#0B0F0D]/95 backdrop-blur-md'
+            ? 'bg-[#081A56]/95 backdrop-blur-md'
             : 'bg-transparent'
         }`}
       >
@@ -150,7 +150,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
               <span className="block font-serif-luxury font-bold text-lg sm:text-2xl lg:text-3xl tracking-tight text-white leading-tight drop-shadow-md">
                 SEBBY LOGISTICS LTD
               </span>
-              <span className="mt-1 block text-[11px] sm:text-sm lg:text-base text-[#00E575] font-serif-luxury font-semibold italic leading-snug drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+              <span className="mt-1 block text-[11px] sm:text-sm lg:text-base text-[#CBD7FF] font-serif-luxury font-semibold italic leading-snug drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
                 &quot;For Purchase of Flowers from Kenya including Freight&quot;
               </span>
             </div>
@@ -174,14 +174,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
               <a
                 href="#hero"
                 onClick={(e) => handleNavClick(e, 'hero')}
-                className="text-sm md:text-base font-bold text-white hover:text-[#00E575] transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] uppercase"
+                className="text-sm md:text-base font-bold text-white hover:text-[#CBD7FF] transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] uppercase"
               >
                 Home
               </a>
               <a
                 href="#about"
                 onClick={(e) => handleNavClick(e, 'about')}
-                className="text-sm md:text-base font-bold text-white hover:text-[#00E575] transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] uppercase"
+                className="text-sm md:text-base font-bold text-white hover:text-[#CBD7FF] transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] uppercase"
               >
                 About Us
               </a>
@@ -202,20 +202,20 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
 
       {/* Mobile drawer */}
       {mobileMenuOpen && (
-        <div ref={drawer} id="mobile-navigation" className="bg-[#0B0F0D]/98 backdrop-blur-xl px-6 py-5 md:hidden text-white max-h-[calc(100svh-9rem)] overflow-y-auto">
+        <div ref={drawer} id="mobile-navigation" className="bg-[#081A56]/98 backdrop-blur-xl px-6 py-5 md:hidden text-white max-h-[calc(100svh-9rem)] overflow-y-auto">
           <div className="flex flex-col space-y-4">
             <nav className="flex flex-col space-y-3">
               <a
                 href="#hero"
                 onClick={(e) => handleNavClick(e, 'hero')}
-                className="text-base font-bold text-white hover:text-[#00E575] uppercase tracking-wide py-1 border-b border-white/5"
+                className="text-base font-bold text-white hover:text-[#CBD7FF] uppercase tracking-wide py-1 border-b border-white/5"
               >
                 Home
               </a>
               <a
                 href="#about"
                 onClick={(e) => handleNavClick(e, 'about')}
-                className="text-base font-bold text-white hover:text-[#00E575] uppercase tracking-wide py-1 border-b border-white/5"
+                className="text-base font-bold text-white hover:text-[#CBD7FF] uppercase tracking-wide py-1 border-b border-white/5"
               >
                 About Us
               </a>
