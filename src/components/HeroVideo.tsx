@@ -148,7 +148,8 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               </p>
             </div>
 
-            <div className="flex shrink-0">
+            {/* Reserve space for the fixed WhatsApp action on phones and desktop. */}
+            <div className="flex shrink-0 pb-24 sm:pb-0 lg:mr-20">
               <button
                 onClick={onOpenRFQ}
                 className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-white bg-[#C8102E] hover:bg-[#A30922] transition-all rounded-lg shadow-[0_8px_30px_rgba(200,16,46,0.45)] hover:shadow-[0_8px_36px_rgba(200,16,46,0.6)] hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
