@@ -30,7 +30,7 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className="md:col-span-8 space-y-4">
             {/* Logo lockup on top of the brand text */}
             <div className="flex items-center gap-4">
-              <div className="h-24 w-[109px] sm:h-28 sm:w-32 rounded-md overflow-hidden bg-white flex items-center justify-center shadow-md shrink-0">
+              <div className="h-24 w-[109px] sm:h-28 sm:w-32 flex items-center justify-center shadow-md shrink-0">
                 <SebbyLogo className="h-full w-full" />
               </div>
               <div className="min-w-0">
