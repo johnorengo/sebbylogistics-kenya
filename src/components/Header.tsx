@@ -146,7 +146,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
             <div className="h-20 w-[91px] sm:h-24 sm:w-[109px] lg:h-28 lg:w-32 shrink-0 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
               <SebbyLogo className="h-full w-full" />
             </div>
-            <div className="min-w-0 max-w-[14rem] sm:max-w-[21rem] lg:max-w-[28rem] text-left">
+            <div className="relative top-4 min-w-0 max-w-[14rem] sm:max-w-[21rem] lg:max-w-[28rem] text-left">
               <span className="block font-serif-luxury font-bold text-lg sm:text-2xl lg:text-3xl tracking-tight text-white leading-tight drop-shadow-md">
                 SEBBY LOGISTICS LTD
               </span>
