@@ -137,16 +137,8 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
           </div>
         </div>
 
-        {/* Bottom Zone: Request a Quote + current slide + carousel controls */}
+        {/* Bottom Zone: Request a Quote + current image caption */}
         <div className="hero-bottom border-t border-white/15 pt-3 flex flex-col gap-3">
-          <div className="flex items-center gap-3" role="group" aria-label="Hero slideshow">
-            {HERO_IMAGES.map((image, index) => (
-              <button key={image.id} type="button" onClick={() => { setActiveImageIndex(index); }} aria-label={`Show slide ${index + 1}: ${image.title}`} aria-pressed={index === activeImageIndex} className="slide-dot flex h-11 w-9 items-center justify-center rounded-md">
-                <span className={`h-1 rounded-full transition-all duration-300 ${index === activeImageIndex ? 'w-8 bg-[#00E575]' : 'w-4 bg-white/50'}`} />
-              </button>
-            ))}
-
-          </div>
           {/* Row 1: current story caption (left) + Request Quote CTA (right) */}
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
             <div key={activeImageIndex} className="max-w-2xl hero-caption">
