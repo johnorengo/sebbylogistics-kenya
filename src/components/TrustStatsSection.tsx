@@ -38,7 +38,7 @@ const STATS = [
 
 export const TrustStatsSection: React.FC = () => {
   return (
-    <section className="relative py-8 sm:py-10 bg-[#EEF1EB] border-b border-[#D8DED8]">
+    <section className="relative py-4 sm:py-5 bg-[#EEF1EB] border-b border-[#D8DED8]">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Proper heading explaining the cards below */}
         <div className="max-w-2xl mb-6">

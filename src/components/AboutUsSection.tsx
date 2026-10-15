@@ -10,7 +10,7 @@ const farmLocations = [
 
 export const AboutUsSection: React.FC = () => {
   return (
-    <section id="about" className="relative pt-7 pb-14 sm:pt-10 sm:pb-20 bg-[#F7F6F1] border-b border-[#D8DED8] scroll-mt-24">
+    <section id="about" className="relative py-7 sm:py-10 bg-[#F7F6F1] border-b border-[#D8DED8] scroll-mt-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Eyebrow Header */}
         <div className="flex items-center gap-3 mb-4">

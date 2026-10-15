@@ -54,7 +54,7 @@ const REASONS = [
 
 export const WhyChooseUsSection: React.FC = () => {
   return (
-    <section id="why-choose-us" className="relative py-10 sm:py-14 bg-[#EEF1EB] border-b border-[#D8DED8] scroll-mt-24">
+    <section id="why-choose-us" className="relative py-5 sm:py-7 bg-[#EEF1EB] border-b border-[#D8DED8] scroll-mt-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Header */}
         <div className="max-w-3xl mb-8">

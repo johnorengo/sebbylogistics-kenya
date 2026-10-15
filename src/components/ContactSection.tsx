@@ -5,7 +5,7 @@ import { QuoteSection } from './QuoteSection';
 
 export const ContactSection: React.FC = () => {
   return (
-    <section id="contact" className="relative py-10 sm:py-14 bg-[#F8FAF8] border-b border-[#D9E1DC] scroll-mt-28">
+    <section id="contact" className="relative py-5 sm:py-7 bg-[#F8FAF8] border-b border-[#D9E1DC] scroll-mt-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Header */}
         <div className="pb-6 border-b border-[#D9E1DC]">
