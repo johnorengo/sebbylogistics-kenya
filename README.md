@@ -30,6 +30,10 @@ npm run build
 
 Choose one canonical hostname. Configure hosting to redirect HTTP and the alternate www/non-www hostname to the canonical HTTPS URL using permanent redirects. Unrecognized page paths should return a real HTTP 404, rather than the landing page with a 200 response. Check there is no hosting-level `X-Robots-Tag: noindex`, authentication, or firewall rule blocking crawlers. Protect staging sites from indexing separately.
 
+## Change delivery workflow
+
+After each website change, run the TypeScript checks and production build, refresh `artifacts/sebbylogistics-cpanel.zip` from the contents of `dist/` (including `.htaccess`), then commit and push the source changes to GitHub. The ZIP is a local deployment artifact and is excluded from Git by `artifacts/` in `.gitignore`. Keep `index.html` at the archive root so it can be extracted directly into the cPanel document root.
+
 ## Google Search Console and indexing
 
 1. Open https://search.google.com/search-console and add the **Domain property** `sebbylogistics.com` (or your final domain). Verify ownership using the DNS TXT value Google provides. This requires access to the domain's DNS settings.
