@@ -10,16 +10,16 @@ const farmLocations = [
 
 export const AboutUsSection: React.FC = () => {
   return (
-    <section id="about" className="relative py-14 sm:py-20 bg-[#F5F7FC] border-b border-[#DCE2F0] scroll-mt-24">
+    <section id="about" className="relative py-14 sm:py-20 bg-[#F7F6F1] border-b border-[#D8DED8] scroll-mt-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section Eyebrow Header */}
         <div className="flex items-center gap-3 mb-4">
-          <span className="h-2 w-2 rounded-full bg-[#163B94]" />
-          <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#163B94]">
+          <span className="h-2 w-2 rounded-full bg-[#007A3D]" />
+          <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#007A3D]">
             About Us
           </span>
-          <span className="text-[#DCE2F0]">/</span>
-          <span className="text-xs font-medium text-[#536078] font-data">
+          <span className="text-[#D8DED8]">/</span>
+          <span className="text-xs font-medium text-[#4F5752] font-data">
             SEBBY Logistics Ltd
           </span>
         </div>
@@ -28,15 +28,15 @@ export const AboutUsSection: React.FC = () => {
           {/* Left Column: Content */}
           <div className="lg:col-span-7 space-y-6">
             <div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif-luxury font-bold text-[#0B215D] tracking-tight leading-[1.15]">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif-luxury font-bold text-[#174D3B] tracking-tight leading-[1.15]">
                 Your Trusted Partner for Kenyan Flower Exports
               </h2>
-              <div className="mt-3 inline-block text-base sm:text-lg font-serif-luxury italic text-[#344B7B] font-semibold">
+              <div className="mt-3 inline-block text-base sm:text-lg font-serif-luxury italic text-[#285F4A] font-semibold">
                 From Kenyan farms. To the world.
               </div>
             </div>
 
-            <div className="space-y-4 text-base sm:text-lg text-[#536078] leading-relaxed font-sans-clean font-normal">
+            <div className="space-y-4 text-base sm:text-lg text-[#4F5752] leading-relaxed font-sans-clean font-normal">
               <p>
                 At <strong>SEBBY Logistics Ltd</strong>, we connect international flower buyers with the finest flower farms in Kenya. Through strong national partnerships and an extensive network of growers, we provide access to premium flowers at better prices while simplifying the entire procurement and logistics process.
               </p>
@@ -48,14 +48,14 @@ export const AboutUsSection: React.FC = () => {
               </p>
             </div>
 
-            <div className="relative overflow-hidden rounded-2xl border border-[#23458F] bg-gradient-to-br from-[#0B215D] to-[#163B94] p-5 sm:p-6 shadow-lg shadow-blue-950/10">
-              <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-white">
-                <MapPin aria-hidden="true" className="h-4 w-4 shrink-0 text-[#FF647C]" />
+            <div className="relative overflow-hidden rounded-2xl border border-[#D8DED8] bg-white p-5 sm:p-6 shadow-sm">
+              <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#174D3B]">
+                <MapPin aria-hidden="true" className="h-4 w-4 shrink-0 text-[#007A3D]" />
                 Our Kenyan growing regions
               </h3>
               <ul aria-label="Flower farm locations in Kenya" className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {farmLocations.map((location) => (
-                  <li key={location} className="rounded-lg border border-white/15 bg-white/10 px-3 py-2.5 text-xs sm:text-sm font-medium text-white">
+                  <li key={location} className="rounded-lg border border-[#D8DED8] bg-[#EEF1EB] px-3 py-2.5 text-xs sm:text-sm font-medium text-[#285F4A]">
                     {location}
                   </li>
                 ))}
@@ -63,30 +63,30 @@ export const AboutUsSection: React.FC = () => {
             </div>
 
             {/* Short Company Story and Mission Callout */}
-            <div className="p-6 rounded-2xl bg-white border-l-4 border-l-[#C8102E] border border-[#DCE2F0] shadow-sm">
+            <div className="p-6 rounded-2xl bg-white border-l-4 border-l-[#C8102E] border border-[#D8DED8] shadow-sm">
               <div className="flex items-center gap-2 mb-2">
                 <Sparkles className="h-4 w-4 text-[#C8102E]" />
                 <span className="text-xs uppercase tracking-wider font-bold text-[#C8102E]">
                   Company Story & Mission
                 </span>
               </div>
-              <p className="text-sm sm:text-base text-[#0B215D] font-serif-luxury italic leading-relaxed">
+              <p className="text-sm sm:text-base text-[#174D3B] font-serif-luxury italic leading-relaxed">
                 &quot;Our mission is to connect global flower buyers directly with Kenyan growers through transparent sourcing, dependable quality and seamless airfreight.&quot;
               </p>
             </div>
 
             {/* Trust Highlights Row */}
-            <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-semibold text-[#0B215D]">
-              <div className="flex items-center gap-2 p-3 rounded-xl bg-white border border-[#DCE2F0]">
-                <ShieldCheck className="h-4 w-4 text-[#163B94]" />
+            <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-semibold text-[#174D3B]">
+              <div className="flex items-center gap-2 p-3 rounded-xl bg-white border border-[#D8DED8]">
+                <ShieldCheck className="h-4 w-4 text-[#007A3D]" />
                 <span>Single Point of Contact</span>
               </div>
-              <div className="flex items-center gap-2 p-3 rounded-xl bg-white border border-[#DCE2F0]">
+              <div className="flex items-center gap-2 p-3 rounded-xl bg-white border border-[#D8DED8]">
                 <ShieldCheck className="h-4 w-4 text-[#C8102E]" />
                 <span>Direct Grower Rates</span>
               </div>
-              <div className="flex items-center gap-2 p-3 rounded-xl bg-white border border-[#DCE2F0]">
-                <ShieldCheck className="h-4 w-4 text-[#163B94]" />
+              <div className="flex items-center gap-2 p-3 rounded-xl bg-white border border-[#D8DED8]">
+                <ShieldCheck className="h-4 w-4 text-[#007A3D]" />
                 <span>Scheduled Airfreight</span>
               </div>
             </div>
@@ -109,13 +109,13 @@ export const AboutUsSection: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
 
               {/* Floating Badge Over Image */}
-              <div className="absolute bottom-5 left-5 right-5 p-4 rounded-2xl bg-[#081A56]/90 backdrop-blur-md border border-white/20 text-white">
+              <div className="absolute bottom-5 left-5 right-5 p-4 rounded-2xl bg-black/75 backdrop-blur-md border border-white/20 text-white">
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-xl bg-[#163B94] flex items-center justify-center shrink-0">
+                  <div className="h-10 w-10 rounded-xl bg-[#007A3D] flex items-center justify-center shrink-0">
                     <Sprout className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <div className="text-xs font-bold uppercase tracking-wider text-[#DCE6FF]">
+                    <div className="text-xs font-bold uppercase tracking-wider text-[#00E575]">
                       Direct Farm Harvest
                     </div>
                     <div className="text-sm font-serif-luxury font-semibold text-white">
@@ -127,7 +127,7 @@ export const AboutUsSection: React.FC = () => {
             </div>
 
             {/* Corner Decorative Accent */}
-            <div className="absolute -top-3 -right-3 h-16 w-16 rounded-full bg-white border border-[#DCE2F0] shadow-md flex items-center justify-center p-2 hidden sm:flex">
+            <div className="absolute -top-3 -right-3 h-16 w-16 rounded-full bg-white border border-[#D8DED8] shadow-md flex items-center justify-center p-2 hidden sm:flex">
               <SebbyLogo className="h-full w-full" />
             </div>
           </div>

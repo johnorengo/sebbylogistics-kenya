@@ -10,14 +10,16 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = () => {
   return (
-    <footer className="relative border-t border-white/10 bg-gradient-to-b from-[#09152D] via-[#090F1C] to-[#101318] text-white pt-0 pb-[24vw] sm:pb-[23vw] lg:pb-72 overflow-hidden">
+    <footer className="relative border-t border-white/10 bg-gradient-to-b from-[#0E1C15] via-[#0B100D] to-[#08100B] text-white pt-0 pb-[24vw] sm:pb-[23vw] lg:pb-72 overflow-hidden">
       {/* 1. Kenyan National Flag Accent Ribbon */}
       <div className="h-1.5 w-full kenya-ribbon-bar relative z-10" />
 
       {/* Dedicated background space keeps the national wordmark visible below the content. */}
       <div aria-hidden="true" className="absolute inset-x-0 bottom-0 z-0 flex justify-center pointer-events-none overflow-hidden">
-        <KenyaFlagWordmark className="w-full max-w-7xl h-auto opacity-75" />
+        <KenyaFlagWordmark className="w-full max-w-7xl h-auto opacity-60 [mask-image:linear-gradient(to_bottom,transparent,black_40%)]" />
       </div>
+
+      <div aria-hidden="true" className="absolute inset-0 z-0 bg-[#0B0F0D]/40 pointer-events-none" />
 
       {/* 3. Footer Main Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12 pt-8">
@@ -33,7 +35,7 @@ export const Footer: React.FC<FooterProps> = () => {
                 <div className="font-serif-luxury font-bold text-xl sm:text-2xl tracking-tight text-white leading-tight">
                   SEBBY LOGISTICS LTD
                 </div>
-                <div className="mt-0.5 text-xs sm:text-sm text-[#BACBFF] font-serif-luxury italic tracking-wide">
+                <div className="mt-0.5 text-xs sm:text-sm text-[#00E575] font-serif-luxury italic tracking-wide">
                   &quot;For Purchase of Flowers from Kenya including Freight&quot;
                 </div>
               </div>
@@ -93,7 +95,7 @@ export const Footer: React.FC<FooterProps> = () => {
 
           {/* Quick Navigation Links (Col 9-12) */}
           <div className="md:col-span-4 space-y-3 md:pl-6">
-            <div className="text-xs font-bold uppercase tracking-wider text-[#BACBFF]">
+            <div className="text-xs font-bold uppercase tracking-wider text-[#009E49]">
               Quick Navigation
             </div>
             <ul className="space-y-2.5 text-sm text-white/80">
@@ -107,7 +109,7 @@ export const Footer: React.FC<FooterProps> = () => {
                 <a href="#quote" onClick={(e) => scrollToSection(e, 'quote')} className="hover:text-white transition-colors">Request a Quote</a>
               </li>
               <li>
-                <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="hover:text-white transition-colors font-semibold text-[#BACBFF]">
+                <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="hover:text-white transition-colors font-semibold text-[#009E49]">
                   Contact Us
                 </a>
               </li>
