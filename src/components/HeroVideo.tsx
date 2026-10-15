@@ -11,7 +11,7 @@ const HERO_IMAGES = [
   {
     id: 1,
     title: 'High-Altitude Greenhouse Harvest',
-    caption: 'Hand-Cut Orange & Peach Roses from Naivasha Partner Farms',
+    caption: 'Hand-Cut Orange & Peach Roses from Growers in Kenya',
     image: pic1Img,
   },
   {
