@@ -12,7 +12,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   // Keep navigation readable after scrolling or when the mobile menu opens.
   const [isSolid, setIsSolid] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+  const [collapsed, setCollapsed] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
   const menuButton = useRef<HTMLButtonElement>(null);
   const drawer = useRef<HTMLDivElement>(null);
 
@@ -47,7 +48,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
       if (frame !== null) return;
       frame = requestAnimationFrame(() => {
         const y = window.scrollY;
-        setScrollY(Math.min(Math.max(y, 0), 160));
+        setCollapsed(y >= 160);
+        const offset = (document.querySelector('[data-header-navigation]')?.getBoundingClientRect().bottom ?? 160) + 32;
+        let active = 'hero';
+        for (const id of ['about', 'contact']) {
+          if ((document.getElementById(id)?.getBoundingClientRect().top ?? Infinity) <= offset) active = id;
+        }
+        if (y + window.innerHeight >= document.documentElement.scrollHeight - 4) active = 'contact';
+        setActiveSection(active);
         const heroElement = document.getElementById('hero');
         if (heroElement) {
           const rect = heroElement.getBoundingClientRect();
@@ -69,7 +77,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
     };
   }, []);
 
-  const collapsed = scrollY >= 160;
 
   const handleNavClick = (e: React.MouseEvent, id: string) => {
     setMobileMenuOpen(false);
@@ -118,7 +125,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
             <a
               href="mailto:support@sebbylogistics.com"
               title="Email support"
-              className="group flex items-center gap-2 text-white/90 hover:text-white shrink-0 font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] min-w-0 rounded-md px-2 py-0.5 hover:bg-white/15 transition-all duration-200"
+              className="group flex items-center gap-2 text-white/90 hover:text-white shrink-0 font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] min-w-0 rounded-md px-2 py-0.5 hover:bg-white/15 transition-all duration-200 max-sm:shrink"
             >
               <Mail className="h-3.5 w-3.5 text-[#009E49] group-hover:text-[#00E575] group-hover:scale-125 transition-all duration-200 shrink-0" />
               <span className="font-data truncate no-underline group-hover:underline underline-offset-4 decoration-[#00E575]/70">support@sebbylogistics.com</span>
@@ -173,6 +180,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
             <nav className="flex items-center gap-6 lg:gap-10 shrink-0">
               <a
                 href="#hero"
+                aria-current={activeSection === 'hero' ? 'location' : undefined}
                 onClick={(e) => handleNavClick(e, 'hero')}
                 className="text-sm md:text-base font-bold text-white hover:text-[#00E575] transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] uppercase"
               >
@@ -180,6 +188,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
               </a>
               <a
                 href="#about"
+                aria-current={activeSection === 'about' ? 'location' : undefined}
                 onClick={(e) => handleNavClick(e, 'about')}
                 className="text-sm md:text-base font-bold text-white hover:text-[#00E575] transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] uppercase"
               >
@@ -187,6 +196,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
               </a>
               <a
                 href="#contact"
+                aria-current={activeSection === 'contact' ? 'location' : undefined}
                 onClick={(e) => handleNavClick(e, 'contact')}
                 className="text-sm md:text-base font-bold text-white hover:text-[#C8102E] transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] uppercase"
               >
@@ -202,11 +212,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
 
       {/* Mobile drawer */}
       {mobileMenuOpen && (
-        <div ref={drawer} id="mobile-navigation" className="bg-[#0B0F0D]/98 backdrop-blur-xl px-6 py-5 md:hidden text-white max-h-[calc(100svh-9rem)] overflow-y-auto">
+        <div ref={drawer} id="mobile-navigation" className="mobile-drawer bg-[#0B0F0D]/98 backdrop-blur-xl px-6 py-5 md:hidden text-white max-h-[calc(100svh-9rem)] overflow-y-auto">
           <div className="flex flex-col space-y-4">
             <nav className="flex flex-col space-y-3">
               <a
                 href="#hero"
+                aria-current={activeSection === 'hero' ? 'location' : undefined}
                 onClick={(e) => handleNavClick(e, 'hero')}
                 className="text-base font-bold text-white hover:text-[#00E575] uppercase tracking-wide py-1 border-b border-white/5"
               >
@@ -214,6 +225,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
               </a>
               <a
                 href="#about"
+                aria-current={activeSection === 'about' ? 'location' : undefined}
                 onClick={(e) => handleNavClick(e, 'about')}
                 className="text-base font-bold text-white hover:text-[#00E575] uppercase tracking-wide py-1 border-b border-white/5"
               >
@@ -221,6 +233,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
               </a>
               <a
                 href="#contact"
+                aria-current={activeSection === 'contact' ? 'location' : undefined}
                 onClick={(e) => handleNavClick(e, 'contact')}
                 className="text-base font-bold text-white hover:text-[#C8102E] uppercase tracking-wide py-1 flex items-center gap-2"
               >

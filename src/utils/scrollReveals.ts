@@ -1,7 +1,7 @@
 const REVEAL_TARGETS = [
   '#hero h1', '#hero h1 + p', 'main h2', 'main h2 + p',
   'main > section:not(#hero):not(#about):not(#contact) > div > .grid > div',
-  '#about .space-y-4', '#about img',
+  '#about .space-y-4', '#about img', '#about .space-y-6 > div',
   '#contact > div > .grid > div',
   '#partners h3', '#partners > .grid > div',
 ].join(',');
@@ -22,13 +22,13 @@ export function observeScrollReveals(root: ParentNode) {
       const siblings = Array.from(element.parentElement?.children || []);
       const delay = element.parentElement?.classList.contains('grid') ? Math.min(siblings.indexOf(element), 3) * 70 : 0;
       const animation = element.animate([
-        { opacity: 0.4, transform: 'translateY(18px)' },
+        { opacity: 0.55, transform: 'translateY(14px)' },
         { opacity: 1, transform: 'translateY(0)' },
-      ], { duration: element.matches('h1, h2, h3') ? 750 : 600, delay, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'backwards' });
+      ], { duration: element.matches('h1, h2, h3') ? 650 : 500, delay, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'backwards' });
       animations.add(animation);
       animation.finished.then(() => animations.delete(animation), () => animations.delete(animation));
     }
-  }, { threshold: 0.12, rootMargin: '0px 0px -24px 0px' });
+  }, { threshold: 0.01, rootMargin: '0px 0px -24px 0px' });
   const onPreferenceChange = () => {
     if (preference.matches) for (const animation of animations) animation.cancel();
   };

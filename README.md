@@ -69,3 +69,8 @@ The quote form uses Web3Forms to deliver every quote field to `support@sebbylogi
 Every production build checks that the HTML contains one H1, all visible page sections, consistent canonical/structured-data URLs, a crawlable sitemap, and existing image/script/style assets. JavaScript hydrates the pre-rendered markup to enable the menu, carousel, and form interactions. Changes to components are automatically reflected in the next build.
 
 Official references: [JavaScript SEO](https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics), [sitemap submission](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap), and [requesting a recrawl](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl).
+
+
+## Scroll and motion behavior
+
+Wheel and touch scrolling remain native. Section navigation accounts for the fixed header and moves keyboard focus to the destination. Navigation highlights the current section; floating quick actions stay at the bottom right with safe-area spacing. Content reveals once with a short stagger, and remains visible when JavaScript or animation support is unavailable. Reduced-motion preferences disable reveal motion and hero zoom. The hero slideshow has manual slide selection and a pause/play control; it pauses during hover, keyboard interaction, and while the tab is hidden. Sections use responsive spacing and short desktop viewports allow the hero to grow to fit its content.

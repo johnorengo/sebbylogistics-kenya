@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
 import { scrollToElement } from '../utils/scroll';
 
@@ -12,7 +12,7 @@ export const WhatsAppButton: React.FC = () => (
           className="relative flex items-center justify-center h-14 w-14 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-2xl hover:shadow-[0_0_25px_rgba(37,211,102,0.6)] transition-all duration-300 hover:scale-110 active:scale-95"
         >
           {/* Subtle Ambient Pulse Ring */}
-          <span className="absolute -inset-1 rounded-full bg-[#25D366] opacity-40 animate-ping pointer-events-none" />
+          <span className="absolute -inset-1 rounded-full bg-[#25D366] opacity-20 pointer-events-none" />
 
           {/* Official WhatsApp SVG Icon */}
           <svg
@@ -33,44 +33,18 @@ export const WhatsAppButton: React.FC = () => (
 
 export const FloatingWhatsApp: React.FC = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const floatingActions = useRef<HTMLElement>(null);
-
   useEffect(() => {
-    const anchor = document.getElementById('hero-whatsapp-anchor');
     let frame: number | null = null;
-    const updatePosition = () => {
+    const update = () => {
       frame = null;
-      const y = Math.max(0, window.scrollY);
-      const rect = anchor?.getBoundingClientRect();
-      const progress = Math.min(y / 240, 1);
-      const eased = progress * progress * (3 - 2 * progress);
-      const targetX = window.innerWidth - 24 - 56;
-      const targetY = window.innerHeight - 24 - 56 - 60 * eased;
-      const startX = rect?.left ?? targetX;
-      const startY = rect ? rect.top + y : targetY;
-      const x = startX + (targetX - startX) * eased;
-      const top = startY + (targetY - startY) * eased;
-      if (floatingActions.current) {
-        floatingActions.current.style.transform = `translate3d(${x}px, ${top}px, 0)`;
-        floatingActions.current.style.visibility = 'visible';
-      }
-      setShowBackToTop(y > 500 && progress === 1);
+      setShowBackToTop(window.scrollY > 500);
     };
-    const scheduleUpdate = () => {
-      if (frame === null) frame = requestAnimationFrame(updatePosition);
-    };
-    updatePosition();
-    window.addEventListener('scroll', scheduleUpdate, { passive: true });
-    window.addEventListener('resize', scheduleUpdate);
-    const observer = new ResizeObserver(scheduleUpdate);
-    if (anchor) observer.observe(anchor);
-    const hero = document.getElementById('hero');
-    if (hero) observer.observe(hero);
+    const onScroll = () => { if (frame === null) frame = requestAnimationFrame(update); };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
+      window.removeEventListener('scroll', onScroll);
       if (frame !== null) cancelAnimationFrame(frame);
-      observer.disconnect();
-      window.removeEventListener('scroll', scheduleUpdate);
-      window.removeEventListener('resize', scheduleUpdate);
     };
   }, []);
 
@@ -79,7 +53,7 @@ export const FloatingWhatsApp: React.FC = () => {
   };
 
   return (
-    <aside ref={floatingActions} aria-label="Quick actions" style={{ visibility: 'hidden' }} className="fixed top-0 left-0 z-50 flex flex-col items-center will-change-transform">
+    <aside aria-label="Quick actions" className="quick-actions fixed z-40 flex flex-col items-center">
       {/* WhatsApp chat */}
       <WhatsAppButton />
 
