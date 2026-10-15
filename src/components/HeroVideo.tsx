@@ -103,8 +103,8 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
 
       {/* Main Content Layout */}
       <div className="hero-layout relative z-20 mx-auto flex flex-1 max-w-7xl flex-col justify-between gap-5 px-6 lg:px-12 w-full">
-        {/* Center Editorial Hero - Direct Heading & Customer Copy */}
-        <div className="hero-copy my-auto max-w-5xl">
+        {/* Keep copy close to the bottom caption, leaving the image open above. */}
+        <div className="hero-copy mt-auto max-w-5xl">
           <h1 className="hero-title text-3xl sm:text-4xl lg:text-5xl font-serif-luxury font-bold tracking-tight text-white leading-[1.08] text-balance drop-shadow-md">
             Buy Premium Kenyan Flowers Direct from Farms, Including Worldwide Airfreight.
           </h1>
