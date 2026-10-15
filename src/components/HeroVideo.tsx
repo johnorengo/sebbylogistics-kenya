@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, ChevronRight, FileText, Pause, Play } from 'lucide-react';
+import { CheckCircle2, ChevronRight, FileText } from 'lucide-react';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const pic1Img = '/images/kenyan-roses.jpg';
@@ -45,7 +45,6 @@ interface HeroVideoProps {
 export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [loadedImages, setLoadedImages] = useState([0]);
-  const [paused, setPaused] = useState(false);
   const [interacting, setInteracting] = useState(false);
   const reducedMotion = useReducedMotion();
 
@@ -55,14 +54,14 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
   }, [activeImageIndex]);
 
   useEffect(() => {
-    if (reducedMotion || paused || interacting) return;
+    if (reducedMotion || interacting) return;
     const timer = setInterval(() => {
       if (document.hidden) return;
       setActiveImageIndex((curr) => (curr + 1) % HERO_IMAGES.length);
     }, 6500);
 
     return () => clearInterval(timer);
-  }, [reducedMotion, paused, interacting]);
+  }, [reducedMotion, interacting]);
 
   return (
     <section onMouseEnter={() => setInteracting(true)} onMouseLeave={() => setInteracting(false)} onFocusCapture={() => setInteracting(true)} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setInteracting(false); }} id="hero" aria-label="Kenyan flower sourcing and airfreight" className="hero-shell relative min-h-[100svh] w-full overflow-hidden bg-[#0B0F0D] flex flex-col pt-[184px] sm:pt-[200px] md:pt-[216px] pb-6 scroll-mt-20">
@@ -142,13 +141,11 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
         <div className="hero-bottom border-t border-white/15 pt-3 flex flex-col gap-3">
           <div className="flex items-center gap-3" role="group" aria-label="Hero slideshow">
             {HERO_IMAGES.map((image, index) => (
-              <button key={image.id} type="button" onClick={() => { setActiveImageIndex(index); setPaused(true); }} aria-label={`Show slide ${index + 1}: ${image.title}`} aria-pressed={index === activeImageIndex} className="slide-dot flex h-11 w-9 items-center justify-center rounded-md">
+              <button key={image.id} type="button" onClick={() => { setActiveImageIndex(index); }} aria-label={`Show slide ${index + 1}: ${image.title}`} aria-pressed={index === activeImageIndex} className="slide-dot flex h-11 w-9 items-center justify-center rounded-md">
                 <span className={`h-1 rounded-full transition-all duration-300 ${index === activeImageIndex ? 'w-8 bg-[#00E575]' : 'w-4 bg-white/50'}`} />
               </button>
             ))}
-            {!reducedMotion && <button type="button" onClick={() => setPaused(!paused)} aria-label={paused ? 'Play slideshow' : 'Pause slideshow'} className="flex h-11 w-11 items-center justify-center rounded-full border border-white/30 text-white hover:bg-white/15 transition-colors">
-              {paused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
-            </button>}
+
           </div>
           {/* Row 1: current story caption (left) + Request Quote CTA (right) */}
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
