@@ -74,3 +74,6 @@ Official references: [JavaScript SEO](https://developers.google.com/search/docs/
 ## Scroll and motion behavior
 
 Wheel and touch scrolling remain native. Section navigation accounts for the fixed header and moves keyboard focus to the destination. Navigation highlights the current section; floating quick actions stay at the bottom right with safe-area spacing. Content reveals once with a short stagger, and remains visible when JavaScript or animation support is unavailable. Reduced-motion preferences disable reveal motion and hero zoom. The hero background images rotate automatically without visible navigation controls; it rotates every 6.5 seconds without pausing on hover or focus, and pauses while the tab is hidden or reduced motion is enabled. Sections below the hero use compact responsive top and bottom padding (20?32px), and short desktop viewports allow the hero to grow to fit its content.
+
+
+Hero images use the original landscape photos with `object-fit: contain` on every device. The entire photo remains visible without distortion or zoom; tall viewports show the dark hero background around it. The quote row reserves a separate right-side lane for floating WhatsApp controls, including safe-area spacing. Automatic crossfades retain the 6.5-second rotation interval.

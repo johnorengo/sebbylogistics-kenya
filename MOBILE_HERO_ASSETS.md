@@ -1,3 +1,5 @@
+Status: These portrait derivatives are archived assets. The hero now uses the original landscape photographs with contain sizing on every viewport to preserve the full composition.
+
 # Mobile hero portrait assets
 
 Generated with the built-in image generation tool on 2026-10-15, then encoded as WebP (quality 88). Originals remain unchanged. The hero selects these assets below 768px through picture/source; desktop uses the existing landscape images.
