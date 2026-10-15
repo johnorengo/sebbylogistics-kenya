@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowUp } from 'lucide-react';
 import { scrollToElement } from '../utils/scroll';
 
@@ -33,33 +33,53 @@ export const WhatsAppButton: React.FC = () => (
 
 export const FloatingWhatsApp: React.FC = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const [heroVisible, setHeroVisible] = useState(true);
+  const floatingActions = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const hero = document.getElementById('hero');
-    if (!hero) { setHeroVisible(false); return; }
-    const observer = new IntersectionObserver(([entry]) => setHeroVisible(entry.isIntersecting));
-    observer.observe(hero);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowBackToTop(window.scrollY > 500);
+    const anchor = document.getElementById('hero-whatsapp-anchor');
+    let frame: number | null = null;
+    const updatePosition = () => {
+      frame = null;
+      const y = Math.max(0, window.scrollY);
+      const rect = anchor?.getBoundingClientRect();
+      const progress = Math.min(y / 240, 1);
+      const eased = progress * progress * (3 - 2 * progress);
+      const targetX = window.innerWidth - 24 - 56;
+      const targetY = window.innerHeight - 24 - 56 - 60 * eased;
+      const startX = rect?.left ?? targetX;
+      const startY = rect ? rect.top + y : targetY;
+      const x = startX + (targetX - startX) * eased;
+      const top = startY + (targetY - startY) * eased;
+      if (floatingActions.current) {
+        floatingActions.current.style.transform = `translate3d(${x}px, ${top}px, 0)`;
+        floatingActions.current.style.visibility = 'visible';
+      }
+      setShowBackToTop(y > 500 && progress === 1);
     };
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const scheduleUpdate = () => {
+      if (frame === null) frame = requestAnimationFrame(updatePosition);
+    };
+    updatePosition();
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
+    const observer = new ResizeObserver(scheduleUpdate);
+    if (anchor) observer.observe(anchor);
+    const hero = document.getElementById('hero');
+    if (hero) observer.observe(hero);
+    return () => {
+      if (frame !== null) cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+    };
   }, []);
 
   const scrollToTop = () => {
     scrollToElement('hero');
   };
 
-  if (heroVisible) return null;
-
   return (
-    <aside aria-label="Quick actions" className="fixed bottom-6 right-6 z-50 flex flex-col items-center">
+    <aside ref={floatingActions} aria-label="Quick actions" style={{ visibility: 'hidden' }} className="fixed top-0 left-0 z-50 flex flex-col items-center will-change-transform">
       {/* WhatsApp chat */}
       <WhatsAppButton />
 

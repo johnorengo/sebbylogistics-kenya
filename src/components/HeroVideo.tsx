@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { CheckCircle2, ChevronRight, FileText } from 'lucide-react';
-import { WhatsAppButton } from './FloatingWhatsApp';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const pic1Img = '/images/kenyan-roses.jpg';
@@ -159,7 +158,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
                 Request a Quote
                 <ChevronRight className="h-4 w-4" />
               </button>
-              <WhatsAppButton />
+              <span id="hero-whatsapp-anchor" aria-hidden="true" className="h-14 w-14 shrink-0" />
             </div>
           </div>
 
