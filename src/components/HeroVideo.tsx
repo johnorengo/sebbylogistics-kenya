@@ -13,24 +13,28 @@ const HERO_IMAGES = [
     title: 'High-Altitude Greenhouse Harvest',
     caption: 'Hand-Cut Orange & Peach Roses from Growers in Kenya',
     image: pic1Img,
+    portraitImage: '/images/mobile/kenyan-roses-portrait.webp',
   },
   {
     id: 2,
     title: 'Kenya Airways Cargo Airfreight',
     caption: 'Scheduled Widebody Airfreight from JKIA Nairobi to Global Destinations',
     image: pic2Img,
+    portraitImage: '/images/mobile/kenya-airways-cargo-portrait.webp',
   },
   {
     id: 3,
     title: 'Premium Long-Stem Kenyan Roses',
     caption: 'Vibrant Crimson Red & Delicate Pink Export-Grade Blooms',
     image: pic3Img,
+    portraitImage: '/images/mobile/red-pink-roses-portrait.webp',
   },
   {
     id: 4,
     title: 'Airside Cold-Chain Loading at JKIA',
     caption: 'KLM Cargo Widebody Palletized Boxes Flown Direct to European Hubs',
     image: pic4Img,
+    portraitImage: '/images/mobile/klm-cargo-portrait.webp',
   },
 ];
 
@@ -60,7 +64,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
 
   return (
     <section id="hero" aria-label="Kenyan flower sourcing and airfreight" className="hero-shell relative min-h-[100svh] w-full overflow-hidden bg-[#0B0F0D] flex flex-col pt-[184px] sm:pt-[200px] md:pt-[216px] pb-6 scroll-mt-20">
-      {/* Full photographs retain their composition at every viewport size */}
+      {/* Edge-to-edge backgrounds choose a composition based on screen shape */}
       <div className="hero-visual absolute inset-0 z-0">
         {HERO_IMAGES.map((item, idx) => (
           <div
@@ -69,6 +73,13 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               activeImageIndex === idx ? 'opacity-100' : 'opacity-0 pointer-events-none'
             }`}
           >
+            <picture className="hero-picture">
+              <source
+                media="(max-aspect-ratio: 1/1)"
+                srcSet={idx === activeImageIndex || loadedImages.includes(idx) ? item.portraitImage : undefined}
+                width={841}
+                height={1870}
+              />
               <img
               src={idx === activeImageIndex || loadedImages.includes(idx) ? item.image : undefined}
               onLoad={() => { if (idx === activeImageIndex) setLoadedImages(previous => previous.includes((idx + 1) % HERO_IMAGES.length) ? previous : [...previous, (idx + 1) % HERO_IMAGES.length]); }}
@@ -79,8 +90,9 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               fetchPriority={idx === 0 ? 'high' : 'low'}
               decoding="async"
               referrerPolicy="no-referrer"
-              className="hero-background-image"
+              className={`hero-background-image transition-transform duration-[12000ms] ease-out ${activeImageIndex === idx ? 'hero-image-active' : ''}`}
             />
+            </picture>
             {/* Luminous, Airy Overlays: Enhancing Light while Preserving Text Legibility */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F0D]/70 via-black/20 to-black/30 md:from-[#0B0F0D]/90 md:via-black/25 md:to-black/35" />
             <div className="absolute inset-0 bg-gradient-to-r from-[#0B0F0D]/35 via-[#0B0F0D]/10 to-transparent md:from-[#0B0F0D]/80 md:via-[#0B0F0D]/30" />

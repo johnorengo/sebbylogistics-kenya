@@ -1,8 +1,8 @@
-Status: These portrait derivatives are archived assets. The hero now uses the original landscape photographs with contain sizing on every viewport to preserve the full composition.
+Status: Active. Portrait and square viewports use these derivatives via picture/source with max-aspect-ratio: 1/1. Landscape viewports use the original landscape images. All backgrounds use cover sizing without letterboxing.
 
 # Mobile hero portrait assets
 
-Generated with the built-in image generation tool on 2026-10-15, then encoded as WebP (quality 88). Originals remain unchanged. The hero selects these assets below 768px through picture/source; desktop uses the existing landscape images.
+Generated with the built-in image generation tool on 2026-10-15, then encoded as WebP (quality 88). Originals remain unchanged. The hero selects these assets for portrait and square screen shapes through picture/source, including tablets; landscape screens use the existing landscape images.
 
 Files in public/images/mobile/:
 - kenyan-roses-portrait.webp

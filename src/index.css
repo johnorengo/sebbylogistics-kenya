@@ -164,16 +164,21 @@ header nav a[aria-current="location"]::after { transform: scaleX(1); }
   .hero-shell { height: auto; min-height: 100svh; }
 }
 
-/* Show every photograph in full, without stretching, crop or animated zoom. */
+/* Cover every hero without stretching or letterboxing. */
 .hero-background-image {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
 }
 /* A dedicated lane separates page actions from the fixed WhatsApp control,
    including its hover scale, ring, safe-area inset and scrollbar clearance. */
 .hero-bottom {
   padding-right: calc(5rem + env(safe-area-inset-right, 0px));
+}
+
+.hero-picture { display: block; width: 100%; height: 100%; }
+@media (min-aspect-ratio: 1/1) and (prefers-reduced-motion: no-preference) {
+  .hero-image-active { transform: scale(1.05); }
 }
