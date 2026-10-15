@@ -9,7 +9,7 @@ export function seoHead() {
     '@type': 'Organization', '@id': siteUrl + '#organization',
     name: 'Sebby Logistics Ltd', url: siteUrl, description,
     sameAs: ['https://www.facebook.com/profile.php?id=61576578089104', 'https://www.instagram.com/sebbylogistics/'],
-    logo: { '@type': 'ImageObject', url: new URL('images/sebby-logo.png', siteUrl).href, width: 1333, height: 1181 },
+    logo: { '@type': 'ImageObject', url: new URL('images/sebby-logo.png', siteUrl).href, width: 1333, height: 1180 },
     telephone: '+254719707003', email: 'support@sebbylogistics.com',
     address: { '@type': 'PostalAddress', streetAddress: 'Jomo Kenyatta International Airport, 1st Freight Lane Avenue (Cargo)', addressLocality: 'Nairobi', addressCountry: 'KE' },
     contactPoint: [
