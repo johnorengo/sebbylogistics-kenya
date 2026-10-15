@@ -31,7 +31,7 @@ export const Footer: React.FC<FooterProps> = () => {
               <div className="h-16 w-[73px] sm:h-20 sm:w-[91px] flex items-center justify-center shrink-0">
                 <SebbyLogo className="h-full w-full" />
               </div>
-              <div className="min-w-0">
+              <div className="relative top-4 min-w-0">
                 <div className="font-serif-luxury font-bold text-xl sm:text-2xl tracking-tight text-white leading-tight">
                   SEBBY LOGISTICS LTD
                 </div>

@@ -97,7 +97,7 @@ Invoicing & Accounts: invoices@sebbylogistics.com
             <div className="h-14 w-14 rounded-full p-1 bg-[#F8FAF8] border border-[#D9E1DC] flex items-center justify-center shrink-0">
               <SebbyLogo className="h-full w-full" />
             </div>
-            <div>
+            <div className="relative top-4">
               <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#C8102E]">
                 Technical Export Brochure
               </div>
