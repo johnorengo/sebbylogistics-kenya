@@ -1,9 +1,10 @@
 @import "tailwindcss";
 
-/* Mobile uses the same full-bleed photo treatment as desktop. */
+/* Show the complete landscape photo on phones, with content directly below. */
 @media (max-width: 767px) {
-  .hero-shell { padding-top: 168px; padding-bottom: 20px; }
-  .hero-layout { gap: 14px; padding-inline: 20px; }
+  .hero-shell { min-height: 0; padding-top: 168px; padding-bottom: 20px; }
+  .hero-visual { position: relative; inset: auto; width: 100%; aspect-ratio: 1376 / 768; flex-shrink: 0; }
+  .hero-layout { flex: none; gap: 14px; padding-inline: 20px; margin-top: 20px; }
   .hero-title { font-size: clamp(26px, 7vw, 34px); line-height: 1.08; }
   .hero-description { font-size: 13px; line-height: 1.5; margin-top: 10px; }
   .hero-features { margin-top: 12px; }

@@ -61,7 +61,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
   return (
     <section id="hero" aria-label="Kenyan flower sourcing and airfreight" className="hero-shell relative min-h-[100svh] w-full overflow-hidden bg-[#0B0F0D] flex flex-col pt-[184px] sm:pt-[200px] md:pt-[216px] pb-6 scroll-mt-20">
       {/* Full-bleed Cinematic Visual Story Canvas - Featuring 4 Uploaded Hero Pictures */}
-      <div className="absolute inset-0 z-0">
+      <div className="hero-visual absolute inset-0 z-0">
         {HERO_IMAGES.map((item, idx) => (
           <div
             key={item.id}
@@ -79,13 +79,13 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               fetchPriority={idx === 0 ? 'high' : 'low'}
               decoding="async"
               referrerPolicy="no-referrer"
-              className={`h-full w-full object-cover transition-transform duration-[12000ms] ease-out ${
+              className={`h-full w-full object-contain md:object-cover transition-transform duration-[12000ms] ease-out ${
                 activeImageIndex === idx ? 'md:scale-105 filter brightness-[1.02] contrast-[1.02] saturate-[1.06]' : 'scale-100'
               }`}
             />
             {/* Luminous, Airy Overlays: Enhancing Light while Preserving Text Legibility */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F0D]/70 via-black/20 to-black/30 md:from-[#0B0F0D]/90 md:via-black/25 md:to-black/35" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0B0F0D]/35 via-[#0B0F0D]/10 to-transparent md:from-[#0B0F0D]/80 md:via-[#0B0F0D]/30" />
+            <div className="absolute inset-0 hidden md:block bg-gradient-to-t from-[#0B0F0D]/70 via-black/20 to-black/30 md:from-[#0B0F0D]/90 md:via-black/25 md:to-black/35" />
+            <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-[#0B0F0D]/35 via-[#0B0F0D]/10 to-transparent md:from-[#0B0F0D]/80 md:via-[#0B0F0D]/30" />
           </div>
         ))}
       </div>
