@@ -69,17 +69,6 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               activeImageIndex === idx ? 'opacity-100' : 'opacity-0 pointer-events-none'
             }`}
           >
-            {/* Fill portrait-screen space while retaining the full foreground photo. */}
-            <img
-              src={idx === activeImageIndex || loadedImages.includes(idx) ? item.image : undefined}
-              alt=""
-              aria-hidden="true"
-              width={1376}
-              height={768}
-              loading={idx === 0 ? 'eager' : 'lazy'}
-              decoding="async"
-              className="absolute inset-0 h-full w-full object-cover blur-xl scale-110 opacity-80 md:hidden"
-            />
             <img
               src={idx === activeImageIndex || loadedImages.includes(idx) ? item.image : undefined}
               onLoad={() => { if (idx === activeImageIndex) setLoadedImages(previous => previous.includes((idx + 1) % HERO_IMAGES.length) ? previous : [...previous, (idx + 1) % HERO_IMAGES.length]); }}
@@ -90,7 +79,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
               fetchPriority={idx === 0 ? 'high' : 'low'}
               decoding="async"
               referrerPolicy="no-referrer"
-              className={`h-full w-full object-contain md:object-cover transition-transform duration-[12000ms] ease-out ${
+              className={`h-full w-full object-cover transition-transform duration-[12000ms] ease-out ${
                 activeImageIndex === idx ? 'md:scale-105 filter brightness-[1.02] contrast-[1.02] saturate-[1.06]' : 'scale-100'
               }`}
             />

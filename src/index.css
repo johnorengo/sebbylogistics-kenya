@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+/* Mobile uses the same full-bleed photo treatment as desktop. */
+@media (max-width: 767px) {
+  .hero-shell { padding-top: 168px; padding-bottom: 20px; }
+  .hero-layout { gap: 14px; padding-inline: 20px; }
+  .hero-title { font-size: clamp(26px, 7vw, 34px); line-height: 1.08; }
+  .hero-description { font-size: 13px; line-height: 1.5; margin-top: 10px; }
+  .hero-features { margin-top: 12px; }
+  .hero-feature { padding: 8px; gap: 6px; }
+  .hero-feature span { font-size: 11px; letter-spacing: 0; }
+  .hero-slide-caption { font-size: 12px; line-height: 1.4; }
+}
+
 /* One-screen desktop hero; short or narrow screens can grow without clipping. */
 @media (min-width: 1024px) and (min-height: 560px) {
   .hero-shell { height: 100svh; min-height: 0; padding-top: 216px; padding-bottom: 16px; }
