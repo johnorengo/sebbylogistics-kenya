@@ -133,10 +133,10 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
         className={`relative z-10 transition-colors duration-200 ${
           isSolid || collapsed || mobileMenuOpen
             ? 'bg-[#081A56]/95 backdrop-blur-md'
-            : 'bg-transparent'
+            : 'bg-black/55 md:bg-transparent'
         }`}
       >
-        <div className="relative mx-auto max-w-7xl flex items-center justify-between gap-4 px-4 sm:px-8 lg:px-12 min-h-24 md:min-h-28 py-3">
+        <div className="relative mx-auto max-w-7xl flex items-center justify-between gap-4 px-4 sm:px-8 lg:px-12 min-h-32 md:min-h-28 py-3">
           <a
             href="#hero"
             onClick={(e) => handleNavClick(e, 'hero')}
@@ -146,11 +146,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
             <div className="h-20 w-[91px] sm:h-24 sm:w-[109px] lg:h-28 lg:w-32 shrink-0 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
               <SebbyLogo className="h-full w-full" />
             </div>
-            <div className="relative top-4 min-w-0 max-w-[14rem] sm:max-w-[21rem] lg:max-w-[28rem] text-left">
-              <span className="block font-serif-luxury font-bold text-lg sm:text-2xl lg:text-3xl tracking-tight text-white leading-tight drop-shadow-md">
+            <div className="relative md:top-4 min-w-0 max-w-[14rem] sm:max-w-[21rem] lg:max-w-[28rem] text-left">
+              <span className="block font-serif-luxury font-bold text-[22px] sm:text-2xl lg:text-3xl tracking-tight text-white leading-tight drop-shadow-md">
                 SEBBY LOGISTICS LTD
               </span>
-              <span className="mt-1 block text-[11px] sm:text-sm lg:text-base text-[#00E575] font-serif-luxury font-semibold italic leading-snug drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+              <span className="mt-1.5 block text-[13px] sm:text-sm lg:text-base text-[#00E575] font-sans-clean md:font-serif-luxury font-semibold md:italic leading-snug drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
                 &quot;For Purchase of Flowers from Kenya including Freight&quot;
               </span>
             </div>
