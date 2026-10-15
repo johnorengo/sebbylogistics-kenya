@@ -1,7 +1,12 @@
 import React from 'react';
-import { ShieldCheck, Sparkles, Sprout } from 'lucide-react';
+import { MapPin, ShieldCheck, Sparkles, Sprout } from 'lucide-react';
 const pic1Img = '/images/kenyan-roses.jpg';
 import { SebbyLogo } from './SebbyLogo';
+
+const farmLocations = [
+  'Naivasha', 'Nakuru', 'Nyahururu', 'Rumuruti', 'Nanyuki & Timau',
+  'Kiambu', 'Isinya', 'Mount Elgon', 'Eldoret', 'Kajiado',
+];
 
 export const AboutUsSection: React.FC = () => {
   return (
@@ -41,6 +46,20 @@ export const AboutUsSection: React.FC = () => {
               <p>
                 Whether you are a wholesaler, distributor, florist, supermarket chain, or flower importer, we ensure a seamless sourcing experience from Kenya to your destination.
               </p>
+            </div>
+
+            <div className="rounded-2xl border border-[#D8DED8] bg-white/70 p-4 sm:p-5">
+              <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#174D3B]">
+                <MapPin aria-hidden="true" className="h-4 w-4 shrink-0 text-[#007A3D]" />
+                Our Kenyan growing regions
+              </h3>
+              <ul aria-label="Flower farm locations in Kenya" className="mt-3 flex flex-wrap gap-2">
+                {farmLocations.map((location) => (
+                  <li key={location} className="rounded-full border border-[#D8DED8] bg-[#F7F6F1] px-3 py-1.5 text-xs sm:text-sm font-medium text-[#285F4A]">
+                    {location}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {/* Short Company Story and Mission Callout */}
@@ -100,7 +119,7 @@ export const AboutUsSection: React.FC = () => {
                       Direct Farm Harvest
                     </div>
                     <div className="text-sm font-serif-luxury font-semibold text-white">
-                      Great Rift Valley & Naivasha Highlands
+                      Across Kenya's Flower-Growing Regions
                     </div>
                   </div>
                 </div>
