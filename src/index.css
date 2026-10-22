@@ -2,7 +2,7 @@
 
 /* Responsive hero typography; photography keeps its original proportions. */
 @media (max-width: 767px) {
-  .hero-shell { min-height: 100svh; padding-top: 168px; padding-bottom: 20px; }
+  .hero-shell { min-height: 100svh; padding-top: 200px; padding-bottom: 20px; }
   .hero-layout { gap: 14px; padding-inline: 20px; }
   .hero-title { font-size: clamp(26px, 7vw, 34px); line-height: 1.08; }
   .hero-description { font-size: 13px; line-height: 1.5; margin-top: 10px; }
@@ -14,13 +14,13 @@
 
 /* One-screen desktop hero; short or narrow screens can grow without clipping. */
 @media (min-width: 1024px) and (min-height: 560px) {
-  .hero-shell { height: 100svh; min-height: 0; padding-top: 216px; padding-bottom: 16px; }
+  .hero-shell { height: 100svh; min-height: 0; padding-top: 232px; padding-bottom: 16px; }
   .hero-title { font-size: clamp(2rem, 4.4vh, 3rem); }
   .hero-description { font-size: 15px; line-height: 1.5; }
   .hero-layout { gap: 12px; }
 }
 @media (min-width: 1024px) and (min-height: 560px) and (max-height: 740px) {
-  .hero-shell { padding-top: 184px; padding-bottom: 12px; }
+  .hero-shell { padding-top: 248px; padding-bottom: 12px; }
   .hero-brand-logo { width: 100px; height: 100px; }
   .hero-brand-title { font-size: 30px; margin-top: 4px; }
   .hero-brand-tagline { font-size: 21px; margin-top: 4px; }
@@ -92,22 +92,14 @@
 
 /* Kenyan Flag Inspired Accent Ribbons & Borders */
 .kenya-ribbon-bar {
-  height: 6px;
+  height: 80px;
   position: relative;
   z-index: 20;
-  background: linear-gradient(
-    90deg,
-    #0b0f0d 0%,
-    #0b0f0d 32%,
-    #fff 32%,
-    #fff 34%,
-    #c8102e 34%,
-    #c8102e 66%,
-    #fff 66%,
-    #fff 68%,
-    #007a3d 68%,
-    #007a3d 100%
-  );
+  background: #081a56 url('/kenya-brush-flag.png') center / 100% 100% no-repeat;
+}
+
+@media (max-width: 767px) {
+  .kenya-ribbon-bar { height: 40px; }
 }
 
 /* Refined Kenyan-Themed Scrollbar */

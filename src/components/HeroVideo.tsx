@@ -63,7 +63,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onOpenRFQ }) => {
   }, [reducedMotion]);
 
   return (
-    <section id="hero" aria-label="Kenyan flower sourcing and airfreight" className="hero-shell relative min-h-[100svh] w-full overflow-hidden bg-[#0B0F0D] flex flex-col pt-[184px] sm:pt-[200px] md:pt-[216px] pb-6 scroll-mt-20">
+    <section id="hero" aria-label="Kenyan flower sourcing and airfreight" className="hero-shell relative min-h-[100svh] w-full overflow-hidden bg-[#0B0F0D] flex flex-col pt-[184px] sm:pt-[200px] md:pt-[232px] pb-6 scroll-mt-20">
       {/* Edge-to-edge backgrounds choose a composition based on screen shape */}
       <div className="hero-visual absolute inset-0 z-0">
         {HERO_IMAGES.map((item, idx) => (
