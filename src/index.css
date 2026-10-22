@@ -92,18 +92,21 @@
 
 /* Kenyan Flag Inspired Accent Ribbons & Borders */
 .kenya-ribbon-bar {
+  height: 6px;
+  position: relative;
+  z-index: 20;
   background: linear-gradient(
-    90deg,
-    #0B0F0D 0%,
-    #0B0F0D 32%,
-    #FFFFFF 32%,
-    #FFFFFF 34%,
-    #C8102E 34%,
-    #C8102E 66%,
-    #FFFFFF 66%,
-    #FFFFFF 68%,
-    #007A3D 68%,
-    #007A3D 100%
+    to bottom,
+    #000 0%,
+    #000 31%,
+    #fff 31%,
+    #fff 37%,
+    #bb0000 37%,
+    #bb0000 63%,
+    #fff 63%,
+    #fff 69%,
+    #006600 69%,
+    #006600 100%
   );
 }
 

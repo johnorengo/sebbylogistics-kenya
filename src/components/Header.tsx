@@ -94,7 +94,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenRFQ }) => {
       }`}
     >
       {/* 1. Kenyan National Flag Accent Ribbon — always sticky */}
-      <div className="h-1 w-full kenya-ribbon-bar" />
+      <div className="kenya-ribbon-bar" role="img" aria-label="Kenyan flag colors" />
 
       {/* 2. Contact strip — above the brand and navigation, without a divider. */}
       <div
