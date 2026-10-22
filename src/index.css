@@ -96,17 +96,17 @@
   position: relative;
   z-index: 20;
   background: linear-gradient(
-    to bottom,
-    #000 0%,
-    #000 31%,
-    #fff 31%,
-    #fff 37%,
-    #bb0000 37%,
-    #bb0000 63%,
-    #fff 63%,
-    #fff 69%,
-    #006600 69%,
-    #006600 100%
+    90deg,
+    #0b0f0d 0%,
+    #0b0f0d 32%,
+    #fff 32%,
+    #fff 34%,
+    #c8102e 34%,
+    #c8102e 66%,
+    #fff 66%,
+    #fff 68%,
+    #007a3d 68%,
+    #007a3d 100%
   );
 }
 
